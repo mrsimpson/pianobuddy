@@ -1,0 +1,337 @@
+<template>
+  <div class="import-dialog" v-if="isOpen">
+    <div class="dialog-overlay" @click="close"></div>
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <h2>Import MusicXML File</h2>
+        <button class="close-button" @click="close">&times;</button>
+      </div>
+      
+      <div class="dialog-body">
+        <div class="file-drop-zone" 
+          @dragover.prevent 
+          @drop.prevent="handleDrop"
+          :class="{ 'dragging': isDragging }"
+          @dragenter.prevent="isDragging = true"
+          @dragleave.prevent="isDragging = false"
+        >
+          <div class="drop-zone-content">
+            <span class="icon">📄</span>
+            <p>Drag and drop your MusicXML file here</p>
+            <p>or</p>
+            <label class="file-input-label">
+              Choose File
+              <input 
+                type="file" 
+                accept=".xml,.musicxml,.mxl" 
+                @change="handleFileSelect" 
+                class="file-input"
+              >
+            </label>
+          </div>
+        </div>
+
+        <div v-if="error" class="error-message">
+          {{ error }}
+        </div>
+
+        <div v-if="selectedFile" class="selected-file">
+          <p>Selected file: {{ selectedFile.name }}</p>
+          <input 
+            type="text" 
+            v-model="songName" 
+            placeholder="Enter song name"
+            class="song-name-input"
+          >
+        </div>
+      </div>
+
+      <div class="dialog-footer">
+        <button 
+          class="cancel-button" 
+          @click="close"
+        >
+          Cancel
+        </button>
+        <button 
+          class="import-button" 
+          @click="importFile"
+          :disabled="!canImport"
+        >
+          Import
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import { MusicXmlService } from '../../services/musicXmlService';
+import { SongService } from '../../services/songService';
+import { v4 as uuidv4 } from 'uuid';
+
+const props = defineProps<{
+  isOpen: boolean;
+}>();
+
+const emit = defineEmits<{
+  (e: 'close'): void;
+  (e: 'imported'): void;
+}>();
+
+const isDragging = ref(false);
+const selectedFile = ref<File | null>(null);
+const songName = ref('');
+const error = ref('');
+
+const musicXmlService = new MusicXmlService();
+
+const canImport = computed(() => 
+  selectedFile.value && songName.value.trim() && !error.value
+);
+
+const close = () => {
+  selectedFile.value = null;
+  songName.value = '';
+  error.value = '';
+  emit('close');
+};
+
+const validateFile = async (file: File) => {
+  if (!file.name.endsWith('.xml') && !file.name.endsWith('.musicxml') && !file.name.endsWith('.mxl')) {
+    throw new Error('Please select a valid MusicXML file (.xml, .mxl or .musicxml)');
+  }
+
+  const content = await file.text();
+  const validation = musicXmlService.validateXml(content);
+  
+  if (!validation.isValid) {
+    throw new Error(validation.error || 'Invalid MusicXML file');
+  }
+
+  return content;
+};
+
+const handleFileSelect = async (event: Event) => {
+  const input = event.target as HTMLInputElement;
+  if (!input.files?.length) return;
+
+  try {
+    const file = input.files[0];
+    await validateFile(file);
+    selectedFile.value = file;
+    songName.value = file.name.replace(/\.(xml|musicxml|mxl)$/, '');
+    error.value = '';
+  } catch (err: any) {
+    error.value = err.message;
+    selectedFile.value = null;
+    songName.value = '';
+  }
+};
+
+const handleDrop = async (event: DragEvent) => {
+  isDragging.value = false;
+  const file = event.dataTransfer?.files[0];
+  if (!file) return;
+
+  try {
+    await validateFile(file);
+    selectedFile.value = file;
+    songName.value = file.name.replace(/\.(xml|musicxml|mxl)$/, '');
+    error.value = '';
+  } catch (err: any) {
+    error.value = err.message;
+    selectedFile.value = null;
+    songName.value = '';
+  }
+};
+
+const importFile = async () => {
+  if (!selectedFile.value || !songName.value.trim()) return;
+
+  try {
+    const content = await selectedFile.value.text();
+    const formattedXml = musicXmlService.formatXml(content);
+    
+    const song = {
+      id: uuidv4(),
+      name: songName.value.trim(),
+      xmlContent: formattedXml,
+      createdAt: Date.now(),
+      updatedAt: Date.now()
+    };
+
+    await SongService.saveSong(song);
+    emit('imported');
+    close();
+  } catch (err: any) {
+    error.value = 'Failed to import file. Please try again.';
+  }
+};
+</script>
+
+<style scoped>
+.import-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.dialog-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.dialog-content {
+  position: relative;
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  z-index: 1001;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.dialog-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.dialog-body {
+  padding: 1.5rem;
+}
+
+.file-drop-zone {
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.file-drop-zone.dragging {
+  border-color: #42b883;
+  background: #f0f9f4;
+}
+
+.drop-zone-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-input-label {
+  background: #42b883;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.file-input-label:hover {
+  background: #3aa876;
+}
+
+.error-message {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #fee;
+  color: #dc3545;
+  border-radius: 6px;
+}
+
+.selected-file {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+}
+
+.song-name-input {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.cancel-button, .import-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.cancel-button {
+  background: #f8f9fa;
+  color: #333;
+}
+
+.import-button {
+  background: #42b883;
+  color: white;
+}
+
+.import-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.cancel-button:hover {
+  background: #e9ecef;
+}
+
+.import-button:not(:disabled):hover {
+  background: #3aa876;
+}
+</style>
