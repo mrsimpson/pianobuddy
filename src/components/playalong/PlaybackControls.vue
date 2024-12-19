@@ -1,4 +1,3 @@
-
 <template>
   <div class="playback-controls">
     <div class="left-controls">

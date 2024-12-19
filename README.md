@@ -1,8 +1,8 @@
-# Keynote Mate 🎹
+# Piano Buddy 🎹
 
 A modern web application for learning piano through interactive music sheet visualization and playback. Built with Vue 3, TypeScript, and RxDB.
 
-![Keynote Mate](https://github.com/yourusername/piano-learning-app/raw/main/docs/preview.png)
+![Piano Buddy](https://github.com/yourusername/piano-learning-app/raw/main/docs/preview.png)
 
 ## Features 🌟
 

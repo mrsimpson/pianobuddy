@@ -2,7 +2,7 @@
   <nav class="navigation" :class="{ 'menu-open': isMenuOpen }">
     <div class="nav-content">
       <div class="nav-brand">
-        🎹 Keynote Mate
+        🎹 Piano Buddy
       </div>
       
       <button 
