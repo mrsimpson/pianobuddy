@@ -3,7 +3,7 @@
     <div class="dialog-overlay" @click="close"></div>
     <div class="dialog-content">
       <div class="dialog-header">
-        <h2>Import MusicXML File</h2>
+        <h2>{{ t('import.title') }}</h2>
         <button class="close-button" @click="close">&times;</button>
       </div>
       
@@ -17,10 +17,10 @@
         >
           <div class="drop-zone-content">
             <span class="icon">📄</span>
-            <p>Drag and drop your MusicXML file here</p>
-            <p>or</p>
+            <p>{{ t('import.dropzone.text') }}</p>
+            <p>{{ t('import.dropzone.or') }}</p>
             <label class="file-input-label">
-              Choose File
+              {{ t('import.dropzone.button') }}
               <input 
                 type="file" 
                 accept=".xml,.musicxml,.mxl" 
@@ -36,11 +36,11 @@
         </div>
 
         <div v-if="selectedFile" class="selected-file">
-          <p>Selected file: {{ selectedFile.name }}</p>
+          <p>{{ t('import.selectedFile') }}: {{ selectedFile.name }}</p>
           <input 
             type="text" 
             v-model="songName" 
-            placeholder="Enter song name"
+            :placeholder="t('import.nameInput')"
             class="song-name-input"
           >
         </div>
@@ -51,14 +51,14 @@
           class="cancel-button" 
           @click="close"
         >
-          Cancel
+          {{ t('import.buttons.cancel') }}
         </button>
         <button 
           class="import-button" 
           @click="importFile"
           :disabled="!canImport"
         >
-          Import
+          {{ t('import.buttons.import') }}
         </button>
       </div>
     </div>
@@ -67,9 +67,12 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { MusicXmlService } from '../../services/musicXmlService';
 import { SongService } from '../../services/songService';
 import { v4 as uuidv4 } from 'uuid';
+
+const { t } = useI18n();
 
 const props = defineProps<{
   isOpen: boolean;
@@ -170,6 +173,7 @@ const importFile = async () => {
   }
 };
 </script>
+
 
 <style scoped>
 .import-dialog {

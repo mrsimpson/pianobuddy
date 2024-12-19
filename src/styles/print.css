@@ -1,0 +1,65 @@
+@media print {
+  /* Hide navigation and controls */
+  .navigation,
+  .playback-controls,
+  .btn {
+    display: none !important;
+  }
+
+  /* Reset main content margin since nav is hidden */
+  .main-content {
+    margin-top: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Ensure white background and black text */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Remove shadows and decorative elements */
+  .card,
+  .music-sheet-display,
+  .notes-visualization,
+  .colored-playalong {
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* Ensure full width content */
+  .visualizer-content {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Optimize note visualization for print */
+  .note-bar {
+    border: 1px solid #ccc !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* Remove hover effects */
+  .note-bar:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Ensure text remains visible on colored backgrounds */
+  .note-label {
+    color: black !important;
+    text-shadow: none !important;
+  }
+
+  /* Page breaks */
+  .music-sheet-display {
+    page-break-after: always;
+  }
+
+  /* Avoid breaking inside components */
+  .note-line {
+    break-inside: avoid;
+  }
+}

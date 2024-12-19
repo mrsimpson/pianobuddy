@@ -2,18 +2,30 @@
   <nav class="navigation" :class="{ 'menu-open': isMenuOpen }">
     <div class="nav-content">
       <div class="nav-brand">
-        Piano Learning
+        🎹 Keynote Mate
       </div>
       
-      <button class="burger-menu" @click="toggleMenu">
+      <button 
+        v-if="isMobile"
+        class="burger-menu" 
+        @click="toggleMenu"
+        :aria-expanded="isMenuOpen"
+        aria-label="Toggle navigation menu"
+      >
         <span></span>
         <span></span>
         <span></span>
       </button>
 
-      <div class="nav-links" :class="{ 'show': isMenuOpen }">
-        <router-link to="/library" @click="closeMenu">Library</router-link>
-        <router-link to="/config" @click="closeMenu">Configuration</router-link>
+      <div 
+        class="nav-links" 
+        :class="{ 'show': isMenuOpen }"
+        v-show="!isMobile || isMenuOpen"
+      >
+        <router-link to="/library" @click="closeMenu">{{ t('navigation.library') }}</router-link>
+        <router-link to="/collections" @click="closeMenu">{{ t('navigation.collections') }}</router-link>
+        <router-link to="/config" @click="closeMenu">{{ t('navigation.configuration') }}</router-link>
+        <LanguageSelector />
       </div>
     </div>
   </nav>
@@ -21,7 +33,12 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useResponsive } from '../../composables/useResponsive';
+import LanguageSelector from './LanguageSelector.vue';
 
+const { t } = useI18n();
+const { isMobile } = useResponsive();
 const isMenuOpen = ref(false);
 
 const toggleMenu = () => {
@@ -62,6 +79,7 @@ const closeMenu = () => {
 .nav-links {
   display: flex;
   gap: var(--spacing-lg);
+  align-items: center;
 }
 
 .nav-links a {
@@ -128,6 +146,30 @@ const closeMenu = () => {
 
   .menu-open .burger-menu span:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
+  }
+}
+
+@media (max-width: 800px) {
+  .nav-content {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: var(--spacing-md);
+    flex-direction: column;
+    box-shadow: var(--shadow-md);
+    gap: var(--spacing-md);
+  }
+
+  .nav-links a {
+    padding: var(--spacing-sm);
+    width: 100%;
+    text-align: center;
   }
 }
 </style>

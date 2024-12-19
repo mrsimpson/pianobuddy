@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import ColorConfig from '../views/ColorConfig.vue';
 import SongVisualizer from '../views/SongVisualizer.vue';
 import SongLibrary from '../views/SongLibrary.vue';
+import CollectionsView from '../views/CollectionsView.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -14,6 +15,11 @@ const router = createRouter({
       path: '/library',
       name: 'library',
       component: SongLibrary
+    },
+    {
+      path: '/collections',
+      name: 'collections',
+      component: CollectionsView
     },
     {
       path: '/song/:songId',

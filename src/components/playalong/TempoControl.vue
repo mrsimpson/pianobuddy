@@ -1,7 +1,7 @@
 <template>
   <div class="tempo-control">
     <div class="tempo-input">
-      <label for="tempo">Tempo:</label>
+      <label for="tempo">{{ t('playback.tempo') }}:</label>
       <input 
         type="number" 
         id="tempo" 
@@ -11,23 +11,26 @@
         step="1"
         @change="updateTempo"
       >
-      <span>BPM</span>
+      <span>{{ t('playback.bpm') }}</span>
     </div>
     
     <select 
       class="tempo-preset"
       @change="handlePresetChange"
     >
-      <option value="">Preset</option>
-      <option value="40">Slow (40 BPM)</option>
-      <option value="80">Medium (80 BPM)</option>
-      <option value="120">Fast (120 BPM)</option>
+      <option value="">{{ t('playback.presets.label') }}</option>
+      <option value="40">{{ t('playback.presets.slow') }}</option>
+      <option value="80">{{ t('playback.presets.medium') }}</option>
+      <option value="120">{{ t('playback.presets.fast') }}</option>
     </select>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const props = defineProps<{
   tempo: number;

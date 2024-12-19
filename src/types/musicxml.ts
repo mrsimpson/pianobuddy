@@ -3,6 +3,7 @@ export interface ParsedNote {
   duration: number;
   octave: number;
   isRest?: boolean;
+  lyric?: string;
 }
 
 export interface ValidationResult {

@@ -4,14 +4,13 @@
       v-for="(line, lineIndex) in groupedNotes" 
       :key="lineIndex"
       class="note-line"
+      :style="{ transform: `scale(${scaleFactor})` }"
     >
-      <NoteBar 
+      <NoteWithLyric
         v-for="(note, noteIndex) in line" 
         :key="noteIndex"
         :note="note"
-        :class="{ 
-          'current-note': isCurrentNote(getGlobalNoteIndex(lineIndex, noteIndex))
-        }"
+        :is-current-note="isCurrentNote(getGlobalNoteIndex(lineIndex, noteIndex))"
       />
     </div>
   </div>
@@ -20,8 +19,9 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import type { ParsedNote } from '../../types/musicxml';
-import NoteBar from './NoteBar.vue';
+import NoteWithLyric from './NoteWithLyric.vue';
 import { useNoteVisualizer } from '../../composables/useNoteVisualizer';
+import { useMusicSheetSize } from '../../composables/useMusicSheetSize';
 
 const props = defineProps<{
   notes: ParsedNote[];
@@ -29,13 +29,15 @@ const props = defineProps<{
 }>();
 
 const { getDurationWidth } = useNoteVisualizer();
+const { containerRef, getScaleFactor } = useMusicSheetSize();
+const scaleFactor = computed(() => getScaleFactor());
 
 // Group notes into lines based on total width
 const groupedNotes = computed(() => {
   const lines: ParsedNote[][] = [];
   let currentLine: ParsedNote[] = [];
   let currentWidth = 0;
-  const maxWidth = 900;
+  const maxWidth = window.innerWidth < 800 ? 600 : 900;
 
   props.notes.forEach(note => {
     const noteWidth = getDurationWidth(note.duration);
@@ -79,7 +81,7 @@ const isCurrentNote = (index: number): boolean => {
   background: #f8f9fa;
   border-radius: var(--radius-md);
   min-height: 100px;
-  overflow-x: auto;
+  overflow: hidden;
 }
 
 .note-line {
@@ -87,11 +89,17 @@ const isCurrentNote = (index: number): boolean => {
   gap: var(--spacing-lg);
   padding: var(--spacing-xl) 0;
   min-height: 60px;
+  transform-origin: left center;
 }
 
-:deep(.current-note) {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-  outline: 2px solid var(--primary);
+@media (max-width: 800px) {
+  .notes-visualization {
+    padding: var(--spacing-sm);
+    gap: var(--spacing-md);
+  }
+
+  .note-line {
+    padding: var(--spacing-md) 0;
+  }
 }
 </style>

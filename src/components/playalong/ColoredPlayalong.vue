@@ -1,12 +1,17 @@
 <template>
   <div class="colored-playalong">
-    <PlaybackControls 
-      :playback-service="playbackService"
-      v-model="selectedPart"
-      :parts="parts"
-    />
+    <div class="screen-only">
+      <PlaybackControls 
+        :playback-service="playbackService"
+        v-model="selectedPart"
+        :parts="parts"
+      />
+    </div>
     
-    <div class="visualization-container">
+    <div 
+      class="visualization-container"
+      ref="containerRef"
+    >
       <NotesVisualization 
         :notes="notesForSelectedPart"
         :current-note-index="currentNoteIndex"
@@ -18,6 +23,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import { usePartsExtractor } from '../../composables/usePartsExtractor';
+import { useMusicSheetSize } from '../../composables/useMusicSheetSize';
 import { PlaybackService } from '../../services/playbackService';
 import NotesVisualization from './NotesVisualization.vue';
 import PlaybackControls from './PlaybackControls.vue';
@@ -27,6 +33,7 @@ const props = defineProps<{
 }>();
 
 const { parts, extractParts } = usePartsExtractor();
+const { containerRef } = useMusicSheetSize();
 const selectedPart = ref('');
 const currentNoteIndex = ref(0);
 const playbackService = new PlaybackService();
@@ -61,6 +68,8 @@ playbackService.onNote((index) => {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .visualization-container {
@@ -68,5 +77,30 @@ playbackService.onNote((index) => {
   border: 1px solid #eee;
   border-radius: var(--radius-md);
   background: white;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 800px) {
+  .colored-playalong {
+    padding: var(--spacing-md);
+  }
+}
+
+@media print {
+  .screen-only {
+    display: none !important;
+  }
+
+  .colored-playalong {
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+  }
+
+  .visualization-container {
+    border: none;
+    margin: 0;
+  }
 }
 </style>

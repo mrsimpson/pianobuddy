@@ -1,16 +1,16 @@
 <template>
   <div class="song-library">
-    <PageHeader title="Song Library">
+    <PageHeader :title="t('library.title')">
       <template #actions>
         <button class="btn btn-primary" @click="showImportDialog">
-          Import Song
+          {{ t('library.importButton') }}
         </button>
       </template>
     </PageHeader>
     
     <div class="song-list" v-if="!loading">
       <div v-if="songs.length === 0" class="empty-state">
-        <p>No songs available. Import a song to get started.</p>
+        <p>{{ t('library.noSongs') }}</p>
       </div>
       
       <div v-else class="song-grid">
@@ -22,14 +22,14 @@
         >
           <h3>{{ song.name }}</h3>
           <p class="song-meta">
-            Created: {{ formatDate(song.createdAt) }}
+            {{ t('library.created') }}: {{ formatDate(song.createdAt) }}
           </p>
           <div class="song-actions">
             <button 
               class="btn btn-danger"
               @click.stop="deleteSong(song.id)"
             >
-              Delete
+              {{ t('library.delete') }}
             </button>
           </div>
         </div>
@@ -37,7 +37,7 @@
     </div>
 
     <div v-else class="loading">
-      Loading songs...
+      {{ t('library.loading') }}
     </div>
 
     <ImportDialog 
@@ -51,12 +51,14 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import { SongService } from '../services/songService';
 import { formatDate } from '../utils/dateFormatter';
 import PageHeader from '../components/layout/PageHeader.vue';
 import ImportDialog from '../components/library/ImportDialog.vue';
 import type { Song } from '../types/song';
 
+const { t } = useI18n();
 const router = useRouter();
 const songs = ref<Song[]>([]);
 const loading = ref(true);
@@ -77,7 +79,7 @@ const navigateToSong = (songId: string) => {
 };
 
 const deleteSong = async (songId: string) => {
-  if (!confirm('Are you sure you want to delete this song?')) return;
+  if (!confirm(t('library.deleteConfirm'))) return;
   
   try {
     await SongService.deleteSong(songId);

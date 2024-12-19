@@ -1,3 +1,4 @@
+
 <template>
   <div class="playback-controls">
     <div class="left-controls">
@@ -51,9 +52,12 @@
 
 <script setup lang="ts">
 import { ref, onUnmounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { PlaybackService } from '../../services/playbackService';
 import type { PartInfo } from '../../types/musicxml';
 import TempoControl from './TempoControl.vue';
+
+const { t } = useI18n();
 
 const props = defineProps<{
   playbackService: PlaybackService;

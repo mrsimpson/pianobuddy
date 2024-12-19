@@ -1,26 +1,36 @@
 <template>
   <div class="music-sheet-display">
     <div v-if="error" class="error-message">{{ error }}</div>
-    <div ref="container" class="sheet-container"></div>
+    <div 
+      ref="containerRef"
+      class="sheet-container"
+      :style="{ 
+        transform: `scale(${scaleFactor})`,
+        width: `${100 / scaleFactor}%`
+      }"
+    ></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, computed } from 'vue';
 import { OpenSheetMusicDisplay } from 'opensheetmusicdisplay';
+import { useMusicSheetSize } from '../../composables/useMusicSheetSize';
 
 const props = defineProps<{
   xmlContent: string;
 }>();
 
-const container = ref<HTMLDivElement | null>(null);
+const { containerRef, getScaleFactor, updateWidth } = useMusicSheetSize();
 const error = ref<string>('');
 let osmd: OpenSheetMusicDisplay | null = null;
 
+const scaleFactor = computed(() => getScaleFactor());
+
 const initializeOSMD = async () => {
-  if (!container.value) return;
+  if (!containerRef.value) return;
   
-  osmd = new OpenSheetMusicDisplay(container.value, {
+  osmd = new OpenSheetMusicDisplay(containerRef.value, {
     autoResize: true,
     drawTitle: false,
     drawSubtitle: false,
@@ -39,6 +49,7 @@ const renderScore = async () => {
   try {
     await osmd.load(props.xmlContent);
     await osmd.render();
+    updateWidth(); // Update width after rendering
   } catch (err) {
     console.error('Error rendering score:', err);
     error.value = 'Error rendering the music sheet. Please check if the MusicXML is valid.';
@@ -51,6 +62,10 @@ onMounted(async () => {
 });
 
 watch(() => props.xmlContent, async () => {
+  await osmd.rerender();
+});
+
+watch(scaleFactor, async () => {
   await renderScore();
 });
 </script>
@@ -62,12 +77,13 @@ watch(() => props.xmlContent, async () => {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
   margin-bottom: var(--spacing-lg);
+  overflow: hidden;
+  width: 100%;
 }
 
 .sheet-container {
-  width: 100%;
   min-height: 200px;
-  overflow-x: auto;
+  transform-origin: top left;
 }
 
 .error-message {
@@ -77,5 +93,11 @@ watch(() => props.xmlContent, async () => {
   background-color: #fee;
   border-radius: var(--radius-sm);
   text-align: center;
+}
+
+@media (max-width: 800px) {
+  .music-sheet-display {
+    padding: var(--spacing-sm);
+  }
 }
 </style>

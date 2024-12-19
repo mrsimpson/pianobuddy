@@ -1,5 +1,3 @@
-import { ParsedNote } from '../../types/musicxml';
-
 export class NoteParser {
   static parseNote(noteElement: Element): ParsedNote | null {
     // Check if it's a rest
@@ -21,12 +19,15 @@ export class NoteParser {
     const step = pitchEl.querySelector('step')?.textContent || '';
     const octave = parseInt(pitchEl.querySelector('octave')?.textContent || '4');
     const duration = parseInt(noteElement.querySelector('duration')?.textContent || '1');
+    const lyricEl = noteElement.querySelector('lyric');
+    const lyric = lyricEl?.querySelector('text')?.textContent || '';
 
     return {
       pitch: step,
       duration,
       octave,
-      isRest: false
+      isRest: false,
+      lyric
     };
   }
 
