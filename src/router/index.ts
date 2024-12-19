@@ -1,11 +1,11 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 import ColorConfig from '../views/ColorConfig.vue';
 import SongVisualizer from '../views/SongVisualizer.vue';
 import SongLibrary from '../views/SongLibrary.vue';
 import CollectionsView from '../views/CollectionsView.vue';
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',
