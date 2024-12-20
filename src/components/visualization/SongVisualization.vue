@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import NoteBar from './NoteBar.vue';
+import NoteBar from './../playalong/NoteBar.vue';
 import { pianoKeys } from '../../types/piano';
 import type { ParsedNote } from '../../types/musicxml';
 

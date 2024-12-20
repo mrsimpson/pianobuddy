@@ -1,3 +1,9 @@
+export interface DurationInfo {
+  divisions: number; // Raw duration value in divisions
+  type: string; // Visual note type (quarter, half, etc.)
+  relativeLength: number; // Duration relative to quarter note (1.0 = quarter)
+}
+
 export interface ParsedNote {
   pitch: string;
   duration: number;

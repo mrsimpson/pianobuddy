@@ -1,12 +1,25 @@
+import { ParsedNote } from '../../types/musicxml';
+import { DurationParser } from './durationParser';
+
 export class NoteParser {
+  static parseNoteElements(notes: Element[]): ParsedNote[] {
+    const parsedNotes: ParsedNote[] = [];
+
+    notes.forEach((note) => {
+      const parsedNote = this.parseNote(note);
+      if (parsedNote) {
+        parsedNotes.push(parsedNote);
+      }
+    });
+
+    return parsedNotes;
+  }
+
   static parseNote(noteElement: Element): ParsedNote | null {
-    // Check if it's a rest
     const isRest = noteElement.querySelector('rest') !== null;
 
     if (isRest) {
-      const duration = parseInt(
-        noteElement.querySelector('duration')?.textContent || '1',
-      );
+      const duration = DurationParser.parseDuration(noteElement);
       return {
         pitch: 'rest',
         duration,
@@ -22,9 +35,7 @@ export class NoteParser {
     const octave = parseInt(
       pitchEl.querySelector('octave')?.textContent || '4',
     );
-    const duration = parseInt(
-      noteElement.querySelector('duration')?.textContent || '1',
-    );
+    const duration = DurationParser.parseDuration(noteElement);
     const lyricEl = noteElement.querySelector('lyric');
     const lyric = lyricEl?.querySelector('text')?.textContent || '';
 
@@ -35,19 +46,5 @@ export class NoteParser {
       isRest: false,
       lyric,
     };
-  }
-
-  static parseNotes(part: Element): ParsedNote[] {
-    const notes: ParsedNote[] = [];
-    const noteElements = part.querySelectorAll('note');
-
-    noteElements.forEach((noteEl) => {
-      const parsedNote = this.parseNote(noteEl);
-      if (parsedNote) {
-        notes.push(parsedNote);
-      }
-    });
-
-    return notes;
   }
 }
