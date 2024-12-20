@@ -98,6 +98,7 @@
   /* page breaks */
   .song-title {
     page-break-after: avoid !important;
+    margin-bottom: 1rem !important;
   }
   .music-sheet-display {
     page-break-after: avoid !important;
@@ -105,7 +106,7 @@
 
   /* Page settings */
   @page {
-    size: A4 landscape;
+    size: A4;
     margin: 1cm;
   }
 }
