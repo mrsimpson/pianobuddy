@@ -2,7 +2,7 @@
 import { computed, provide } from 'vue';
 import PianoKey from './PianoKey.vue';
 import { pianoKeys } from '../types/piano';
-import { AudioService } from '../services/audioService';
+import { AudioService } from '../services/audio';
 
 const whiteKeys = computed(() => pianoKeys.filter((key) => !key.isBlack));
 const blackKeys = computed(() => pianoKeys.filter((key) => key.isBlack));
