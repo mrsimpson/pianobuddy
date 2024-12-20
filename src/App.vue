@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <Navigation />
-    <main class="main-content">
+    <main class="main-content container">
       <router-view></router-view>
     </main>
   </div>
@@ -13,6 +13,7 @@ import Navigation from './components/layout/Navigation.vue';
 
 <style>
 @import './styles/theme.css';
+@import './styles/breakpoints.css';
 
 .app {
   min-height: 100vh;
@@ -23,17 +24,12 @@ import Navigation from './components/layout/Navigation.vue';
 .main-content {
   flex: 1;
   margin-top: 64px;
-  width: 100%;
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: var(--spacing-lg);
-  box-sizing: border-box;
+  width: var(--container-width);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
   .main-content {
-    padding: var(--spacing-md);
+    margin-top: 56px;
   }
 }
 </style>

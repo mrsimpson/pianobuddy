@@ -1,34 +1,28 @@
 <template>
   <div class="music-sheet-display">
     <div v-if="error" class="error-message">{{ error }}</div>
-    <div 
-      ref="containerRef"
-      class="sheet-container"
-      :style="{ 
-        transform: `scale(${scaleFactor})`,
-        width: `${100 / scaleFactor}%`
-      }"
-    ></div>
+    <div ref="containerRef" class="sheet-container"></div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch, computed } from 'vue';
+import { ref, onMounted, watch, onUnmounted } from 'vue';
 import { OpenSheetMusicDisplay } from 'opensheetmusicdisplay';
-import { useMusicSheetSize } from '../../composables/useMusicSheetSize';
 
 const props = defineProps<{
   xmlContent: string;
 }>();
 
-const { containerRef, getScaleFactor, updateWidth } = useMusicSheetSize();
+const containerRef = ref<HTMLElement | null>(null);
 const error = ref<string>('');
 let osmd: OpenSheetMusicDisplay | null = null;
 
-const scaleFactor = computed(() => getScaleFactor());
-
 const initializeOSMD = async () => {
   if (!containerRef.value) return;
+  
+  if (osmd) {
+    osmd.clear();
+  }
   
   osmd = new OpenSheetMusicDisplay(containerRef.value, {
     autoResize: true,
@@ -49,23 +43,41 @@ const renderScore = async () => {
   try {
     await osmd.load(props.xmlContent);
     await osmd.render();
-    updateWidth(); // Update width after rendering
   } catch (err) {
     console.error('Error rendering score:', err);
     error.value = 'Error rendering the music sheet. Please check if the MusicXML is valid.';
   }
 };
 
+const handleResize = async () => {
+  await initializeOSMD();
+  await renderScore();
+};
+
+// Debounce the resize handler to avoid too many re-renders
+const debouncedResize = () => {
+  let timeout: number;
+  return () => {
+    clearTimeout(timeout);
+    timeout = window.setTimeout(handleResize, 150);
+  };
+};
+
 onMounted(async () => {
   await initializeOSMD();
   await renderScore();
+  window.addEventListener('resize', debouncedResize());
+});
+
+onUnmounted(() => {
+  if (osmd) {
+    osmd.clear();
+  }
+  window.removeEventListener('resize', debouncedResize());
 });
 
 watch(() => props.xmlContent, async () => {
-  await osmd.rerender();
-});
-
-watch(scaleFactor, async () => {
+  await initializeOSMD();
   await renderScore();
 });
 </script>
@@ -83,7 +95,6 @@ watch(scaleFactor, async () => {
 
 .sheet-container {
   min-height: 200px;
-  transform-origin: top left;
 }
 
 .error-message {

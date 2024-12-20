@@ -1,56 +1,58 @@
 <template>
   <div class="playback-controls">
-    <div class="left-controls">
-      <TempoControl 
-        :tempo="tempo"
-        :on-tempo-change="updateTempo"
-      />
-      
-      <div class="transport-controls">
-        <button 
-          class="control-button"
-          @click="rewind"
-          title="Rewind"
-        >
-          ⏮
-        </button>
-        <button 
-          class="control-button"
-          @click="togglePlayback"
-          :title="isPlaying ? 'Pause' : 'Play'"
-        >
-          {{ isPlaying ? '⏸' : '▶' }}
-        </button>
-        <button 
-          class="control-button"
-          @click="stop"
-          title="Stop"
-        >
-          ⏹
-        </button>
+    <div class="controls-wrapper">
+      <div class="controls-group">
+        <TempoControl 
+          :tempo="tempo"
+          :on-tempo-change="updateTempo"
+        />
+        
+        <div class="transport-controls">
+          <button 
+            class="control-button"
+            @click="rewind"
+            title="Rewind"
+          >
+            ⏮
+          </button>
+          <button 
+            class="control-button"
+            @click="togglePlayback"
+            :title="isPlaying ? 'Pause' : 'Play'"
+          >
+            {{ isPlaying ? '⏸' : '▶' }}
+          </button>
+          <button 
+            class="control-button"
+            @click="stop"
+            title="Stop"
+          >
+            ⏹
+          </button>
+        </div>
       </div>
-    </div>
 
-    <div class="part-select">
-      <select 
-        :value="modelValue"
-        @change="$emit('update:modelValue', ($event.target as HTMLSelectElement).value)"
-        class="part-select-input"
-      >
-        <option 
-          v-for="part in parts" 
-          :key="part.id" 
-          :value="part.id"
+      <div class="part-select" v-if="parts.length > 1">
+        <select 
+          :value="modelValue"
+          @change="handlePartChange"
+          class="part-select-input"
         >
-          {{ part.name }}
-        </option>
-      </select>
+          <option 
+            v-for="part in parts" 
+            :key="part.id" 
+            :value="part.id"
+          >
+            {{ part.name }}
+          </option>
+        </select>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onUnmounted } from 'vue';
+import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { PlaybackService } from '../../services/playbackService';
 import type { PartInfo } from '../../types/musicxml';
@@ -64,16 +66,21 @@ const props = defineProps<{
   parts: PartInfo[];
 }>();
 
-defineEmits<{
+const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void;
 }>();
 
-const tempo = ref(80); // Default to medium tempo
+const tempo = ref(80);
 const isPlaying = ref(false);
 
 const updateTempo = (newTempo: number) => {
   tempo.value = newTempo;
   props.playbackService.setTempo(newTempo);
+};
+
+const handlePartChange = (event: Event) => {
+  const select = event.target as HTMLSelectElement;
+  emit('update:modelValue', select.value);
 };
 
 const togglePlayback = () => {
@@ -94,28 +101,28 @@ const rewind = () => {
   props.playbackService.stop();
   isPlaying.value = false;
 };
-
-onUnmounted(() => {
-  props.playbackService.stop();
-});
 </script>
 
 <style scoped>
 .playback-controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-xl);
   padding: var(--spacing-md);
   background: white;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
 }
 
-.left-controls {
+.controls-wrapper {
   display: flex;
+  gap: var(--spacing-lg);
   align-items: center;
-  gap: var(--spacing-xl);
+}
+
+.controls-group {
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: center;
+  flex: 2;
+  min-width: 300px;
 }
 
 .transport-controls {
@@ -144,7 +151,10 @@ onUnmounted(() => {
 }
 
 .part-select {
+  flex: 1;
+  margin-left: var(--spacing-lg);
   min-width: 200px;
+  max-width: 300px;
 }
 
 .part-select-input {
@@ -158,20 +168,23 @@ onUnmounted(() => {
   color: var(--text);
 }
 
-@media (max-width: 600px) {
-  .playback-controls {
+@media (max-width: 800px) {
+  .controls-wrapper {
     flex-direction: column;
-    gap: var(--spacing-md);
   }
 
-  .left-controls {
-    width: 100%;
+  .controls-group {
     flex-direction: column;
-    gap: var(--spacing-md);
+    width: 100%;
+  }
+
+  .transport-controls {
+    justify-content: center;
   }
 
   .part-select {
     width: 100%;
+    max-width: none;
   }
 }
 </style>

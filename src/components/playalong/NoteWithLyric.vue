@@ -1,13 +1,14 @@
-```vue
 <template>
   <div 
     class="note-with-lyric"
     :style="{ width: `${getDurationWidth(note.duration)}px` }"
   >
-    <NoteBar 
-      :note="note"
-      :class="{ 'current-note': isCurrentNote }"
-    />
+    <div class="note-container">
+      <NoteBar 
+        :note="note"
+        :class="{ 'current-note': isCurrentNote }"
+      />
+    </div>
     <div class="lyric" v-if="note.lyric">
       {{ note.lyric }}
     </div>
@@ -31,16 +32,23 @@ const { getDurationWidth } = useNoteVisualizer();
 .note-with-lyric {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: var(--spacing-sm);
-  min-width: 40px;
+  flex-shrink: 0;
+}
+
+.note-container {
+  height: 60px; /* Fixed height for alignment */
+  display: flex;
+  align-items: flex-start; /* Align notes to top */
 }
 
 .lyric {
   font-size: 0.9rem;
   color: var(--text);
   text-align: center;
-  padding: 0 var(--spacing-xs);
+  max-width: 100%;
+  overflow-wrap: break-word;
+  min-height: 1.2em; /* Consistent height for lyrics */
 }
 
 :deep(.current-note) {
@@ -49,4 +57,3 @@ const { getDurationWidth } = useNoteVisualizer();
   outline: 2px solid var(--primary);
 }
 </style>
-```
