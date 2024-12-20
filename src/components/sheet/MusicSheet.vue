@@ -24,8 +24,8 @@ const initializeOSMD = async () => {
 
   osmd = new OpenSheetMusicDisplay(container.value, {
     autoResize: true,
-    drawTitle: true,
-    drawSubtitle: true,
+    drawTitle: false,
+    drawSubtitle: false,
     drawComposer: false,
     drawLyricist: false,
     drawCredits: false,

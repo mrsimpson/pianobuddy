@@ -13,36 +13,24 @@ const props = defineProps<{
   xmlContent: string;
 }>();
 
+const emit = defineEmits<{
+  (e: 'rendered'): void;
+}>();
+
 const containerRef = ref<HTMLElement | null>(null);
 const error = ref<string>('');
-let osmd: OpenSheetMusicDisplay | null = null;
-
-const initializeOSMD = async () => {
-  if (!containerRef.value) return;
-
-  if (osmd) {
-    osmd.clear();
-  }
-
-  osmd = new OpenSheetMusicDisplay(containerRef.value, {
-    autoResize: true,
-    drawTitle: false,
-    drawSubtitle: false,
-    drawComposer: false,
-    drawLyricist: false,
-    drawCredits: false,
-    drawPartNames: false,
-  });
-};
+const osmd = ref<OpenSheetMusicDisplay | null>(null);
+const isInitialized = ref(false);
 
 const renderScore = async () => {
-  if (!osmd || !props.xmlContent) return;
+  if (!osmd.value || !props.xmlContent || !isInitialized.value) return;
 
   error.value = '';
 
   try {
-    await osmd.load(props.xmlContent);
-    await osmd.render();
+    await osmd.value.load(props.xmlContent);
+    await osmd.value.render();
+    emit('rendered');
   } catch (err) {
     console.error('Error rendering score:', err);
     error.value =
@@ -50,40 +38,58 @@ const renderScore = async () => {
   }
 };
 
-const handleResize = async () => {
-  await initializeOSMD();
-  await renderScore();
-};
+const initializeOSMD = async () => {
+  if (!containerRef.value) return;
 
-// Debounce the resize handler to avoid too many re-renders
-const debouncedResize = () => {
-  let timeout: number;
-  return () => {
-    clearTimeout(timeout);
-    timeout = window.setTimeout(handleResize, 150);
-  };
-};
+  try {
+    if (osmd.value) {
+      osmd.value.clear();
+    }
 
-onMounted(async () => {
-  await initializeOSMD();
-  await renderScore();
-  window.addEventListener('resize', debouncedResize());
-});
+    osmd.value = new OpenSheetMusicDisplay(containerRef.value, {
+      autoResize: true,
+      drawTitle: false,
+      drawSubtitle: false,
+      drawComposer: false,
+      drawLyricist: false,
+      drawCredits: false,
+      drawPartNames: false,
+    });
 
-onUnmounted(() => {
-  if (osmd) {
-    osmd.clear();
+    isInitialized.value = true;
+
+    if (props.xmlContent) {
+      await renderScore();
+    }
+  } catch (err) {
+    console.error('Error initializing OSMD:', err);
+    error.value = 'Failed to initialize music sheet display';
   }
-  window.removeEventListener('resize', debouncedResize());
-});
+};
 
 watch(
   () => props.xmlContent,
   async () => {
-    await initializeOSMD();
-    await renderScore();
+    if (isInitialized.value) {
+      await renderScore();
+    }
   },
 );
+
+onMounted(initializeOSMD);
+
+onUnmounted(() => {
+  if (osmd.value) {
+    osmd.value.clear();
+  }
+  isInitialized.value = false;
+});
+
+defineExpose({
+  osmd,
+  isInitialized,
+  renderScore,
+});
 </script>
 
 <style scoped>

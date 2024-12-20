@@ -51,5 +51,6 @@ export default {
   common: {
     backToLibrary: 'Zurück zur Bibliothek',
     loading: 'Wird geladen...',
+    print: 'Drucken',
   },
 };

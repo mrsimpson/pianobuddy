@@ -1,65 +1,100 @@
+/* Print preparation styles */
+.preparing-print {
+  visibility: hidden !important;
+}
+
+.preparing-print .music-sheet-display,
+.preparing-print .notes-visualization {
+  visibility: visible !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 1200px !important;
+}
+
+/* Actual print styles */
 @media print {
-  /* Hide navigation and controls */
+  /* Reset viewport for print */
+  html {
+    width: 1200px !important;
+  }
+
+  /* Hide screen-only elements */
   .navigation,
   .playback-controls,
-  .btn {
+  .btn,
+  .screen-only {
     display: none !important;
   }
 
-  /* Reset main content margin since nav is hidden */
-  .main-content {
-    margin-top: 0 !important;
+  /* Reset container styles */
+  .main-content,
+  .visualizer-content,
+  .notes-visualization,
+  .notes-content {
+    width: 1200px !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
     padding: 0 !important;
+    overflow: visible !important;
   }
 
-  /* Ensure white background and black text */
+  /* Base styles */
   body {
     background: white !important;
     color: black !important;
-  }
-
-  /* Remove shadows and decorative elements */
-  .card,
-  .music-sheet-display,
-  .notes-visualization,
-  .colored-playalong {
-    box-shadow: none !important;
-    border: none !important;
-  }
-
-  /* Ensure full width content */
-  .visualizer-content {
-    width: 100% !important;
-    margin: 0 !important;
+    margin: 0 auto !important;
     padding: 0 !important;
+    width: 1200px !important;
+    visibility: visible !important;
   }
 
-  /* Optimize note visualization for print */
+  /* Component visibility */
+  .music-sheet-display,
+  .notes-visualization {
+    visibility: visible !important;
+    position: static !important;
+  }
+
+  /* Note lines layout */
+  .note-line {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    width: 1200px !important;
+    padding: 0.5cm 0 !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  /* Preserve note colors */
   .note-bar {
-    border: 1px solid #ccc !important;
-    print-color-adjust: exact;
-    -webkit-print-color-adjust: exact;
+    color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-shadow: none !important;
   }
 
-  /* Remove hover effects */
   .note-bar:hover {
     transform: none !important;
-    box-shadow: none !important;
   }
 
-  /* Ensure text remains visible on colored backgrounds */
   .note-label {
-    color: black !important;
+    color: inherit !important;
     text-shadow: none !important;
   }
 
-  /* Page breaks */
-  .music-sheet-display {
-    page-break-after: always;
+  /* Component spacing */
+  .colored-playalong {
+    margin-top: 1cm !important;
   }
 
-  /* Avoid breaking inside components */
-  .note-line {
-    break-inside: avoid;
+  .music-sheet-display {
+    page-break-after: always !important;
+  }
+
+  /* Page settings */
+  @page {
+    size: A4 landscape;
+    margin: 1cm;
   }
 }

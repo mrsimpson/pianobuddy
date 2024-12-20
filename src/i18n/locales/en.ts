@@ -50,5 +50,6 @@ export default {
   common: {
     backToLibrary: 'Back to Library',
     loading: 'Loading...',
+    print: 'Print',
   },
 };
