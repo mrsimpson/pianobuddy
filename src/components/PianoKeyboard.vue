@@ -1,5 +1,28 @@
+<script lang="ts" setup>
+import { computed, provide } from 'vue';
+import PianoKey from './PianoKey.vue';
+import { pianoKeys } from '../types/piano';
+import { AudioService } from '../services/audioService';
+
+const whiteKeys = computed(() => pianoKeys.filter((key) => !key.isBlack));
+const blackKeys = computed(() => pianoKeys.filter((key) => key.isBlack));
+
+// Calculate the total width of the white keys plus spacing
+const whiteKeyWidth = 60;
+const whiteKeySpacing = 2;
+const totalWidth = computed(
+  () =>
+    whiteKeys.value.length * (whiteKeyWidth + whiteKeySpacing) -
+    whiteKeySpacing,
+);
+
+// Create and provide the audio service
+const audioService = new AudioService();
+provide('audioService', audioService);
+</script>
+
 <template>
-  <div class="piano-keyboard">
+  <div :style="{ width: `${totalWidth}px` }" class="piano-keyboard">
     <div class="keyboard-layout">
       <!-- White keys -->
       <div class="white-keys">
@@ -26,24 +49,8 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { computed, provide } from 'vue';
-import PianoKey from './PianoKey.vue';
-import { pianoKeys } from '../types/piano';
-import { AudioService } from '../services/audioService';
-
-const whiteKeys = computed(() => pianoKeys.filter((key) => !key.isBlack));
-const blackKeys = computed(() => pianoKeys.filter((key) => key.isBlack));
-
-// Create and provide the audio service
-const audioService = new AudioService();
-provide('audioService', audioService);
-</script>
-
 <style scoped>
 .piano-keyboard {
-  width: 100%;
-  max-width: 700px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -71,7 +78,7 @@ provide('audioService', audioService);
 .black-key-absolute {
   position: absolute;
   top: 0;
-  transform: translateX(-50%);
+  transform: translateX(-30%);
 }
 
 /* Add borders to white keys */

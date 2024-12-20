@@ -50,7 +50,7 @@ const { getDurationWidth } = useNoteVisualizer();
 }
 
 :deep(.current-note) {
-  transform: translateY(-2px);
+  transform: translateY(-10px);
   box-shadow: var(--shadow-lg);
   outline: 2px solid var(--primary);
 }

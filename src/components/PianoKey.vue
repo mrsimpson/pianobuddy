@@ -60,8 +60,8 @@ const stopNote = () => {
 
 .white-key {
   background: white;
-  height: 180px;
-  width: 50px;
+  height: 300px;
+  width: 80px;
   z-index: 1;
   border: 1px solid #ccc;
   border-bottom-width: 4px;
@@ -69,8 +69,8 @@ const stopNote = () => {
 
 .black-key {
   background: #333;
-  height: 110px;
-  width: 30px;
+  height: 150px;
+  width: 40px;
   z-index: 2;
   border: 1px solid #000;
   border-bottom-width: 4px;

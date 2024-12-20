@@ -14,11 +14,11 @@ export const pianoKeys: PianoKey[] = [
   { name: 'D#', isBlack: true, offset: 26 },
   { name: 'E', isBlack: false, color: '#FFFF00' },
   { name: 'F', isBlack: false, color: '#008000' },
-  { name: 'F#', isBlack: true, offset: 52 },
+  { name: 'F#', isBlack: true, offset: 55 },
   { name: 'G', isBlack: false, color: '#0000FF' },
-  { name: 'G#', isBlack: true, offset: 64 },
+  { name: 'G#', isBlack: true, offset: 70 },
   { name: 'A', isBlack: false, color: '#4B0082' },
-  { name: 'A#', isBlack: true, offset: 76 },
+  { name: 'A#', isBlack: true, offset: 84 },
   { name: 'B', isBlack: false, color: '#9400D3' }, // Changed from H to B
 ];
 

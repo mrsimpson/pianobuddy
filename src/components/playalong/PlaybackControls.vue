@@ -67,6 +67,7 @@ const togglePlayback = () => {
   if (isPlaying.value) {
     props.playbackService.pause();
   } else {
+    props.playbackService.setTempo(tempo.value);
     props.playbackService.play();
   }
   isPlaying.value = !isPlaying.value;
