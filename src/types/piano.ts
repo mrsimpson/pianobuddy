@@ -19,7 +19,7 @@ export const pianoKeys: PianoKey[] = [
   { name: 'G#', isBlack: true, offset: 70 },
   { name: 'A', isBlack: false, color: '#4B0082' },
   { name: 'A#', isBlack: true, offset: 84 },
-  { name: 'B', isBlack: false, color: '#9400D3' }, // Changed from H to B
+  { name: 'B', isBlack: false, color: '#9400D3' },
 ];
 
 // Helper function to get display name for UI

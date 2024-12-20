@@ -47,7 +47,7 @@ const formatNoteDisplay = computed(() => {
 }
 
 .note-bar.is-rest {
-  background-color: #f8f9fa;
+  background-color: #f8f9fa !important;
   border: 1px dashed #ddd;
 }
 

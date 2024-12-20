@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { pianoKeys } from '../../types/piano';
+const { getNoteColor } = useNoteVisualizer();
 
 const props = defineProps<{
   pitch: string;
@@ -34,11 +34,6 @@ const notePositions: Record<string, number> = {
   G: 16,
   A: 20,
   H: 24,
-};
-
-const getNoteColor = (pitch: string): string => {
-  const key = pianoKeys.find((k) => k.name.startsWith(pitch));
-  return key?.color || '#999999';
 };
 
 const calculatePosition = () => {

@@ -14,18 +14,15 @@
 
 <script setup lang="ts">
 import NoteBar from './../playalong/NoteBar.vue';
-import { pianoKeys } from '../../types/piano';
 import type { ParsedNote } from '../../types/musicxml';
+import { useNoteVisualizer } from '../../composables/useNoteVisualizer.ts';
+
+const { getNoteColor } = useNoteVisualizer();
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps<{
   notes: ParsedNote[];
 }>();
-
-const getNoteColor = (pitch: string): string => {
-  const key = pianoKeys.find((k) => k.name.startsWith(pitch));
-  return key?.color || '#999999';
-};
 </script>
 
 <style scoped>

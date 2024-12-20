@@ -2,17 +2,16 @@ import { pianoKeys } from '../types/piano';
 import type { ParsedNote } from '../types/musicxml';
 import { shouldUseDarkText } from '../utils/colorUtils';
 
-const BASE_WIDTH = 100; // Base width for quarter notes
+const BASE_WIDTH = 60;
 const MIN_NOTE_WIDTH = 40;
 
 export function useNoteVisualizer() {
   const getNoteColor = (pitch: string): string => {
-    const key = pianoKeys.find((k) => k.name.startsWith(pitch));
+    const key = pianoKeys.find((k) => k.name === pitch);
     return key?.color || '#999999';
   };
 
   const getDurationWidth = (duration: DurationInfo): number => {
-    // Scale width based on relative length, using quarter note as base
     return Math.max(duration.relativeLength * BASE_WIDTH, MIN_NOTE_WIDTH);
   };
 

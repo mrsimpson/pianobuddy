@@ -1,27 +1,21 @@
 <template>
   <div ref="containerRef" class="notes-visualization">
-    <div class="notes-content">
-      <div
-        v-for="(line, lineIndex) in groupedNotes"
-        :key="lineIndex"
-        :style="{ transform: `scale(${scaleFactor})` }"
-        class="note-line"
-      >
-        <NoteWithLyric
-          v-for="(note, noteIndex) in line"
-          :key="noteIndex"
-          :is-current-note="
-            isCurrentNote(getGlobalNoteIndex(lineIndex, noteIndex))
-          "
-          :note="note"
-        />
-      </div>
+    <div :style="{ transform: `scale(${scaleFactor})` }" class="notes-content">
+      <NoteWithLyric
+        v-for="(note, index) in props.notes"
+        :key="index"
+        :is-current-note="isCurrentNote(index)"
+        :note="note"
+      />
+      <template v-for="breakIndex in breakIndices" :key="`break-${breakIndex}`">
+        <div class="break"></div>
+      </template>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import type { ParsedNote } from '../../types/musicxml';
 import NoteWithLyric from './NoteWithLyric.vue';
 import { useNoteVisualizer } from '../../composables/useNoteVisualizer';
@@ -40,46 +34,29 @@ const scaleFactor = computed(() => getScaleFactor());
 const updateContainerWidth = () => {
   if (containerRef.value) {
     const width = containerRef.value.offsetWidth;
-    // Account for padding in the width calculation
-    containerWidth.value = width - 48; // 24px padding on each side
+    containerWidth.value = width - 48; // Account for padding
   }
 };
 
-const groupedNotes = computed(() => {
-  const lines: ParsedNote[][] = [];
-  let currentLine: ParsedNote[] = [];
+const breakIndices = computed(() => {
+  const breaks: number[] = [];
   let currentWidth = 0;
-  // Ensure minimum width and account for scale factor
   const maxWidth = Math.max(600, containerWidth.value / scaleFactor.value);
+  const spacing = 24; // Gap between notes
 
-  props.notes.forEach((note) => {
+  props.notes.forEach((note, index) => {
     const noteWidth = getDurationWidth(note.duration);
-    const spacing = 24; // Gap between notes
 
     if (currentWidth + noteWidth + spacing > maxWidth) {
-      lines.push([...currentLine]);
-      currentLine = [note];
+      breaks.push(index);
       currentWidth = noteWidth + spacing;
     } else {
-      currentLine.push(note);
       currentWidth += noteWidth + spacing;
     }
   });
 
-  if (currentLine.length > 0) {
-    lines.push(currentLine);
-  }
-
-  return lines;
+  return breaks;
 });
-
-const getGlobalNoteIndex = (lineIndex: number, noteIndex: number): number => {
-  let index = noteIndex;
-  for (let i = 0; i < lineIndex; i++) {
-    index += groupedNotes.value[i].length;
-  }
-  return index;
-};
 
 const isCurrentNote = (index: number): boolean => {
   return index === props.currentNoteIndex;
@@ -104,10 +81,6 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', debouncedResize());
 });
-
-watch(containerWidth, () => {
-  updateWidth();
-});
 </script>
 
 <style scoped>
@@ -122,20 +95,19 @@ watch(containerWidth, () => {
 
 .notes-content {
   display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xl);
+  flex-wrap: wrap;
+  gap: var(--spacing-lg);
   min-height: 100px;
   width: 100%;
-  overflow-x: auto;
+  transform-origin: left top;
+  padding: var(--spacing-xl) 0;
 }
 
-.note-line {
-  display: flex;
-  gap: var(--spacing-lg);
-  padding: var(--spacing-xl) 0;
-  min-height: 60px;
-  transform-origin: left center;
-  min-width: min-content;
+.break {
+  flex-basis: 100%;
+  height: 0;
+  margin: 0;
+  padding: calc(var(--spacing-xl) / 2) 0;
 }
 
 @media (max-width: 800px) {
@@ -145,10 +117,11 @@ watch(containerWidth, () => {
 
   .notes-content {
     gap: var(--spacing-md);
+    padding: var(--spacing-md) 0;
   }
 
-  .note-line {
-    padding: var(--spacing-md) 0;
+  .break {
+    padding: calc(var(--spacing-md) / 2) 0;
   }
 }
 </style>
