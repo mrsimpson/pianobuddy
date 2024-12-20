@@ -4,8 +4,11 @@ export class PrintService {
 
   async print(onBeforePrint?: () => Promise<void>) {
     try {
-      // Store original width
+      // Store original width and visibility
       this.originalWidth = document.documentElement.style.width;
+
+      // Hide entire app during preparation
+      document.body.style.visibility = 'hidden';
 
       // Add print class to body to trigger print styles
       document.body.classList.add('preparing-print');
@@ -20,9 +23,10 @@ export class PrintService {
         await onBeforePrint();
       }
 
-      // Remove preparing class and add printing class
+      // Remove preparing class, add printing class, and restore visibility
       document.body.classList.remove('preparing-print');
       document.body.classList.add('printing');
+      document.body.style.visibility = '';
 
       // Trigger print
       window.print();
@@ -48,9 +52,10 @@ export class PrintService {
     // Remove print classes
     document.body.classList.remove('preparing-print', 'printing');
 
-    // Reset widths
+    // Reset widths and visibility
     document.documentElement.style.width = this.originalWidth || '';
     document.body.style.width = '';
+    document.body.style.visibility = '';
     this.originalWidth = null;
 
     // Cleanup resize observer

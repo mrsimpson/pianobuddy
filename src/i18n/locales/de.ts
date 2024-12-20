@@ -46,7 +46,7 @@ export default {
     },
   },
   colorConfig: {
-    title: 'Farbkonfiguration',
+    title: 'Farben',
   },
   common: {
     backToLibrary: 'Zurück zur Bibliothek',

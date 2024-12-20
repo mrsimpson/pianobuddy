@@ -60,10 +60,17 @@
   .note-line {
     break-inside: avoid !important;
     page-break-inside: avoid !important;
-    width: 1200px !important;
     padding: 0.5cm 0 !important;
     margin: 0 !important;
     transform: none !important;
+  }
+
+  /* Preserve key colors */
+  .piano-key {
+    color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-shadow: none !important;
   }
 
   /* Preserve note colors */
@@ -89,7 +96,7 @@
   }
 
   .music-sheet-display {
-    page-break-after: always !important;
+    page-break-after: avoid !important;
   }
 
   /* Page settings */
