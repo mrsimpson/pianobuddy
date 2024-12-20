@@ -95,6 +95,10 @@
     margin-top: 1cm !important;
   }
 
+  /* page breaks */
+  .song-title {
+    page-break-after: avoid !important;
+  }
   .music-sheet-display {
     page-break-after: avoid !important;
   }
