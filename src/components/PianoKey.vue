@@ -88,6 +88,8 @@ const stopNote = () => {
 
 .black-key .key-label {
   color: #fff;
+  transform: rotate(90deg);
+  margin-bottom: 20px;
 }
 
 .active {
