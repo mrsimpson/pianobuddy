@@ -1,7 +1,7 @@
 export interface DurationInfo {
-  divisions: number; // Raw duration value in divisions
-  type: string; // Visual note type (quarter, half, etc.)
-  relativeLength: number; // Duration relative to quarter note (1.0 = quarter)
+  divisions: number;
+  type: string;
+  relativeLength: number;
 }
 
 export interface ParsedNote {
@@ -10,6 +10,7 @@ export interface ParsedNote {
   octave: number;
   isRest?: boolean;
   lyric?: string;
+  alter?: number; // Added alter property for accidentals
 }
 
 export interface ValidationResult {

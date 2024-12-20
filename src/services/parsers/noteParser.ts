@@ -32,6 +32,7 @@ export class NoteParser {
     if (!pitchEl) return null;
 
     const step = pitchEl.querySelector('step')?.textContent || '';
+    const alter = parseInt(pitchEl.querySelector('alter')?.textContent || '0');
     const octave = parseInt(
       pitchEl.querySelector('octave')?.textContent || '4',
     );
@@ -39,12 +40,25 @@ export class NoteParser {
     const lyricEl = noteElement.querySelector('lyric');
     const lyric = lyricEl?.querySelector('text')?.textContent || '';
 
+    // Construct pitch name with accidental
+    let fullPitch = step;
+    if (alter === 1) {
+      fullPitch += '#';
+    } else if (alter === -1) {
+      fullPitch += 'b';
+    } else if (alter === 2) {
+      fullPitch += '##';
+    } else if (alter === -2) {
+      fullPitch += 'bb';
+    }
+
     return {
-      pitch: step,
+      pitch: fullPitch,
       duration,
       octave,
       isRest: false,
       lyric,
+      alter,
     };
   }
 }
