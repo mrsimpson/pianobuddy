@@ -1,30 +1,37 @@
 <template>
   <nav class="navigation" :class="{ 'menu-open': isMenuOpen }">
     <div class="nav-content">
-      <div class="nav-brand">
-        🎹 Piano Buddy
-      </div>
-      
-      <button 
+      <div class="nav-brand">🎹 Piano Buddy</div>
+
+      <button
         v-if="isMobile"
-        class="burger-menu" 
-        @click="toggleMenu"
+        class="burger-menu"
         :aria-expanded="isMenuOpen"
         aria-label="Toggle navigation menu"
+        @click="toggleMenu"
       >
         <span></span>
         <span></span>
         <span></span>
       </button>
 
-      <div 
-        class="nav-links" 
-        :class="{ 'show': isMenuOpen }"
+      <div
         v-show="!isMobile || isMenuOpen"
+        :class="{ show: isMenuOpen }"
+        class="nav-links"
       >
-        <router-link to="/library" @click="closeMenu">{{ t('navigation.library') }}</router-link>
-        <router-link to="/collections" @click="closeMenu">{{ t('navigation.collections') }}</router-link>
-        <router-link to="/config" @click="closeMenu">{{ t('navigation.configuration') }}</router-link>
+        <router-link to="/library" @click="closeMenu">{{
+            t('navigation.library')
+          }}
+        </router-link>
+        <router-link to="/collections" @click="closeMenu">{{
+            t('navigation.collections')
+          }}
+        </router-link>
+        <router-link to="/config" @click="closeMenu">{{
+            t('navigation.configuration')
+          }}
+        </router-link>
         <LanguageSelector />
       </div>
     </div>
@@ -32,9 +39,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { useResponsive } from '../../composables/useResponsive';
+import {ref} from 'vue';
+import {useI18n} from 'vue-i18n';
+import {useResponsive} from '../../composables/useResponsive';
 import LanguageSelector from './LanguageSelector.vue';
 
 const { t } = useI18n();

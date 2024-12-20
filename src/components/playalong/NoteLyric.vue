@@ -1,9 +1,6 @@
 ```vue
 <template>
-  <div 
-    class="note-lyric"
-    :style="{ width: `${width}px` }"
-  >
+  <div :style="{ width: `${width}px` }" class="note-lyric">
     <slot>{{ content }}</slot>
   </div>
 </template>

@@ -1,9 +1,5 @@
 <template>
-  <div 
-    class="note-bar"
-    :class="{ 'is-rest': note.isRest }"
-    :style="style"
-  >
+  <div :class="{ 'is-rest': note.isRest }" :style="style" class="note-bar">
     <div class="note-content">
       <span v-if="!note.isRest" class="note-label">
         {{ formatNoteDisplay }}
@@ -13,10 +9,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import type { ParsedNote } from '../../types/musicxml';
-import { useNoteVisualizer } from '../../composables/useNoteVisualizer';
-import { formatNoteForDisplay } from '../../utils/noteMapping';
+import {computed} from 'vue';
+import type {ParsedNote} from '../../types/musicxml';
+import {useNoteVisualizer} from '../../composables/useNoteVisualizer';
+import {formatNoteForDisplay} from '../../utils/noteMapping';
 
 const props = defineProps<{
   note: ParsedNote;
@@ -28,7 +24,8 @@ const style = getNoteStyle(props.note);
 const formatNoteDisplay = computed(() => {
   if (props.note.isRest) return '';
   return formatNoteForDisplay(props.note.pitch, props.note.octave);
-});</script>
+});
+</script>
 
 <style scoped>
 .note-bar {

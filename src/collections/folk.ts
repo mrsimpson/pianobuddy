@@ -1,4 +1,4 @@
-import type { MusicCollection } from './types';
+import type {MusicCollection} from './types';
 
 export const folkCollection: MusicCollection = {
   id: 'folk',
@@ -8,8 +8,8 @@ export const folkCollection: MusicCollection = {
     {
       id: 'greensleeves',
       name: 'Greensleeves',
-      filename: 'greensleeves.musicxml'
-    }
+      filename: 'greensleeves.musicxml',
+    },
     // Add more songs here
-  ]
+  ],
 };

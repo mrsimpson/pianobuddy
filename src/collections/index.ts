@@ -1,10 +1,10 @@
-import { MusicCollection } from './types';
-import { classicalCollection } from './classical';
-import { folkCollection } from './folk';
+import {MusicCollection} from './types';
+import {classicalCollection} from './classical';
+import {folkCollection} from './folk';
 
 export const collections: MusicCollection[] = [
   classicalCollection,
-  folkCollection
+  folkCollection,
 ];
 
 export * from './types';

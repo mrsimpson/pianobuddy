@@ -1,10 +1,10 @@
-import { AudioEngine } from './audioEngine';
-import { NoteMapper } from './noteMapper';
+import {AudioEngine} from './audioEngine';
+import {NoteMapper} from './noteMapper';
 
 export class AudioService {
   private audioEngine: AudioEngine;
   private isInitialized: boolean = false;
-  
+
   constructor() {
     this.audioEngine = new AudioEngine();
   }
@@ -21,7 +21,11 @@ export class AudioService {
     }
   }
 
-  async playNote(note: string, octave: number, duration: number): Promise<void> {
+  async playNote(
+    note: string,
+    octave: number,
+    duration: number,
+  ): Promise<void> {
     try {
       await this.initialize();
       const frequency = NoteMapper.getFrequency(note, octave);

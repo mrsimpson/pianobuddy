@@ -1,15 +1,15 @@
 <template>
-  <div 
+  <div
     class="music-note"
     :style="{
       bottom: `${calculatePosition()}px`,
-      left: `${index * 40}px`
+      left: `${index * 40}px`,
     }"
   >
-    <div 
+    <div
       class="note-circle"
       :style="{
-        backgroundColor: getNoteColor(pitch)
+        backgroundColor: getNoteColor(pitch),
       }"
     >
       <span class="note-label">{{ pitch }}</span>
@@ -18,8 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { pianoKeys } from '../../types/piano';
+import {pianoKeys} from '../../types/piano';
 
 const props = defineProps<{
   pitch: string;
@@ -28,17 +27,17 @@ const props = defineProps<{
 }>();
 
 const notePositions: Record<string, number> = {
-  'C': 0,
-  'D': 4,
-  'E': 8,
-  'F': 12,
-  'G': 16,
-  'A': 20,
-  'H': 24
+  C: 0,
+  D: 4,
+  E: 8,
+  F: 12,
+  G: 16,
+  A: 20,
+  H: 24,
 };
 
 const getNoteColor = (pitch: string): string => {
-  const key = pianoKeys.find(k => k.name.startsWith(pitch));
+  const key = pianoKeys.find((k) => k.name.startsWith(pitch));
   return key?.color || '#999999';
 };
 

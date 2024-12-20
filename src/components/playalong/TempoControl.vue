@@ -2,22 +2,19 @@
   <div class="tempo-control">
     <div class="tempo-input">
       <label for="tempo">{{ t('playback.tempo') }}:</label>
-      <input 
-        type="number" 
-        id="tempo" 
-        v-model="localTempo" 
-        min="30" 
-        max="240" 
+      <input
+        id="tempo"
+        v-model="localTempo"
+        max="240"
+        min="30"
+        type="number"
         step="1"
         @change="updateTempo"
-      >
+      />
       <span>{{ t('playback.bpm') }}</span>
     </div>
-    
-    <select 
-      class="tempo-preset"
-      @change="handlePresetChange"
-    >
+
+    <select class="tempo-preset" @change="handlePresetChange">
       <option value="">{{ t('playback.presets.label') }}</option>
       <option value="40">{{ t('playback.presets.slow') }}</option>
       <option value="80">{{ t('playback.presets.medium') }}</option>
@@ -27,8 +24,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
+import {ref, watch} from 'vue';
+import {useI18n} from 'vue-i18n';
 
 const { t } = useI18n();
 
@@ -39,9 +36,12 @@ const props = defineProps<{
 
 const localTempo = ref(props.tempo);
 
-watch(() => props.tempo, (newTempo) => {
-  localTempo.value = newTempo;
-});
+watch(
+  () => props.tempo,
+  (newTempo) => {
+    localTempo.value = newTempo;
+  },
+);
 
 const updateTempo = () => {
   const tempo = Math.max(30, Math.min(240, localTempo.value));

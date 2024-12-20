@@ -1,9 +1,9 @@
 <template>
-  <div 
+  <div
     class="note-bar"
     :style="{
       backgroundColor: color,
-      width: `${duration * 50}px`
+      width: `${duration * 50}px`,
     }"
   >
     <span class="note-label">{{ note }}</span>

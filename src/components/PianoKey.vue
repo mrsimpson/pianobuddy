@@ -1,7 +1,7 @@
 <template>
-  <div 
-    class="piano-key" 
-    :class="{ 'black-key': isBlack, 'white-key': !isBlack, 'active': isPressed }"
+  <div
+    :class="{ 'black-key': isBlack, 'white-key': !isBlack, active: isPressed }"
+    class="piano-key"
     :style="getKeyStyle"
     @mousedown="playNote"
     @mouseup="stopNote"
@@ -14,10 +14,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, inject, computed } from 'vue';
-import type { AudioService } from '../services/audio/audioService';
-import { getPianoKeyDisplayName } from '../types/piano';
-import { usePianoKey } from '../composables/usePianoKey';
+import {computed, inject, ref} from 'vue';
+import type {AudioService} from '../services/audio/audioService';
+import {getPianoKeyDisplayName} from '../types/piano';
+import {usePianoKey} from '../composables/usePianoKey';
 
 const props = defineProps<{
   name: string;

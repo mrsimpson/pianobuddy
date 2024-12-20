@@ -1,4 +1,4 @@
-import { ValidationResult } from '../../types/musicxml';
+import {ValidationResult} from '../../types/musicxml';
 
 export class MusicXmlValidator {
   static validateStructure(doc: Document): ValidationResult {
@@ -10,12 +10,12 @@ export class MusicXmlValidator {
 
   static validateVoices(part: Element): ValidationResult {
     const voices = part.querySelectorAll('voice');
-    const uniqueVoices = new Set(Array.from(voices).map(v => v.textContent));
-/*    
+    const uniqueVoices = new Set(Array.from(voices).map((v) => v.textContent));
+    /*
     if (uniqueVoices.size > 1) {
-      return { 
-        isValid: false, 
-        error: 'Multiple voices in a part are not supported. Please use single-voice melodies only.' 
+      return {
+        isValid: false,
+        error: 'Multiple voices in a part are not supported. Please use single-voice melodies only.'
       };
     }
     */

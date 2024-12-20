@@ -1,24 +1,21 @@
 <template>
-  <div 
+  <div
     class="note-with-lyric"
     :style="{ width: `${getDurationWidth(note.duration)}px` }"
   >
     <div class="note-container">
-      <NoteBar 
-        :note="note"
-        :class="{ 'current-note': isCurrentNote }"
-      />
+      <NoteBar :class="{ 'current-note': isCurrentNote }" :note="note"/>
     </div>
-    <div class="lyric" v-if="note.lyric">
+    <div v-if="note.lyric" class="lyric">
       {{ note.lyric }}
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { type ParsedNote } from '../../types/musicxml';
+import {type ParsedNote} from '../../types/musicxml';
 import NoteBar from './NoteBar.vue';
-import { useNoteVisualizer } from '../../composables/useNoteVisualizer';
+import {useNoteVisualizer} from '../../composables/useNoteVisualizer';
 
 const props = defineProps<{
   note: ParsedNote;

@@ -13,20 +13,20 @@ export const songSchema = {
   properties: {
     id: {
       type: 'string',
-      maxLength: 100
+      maxLength: 100,
     },
     name: {
-      type: 'string'
+      type: 'string',
     },
     xmlContent: {
-      type: 'string'
+      type: 'string',
     },
     createdAt: {
-      type: 'number'
+      type: 'number',
     },
     updatedAt: {
-      type: 'number'
-    }
+      type: 'number',
+    },
   },
-  required: ['id', 'name', 'xmlContent', 'createdAt', 'updatedAt']
+  required: ['id', 'name', 'xmlContent', 'createdAt', 'updatedAt'],
 };

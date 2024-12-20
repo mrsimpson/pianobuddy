@@ -1,17 +1,15 @@
 <template>
   <div class="part-selector">
     <label for="part-select">Select Part:</label>
-    <select 
-      id="part-select" 
+    <select
+      id="part-select"
       :value="modelValue"
-      @change="$emit('update:modelValue', ($event.target as HTMLSelectElement).value)"
       class="part-select"
+      @change="
+        $emit('update:modelValue', ($event.target as HTMLSelectElement).value)
+      "
     >
-      <option 
-        v-for="part in parts" 
-        :key="part.id" 
-        :value="part.id"
-      >
+      <option v-for="part in parts" :key="part.id" :value="part.id">
         {{ part.name }}
       </option>
     </select>
@@ -19,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import type { PartInfo } from '../../types/musicxml';
+import type {PartInfo} from '../../types/musicxml';
 
 defineProps<{
   modelValue: string;

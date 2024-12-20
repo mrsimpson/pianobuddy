@@ -1,12 +1,12 @@
 export const SUPPORTED_LOCALES = {
   en: {
     name: 'English',
-    flag: '🇬🇧'
+    flag: '🇬🇧',
   },
   de: {
     name: 'Deutsch',
-    flag: '🇩🇪'
-  }
+    flag: '🇩🇪',
+  },
 } as const;
 
 export type LocaleCode = keyof typeof SUPPORTED_LOCALES;

@@ -3,8 +3,8 @@
     <div class="keyboard-layout">
       <!-- White keys -->
       <div class="white-keys">
-        <PianoKey 
-          v-for="key in whiteKeys" 
+        <PianoKey
+          v-for="key in whiteKeys"
           :key="key.name"
           :name="key.name"
           :color="key.color"
@@ -13,8 +13,8 @@
       </div>
       <!-- Black keys -->
       <div class="black-keys">
-        <PianoKey 
-          v-for="key in blackKeys" 
+        <PianoKey
+          v-for="key in blackKeys"
           :key="key.name"
           :name="key.name"
           :isBlack="true"
@@ -27,13 +27,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, provide } from 'vue';
+import {computed, provide} from 'vue';
 import PianoKey from './PianoKey.vue';
-import { pianoKeys } from '../types/piano';
-import { AudioService } from '../services/audioService';
+import {pianoKeys} from '../types/piano';
+import {AudioService} from '../services/audioService';
 
-const whiteKeys = computed(() => pianoKeys.filter(key => !key.isBlack));
-const blackKeys = computed(() => pianoKeys.filter(key => key.isBlack));
+const whiteKeys = computed(() => pianoKeys.filter((key) => !key.isBlack));
+const blackKeys = computed(() => pianoKeys.filter((key) => key.isBlack));
 
 // Create and provide the audio service
 const audioService = new AudioService();

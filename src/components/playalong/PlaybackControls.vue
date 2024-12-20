@@ -2,47 +2,30 @@
   <div class="playback-controls">
     <div class="controls-wrapper">
       <div class="controls-group">
-        <TempoControl 
-          :tempo="tempo"
-          :on-tempo-change="updateTempo"
-        />
-        
+        <TempoControl :on-tempo-change="updateTempo" :tempo="tempo"/>
+
         <div class="transport-controls">
-          <button 
-            class="control-button"
-            @click="rewind"
-            title="Rewind"
-          >
+          <button class="control-button" title="Rewind" @click="rewind">
             ⏮
           </button>
-          <button 
+          <button
             class="control-button"
-            @click="togglePlayback"
             :title="isPlaying ? 'Pause' : 'Play'"
+            @click="togglePlayback"
           >
             {{ isPlaying ? '⏸' : '▶' }}
           </button>
-          <button 
-            class="control-button"
-            @click="stop"
-            title="Stop"
-          >
-            ⏹
-          </button>
+          <button class="control-button" title="Stop" @click="stop">⏹</button>
         </div>
       </div>
 
-      <div class="part-select" v-if="parts.length > 1">
-        <select 
+      <div v-if="parts.length > 1" class="part-select">
+        <select
           :value="modelValue"
-          @change="handlePartChange"
           class="part-select-input"
+          @change="handlePartChange"
         >
-          <option 
-            v-for="part in parts" 
-            :key="part.id" 
-            :value="part.id"
-          >
+          <option v-for="part in parts" :key="part.id" :value="part.id">
             {{ part.name }}
           </option>
         </select>
@@ -52,10 +35,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { PlaybackService } from '../../services/playbackService';
-import type { PartInfo } from '../../types/musicxml';
+import {ref} from 'vue';
+import {useI18n} from 'vue-i18n';
+import {PlaybackService} from '../../services/playbackService';
+import type {PartInfo} from '../../types/musicxml';
 import TempoControl from './TempoControl.vue';
 
 const { t } = useI18n();

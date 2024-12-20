@@ -1,13 +1,13 @@
-import { pianoKeys } from '../types/piano';
-import type { ParsedNote } from '../types/musicxml';
-import { shouldUseDarkText } from '../utils/colorUtils';
+import {pianoKeys} from '../types/piano';
+import type {ParsedNote} from '../types/musicxml';
+import {shouldUseDarkText} from '../utils/colorUtils';
 
 const UNIT_WIDTH = 120; // Base width for quarter notes
 const MIN_NOTE_WIDTH = 40; // Reduced minimum width
 
 export function useNoteVisualizer() {
   const getNoteColor = (pitch: string): string => {
-    const key = pianoKeys.find(k => k.name.startsWith(pitch));
+    const key = pianoKeys.find((k) => k.name.startsWith(pitch));
     return key?.color || '#999999';
   };
 
@@ -20,24 +20,26 @@ export function useNoteVisualizer() {
     if (note.isRest) {
       return {
         width: `${getDurationWidth(note.duration)}px`,
-        minWidth: `${MIN_NOTE_WIDTH}px`
+        minWidth: `${MIN_NOTE_WIDTH}px`,
       };
     }
 
     const backgroundColor = getNoteColor(note.pitch);
-    const textColor = shouldUseDarkText(backgroundColor) ? '#000000' : '#ffffff';
+    const textColor = shouldUseDarkText(backgroundColor)
+      ? '#000000'
+      : '#ffffff';
 
     return {
       backgroundColor,
       color: textColor,
       width: `${getDurationWidth(note.duration)}px`,
-      minWidth: `${MIN_NOTE_WIDTH}px`
+      minWidth: `${MIN_NOTE_WIDTH}px`,
     };
   };
 
   return {
     getNoteStyle,
     getNoteColor,
-    getDurationWidth
+    getDurationWidth,
   };
 }

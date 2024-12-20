@@ -1,7 +1,7 @@
-import { parseXml } from '../utils/xmlParser';
-import { ParsedNote, ValidationResult } from '../types/musicxml';
-import { MusicXmlValidator } from './validators/musicXmlValidator';
-import { PartParser } from './parsers/partParser';
+import {parseXml} from '../utils/xmlParser';
+import {ParsedNote, ValidationResult} from '../types/musicxml';
+import {MusicXmlValidator} from './validators/musicXmlValidator';
+import {PartParser} from './parsers/partParser';
 
 export class MusicXmlService {
   validateXml(xmlContent: string): ValidationResult {
@@ -12,7 +12,7 @@ export class MusicXmlService {
       }
 
       const doc = parseXml(xmlContent);
-      
+
       // Validate basic structure
       const structureValidation = MusicXmlValidator.validateStructure(doc);
       if (!structureValidation.isValid) {
@@ -34,7 +34,7 @@ export class MusicXmlService {
 
       const doc = parseXml(xmlContent);
       const part = PartParser.parseFirstPart(doc);
-      
+
       if (!part) {
         throw new Error('No valid part found in the MusicXML');
       }

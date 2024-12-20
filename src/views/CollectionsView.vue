@@ -1,7 +1,6 @@
 <template>
   <div class="collections-view">
-    <PageHeader :title="t('collections.title')">
-    </PageHeader>
+    <PageHeader :title="t('collections.title')"></PageHeader>
 
     <div v-if="loading" class="loading">
       {{ t('collections.loading') }}
@@ -24,13 +23,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { CollectionService } from '../services/collectionService';
-import { SongService } from '../services/songService';
+import {onMounted, ref} from 'vue';
+import {useI18n} from 'vue-i18n';
+import {CollectionService} from '../services/collectionService';
+import {SongService} from '../services/songService';
 import PageHeader from '../components/layout/PageHeader.vue';
 import CollectionCard from '../components/collections/CollectionCard.vue';
-import type { MusicCollection, CollectionSong } from '../types/collection';
+import type {CollectionSong, MusicCollection} from '../types/collection';
 
 const { t } = useI18n();
 const collections = ref<MusicCollection[]>([]);
@@ -41,7 +40,7 @@ const importedSongIds = ref(new Set<string>());
 const loadImportedSongs = async () => {
   try {
     const songs = await SongService.getAllSongs();
-    importedSongIds.value = new Set(songs.map(song => song.id));
+    importedSongIds.value = new Set(songs.map((song) => song.id));
   } catch (error) {
     console.error('Error loading imported songs:', error);
   }
@@ -51,7 +50,7 @@ const loadCollections = async () => {
   try {
     const collectionIds = await CollectionService.getCollections();
     const loadedCollections = await Promise.all(
-      collectionIds.map(id => CollectionService.getCollection(id))
+      collectionIds.map((id) => CollectionService.getCollection(id)),
     );
     collections.value = loadedCollections;
     await loadImportedSongs();
@@ -64,10 +63,13 @@ const loadCollections = async () => {
 
 const importSong = async (collectionId: string, song: CollectionSong) => {
   try {
-    const xmlContent = await CollectionService.loadCollectionSong(collectionId, song.id);
+    const xmlContent = await CollectionService.loadCollectionSong(
+      collectionId,
+      song.id,
+    );
     await SongService.saveSong({
       name: song.name,
-      xmlContent
+      xmlContent,
     });
     importedSongIds.value.add(song.id);
   } catch (error) {

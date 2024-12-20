@@ -1,17 +1,18 @@
 <template>
-  <div class="import-dialog" v-if="isOpen">
+  <div v-if="isOpen" class="import-dialog">
     <div class="dialog-overlay" @click="close"></div>
     <div class="dialog-content">
       <div class="dialog-header">
         <h2>{{ t('import.title') }}</h2>
         <button class="close-button" @click="close">&times;</button>
       </div>
-      
+
       <div class="dialog-body">
-        <div class="file-drop-zone" 
-          @dragover.prevent 
+        <div
+          :class="{ dragging: isDragging }"
+          class="file-drop-zone"
+          @dragover.prevent
           @drop.prevent="handleDrop"
-          :class="{ 'dragging': isDragging }"
           @dragenter.prevent="isDragging = true"
           @dragleave.prevent="isDragging = false"
         >
@@ -21,12 +22,12 @@
             <p>{{ t('import.dropzone.or') }}</p>
             <label class="file-input-label">
               {{ t('import.dropzone.button') }}
-              <input 
-                type="file" 
-                accept=".xml,.musicxml,.mxl" 
-                @change="handleFileSelect" 
+              <input
+                accept=".xml,.musicxml,.mxl"
+                type="file"
                 class="file-input"
-              >
+                @change="handleFileSelect"
+              />
             </label>
           </div>
         </div>
@@ -37,26 +38,23 @@
 
         <div v-if="selectedFile" class="selected-file">
           <p>{{ t('import.selectedFile') }}: {{ selectedFile.name }}</p>
-          <input 
-            type="text" 
-            v-model="songName" 
+          <input
+            v-model="songName"
+            type="text"
             :placeholder="t('import.nameInput')"
             class="song-name-input"
-          >
+          />
         </div>
       </div>
 
       <div class="dialog-footer">
-        <button 
-          class="cancel-button" 
-          @click="close"
-        >
+        <button class="cancel-button" @click="close">
           {{ t('import.buttons.cancel') }}
         </button>
-        <button 
-          class="import-button" 
-          @click="importFile"
+        <button
+          class="import-button"
           :disabled="!canImport"
+          @click="importFile"
         >
           {{ t('import.buttons.import') }}
         </button>
@@ -66,11 +64,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { MusicXmlService } from '../../services/musicXmlService';
-import { SongService } from '../../services/songService';
-import { v4 as uuidv4 } from 'uuid';
+import {computed, ref} from 'vue';
+import {useI18n} from 'vue-i18n';
+import {MusicXmlService} from '../../services/musicXmlService';
+import {SongService} from '../../services/songService';
+import {v4 as uuidv4} from 'uuid';
 
 const { t } = useI18n();
 
@@ -90,8 +88,8 @@ const error = ref('');
 
 const musicXmlService = new MusicXmlService();
 
-const canImport = computed(() => 
-  selectedFile.value && songName.value.trim() && !error.value
+const canImport = computed(
+  () => selectedFile.value && songName.value.trim() && !error.value,
 );
 
 const close = () => {
@@ -102,13 +100,19 @@ const close = () => {
 };
 
 const validateFile = async (file: File) => {
-  if (!file.name.endsWith('.xml') && !file.name.endsWith('.musicxml') && !file.name.endsWith('.mxl')) {
-    throw new Error('Please select a valid MusicXML file (.xml, .mxl or .musicxml)');
+  if (
+    !file.name.endsWith('.xml') &&
+    !file.name.endsWith('.musicxml') &&
+    !file.name.endsWith('.mxl')
+  ) {
+    throw new Error(
+      'Please select a valid MusicXML file (.xml, .mxl or .musicxml)',
+    );
   }
 
   const content = await file.text();
   const validation = musicXmlService.validateXml(content);
-  
+
   if (!validation.isValid) {
     throw new Error(validation.error || 'Invalid MusicXML file');
   }
@@ -156,13 +160,13 @@ const importFile = async () => {
   try {
     const content = await selectedFile.value.text();
     const formattedXml = musicXmlService.formatXml(content);
-    
+
     const song = {
       id: uuidv4(),
       name: songName.value.trim(),
       xmlContent: formattedXml,
       createdAt: Date.now(),
-      updatedAt: Date.now()
+      updatedAt: Date.now(),
     };
 
     await SongService.saveSong(song);
@@ -173,7 +177,6 @@ const importFile = async () => {
   }
 };
 </script>
-
 
 <style scoped>
 .import-dialog {
@@ -307,7 +310,8 @@ const importFile = async () => {
   border-top: 1px solid #eee;
 }
 
-.cancel-button, .import-button {
+.cancel-button,
+.import-button {
   padding: 0.75rem 1.5rem;
   border-radius: 6px;
   border: none;

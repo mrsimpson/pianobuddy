@@ -1,12 +1,12 @@
-import type { Song } from '../types/song';
-import { getDatabase } from './database';
-import { v4 as uuidv4 } from 'uuid';
+import type {Song} from '../types/song';
+import {getDatabase} from './database';
+import {v4 as uuidv4} from 'uuid';
 
 export class SongService {
   static async getAllSongs(): Promise<Song[]> {
     const db = await getDatabase();
     const songs = await db.songs.find().exec();
-    return songs.map(doc => doc.toJSON());
+    return songs.map((doc) => doc.toJSON());
   }
 
   static async getSongById(id: string): Promise<Song | null> {
@@ -15,15 +15,17 @@ export class SongService {
     return song ? song.toJSON() : null;
   }
 
-  static async saveSong(song: Omit<Song, 'id' | 'createdAt' | 'updatedAt'>): Promise<Song> {
+  static async saveSong(
+    song: Omit<Song, 'id' | 'createdAt' | 'updatedAt'>,
+  ): Promise<Song> {
     const db = await getDatabase();
     const now = Date.now();
-    
+
     const newSong: Song = {
       id: uuidv4(),
       ...song,
       createdAt: now,
-      updatedAt: now
+      updatedAt: now,
     };
 
     await db.songs.insert(newSong);
@@ -36,7 +38,7 @@ export class SongService {
       return {
         ...oldData,
         ...updates,
-        updatedAt: Date.now()
+        updatedAt: Date.now(),
       };
     });
   }

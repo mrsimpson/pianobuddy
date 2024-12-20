@@ -1,11 +1,7 @@
 <template>
   <div class="song-visualization">
     <div class="visualization-container">
-      <div 
-        v-for="(note, index) in notes" 
-        :key="index"
-        class="note-container"
-      >
+      <div v-for="(note, index) in notes" :key="index" class="note-container">
         <NoteBar
           :note="note.pitch"
           :color="getNoteColor(note.pitch)"
@@ -17,17 +13,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import NoteBar from './NoteBar.vue';
-import { pianoKeys } from '../../types/piano';
-import type { ParsedNote } from '../../types/musicxml';
+import {pianoKeys} from '../../types/piano';
+import type {ParsedNote} from '../../types/musicxml';
 
 const props = defineProps<{
   notes: ParsedNote[];
 }>();
 
 const getNoteColor = (pitch: string): string => {
-  const key = pianoKeys.find(k => k.name.startsWith(pitch));
+  const key = pianoKeys.find((k) => k.name.startsWith(pitch));
   return key?.color || '#999999';
 };
 </script>

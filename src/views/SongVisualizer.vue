@@ -3,18 +3,14 @@
     <div class="screen-only">
       <PageHeader :title="currentSong?.name || t('common.loading')">
         <template #actions>
-          <router-link 
-            v-if="isMobile"
-            to="/library" 
-            class="btn btn-secondary"
-          >
+          <router-link v-if="isMobile" class="btn btn-secondary" to="/library">
             {{ t('common.backToLibrary') }}
           </router-link>
         </template>
       </PageHeader>
     </div>
 
-    <div class="visualizer-content" v-if="currentSong">
+    <div v-if="currentSong" class="visualizer-content">
       <h1 class="print-only song-title">{{ currentSong.name }}</h1>
       <MusicSheetDisplay :xml-content="currentSong.xmlContent" />
       <ColoredPlayalong :xml-content="currentSong.xmlContent" />
@@ -27,15 +23,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
-import { useI18n } from 'vue-i18n';
-import { useResponsive } from '../composables/useResponsive';
-import { SongService } from '../services/songService';
+import {onMounted, ref} from 'vue';
+import {useRoute} from 'vue-router';
+import {useI18n} from 'vue-i18n';
+import {useResponsive} from '../composables/useResponsive';
+import {SongService} from '../services/songService';
 import PageHeader from '../components/layout/PageHeader.vue';
 import MusicSheetDisplay from '../components/sheet/MusicSheetDisplay.vue';
 import ColoredPlayalong from '../components/playalong/ColoredPlayalong.vue';
-import type { Song } from '../types/song';
+import type {Song} from '../types/song';
 
 const route = useRoute();
 const { t } = useI18n();

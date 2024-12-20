@@ -1,22 +1,22 @@
 <template>
-  <div class="language-selector" ref="dropdownRef">
-    <button 
+  <div ref="dropdownRef" class="language-selector">
+    <button
       class="selected-language"
-      @click="toggleDropdown"
       :title="SUPPORTED_LOCALES[currentLocale].name"
+      @click="toggleDropdown"
     >
       <span class="flag">{{ SUPPORTED_LOCALES[currentLocale].flag }}</span>
       <span class="chevron" :class="{ open: isOpen }">▼</span>
     </button>
 
-    <div class="language-dropdown" v-if="isOpen">
-      <button 
-        v-for="(locale, code) in sortedLocales" 
+    <div v-if="isOpen" class="language-dropdown">
+      <button
+        v-for="(locale, code) in sortedLocales"
+        v-show="code !== currentLocale"
         :key="code"
         class="language-option"
         :class="{ active: currentLocale === code }"
         @click="changeLocale(code)"
-        v-show="code !== currentLocale"
       >
         <span class="flag">{{ locale.flag }}</span>
         <span class="name">{{ locale.name }}</span>
@@ -26,9 +26,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { SUPPORTED_LOCALES, type LocaleCode } from '../../i18n/constants';
+import {computed, onMounted, onUnmounted, ref} from 'vue';
+import {useI18n} from 'vue-i18n';
+import {type LocaleCode, SUPPORTED_LOCALES} from '../../i18n/constants';
 
 const { locale } = useI18n();
 const currentLocale = ref(locale.value as LocaleCode);
@@ -36,8 +36,9 @@ const isOpen = ref(false);
 const dropdownRef = ref<HTMLElement | null>(null);
 
 const sortedLocales = computed(() => {
-  const entries = Object.entries(SUPPORTED_LOCALES)
-    .sort(([, a], [, b]) => a.name.localeCompare(b.name));
+  const entries = Object.entries(SUPPORTED_LOCALES).sort(([, a], [, b]) =>
+    a.name.localeCompare(b.name),
+  );
   return Object.fromEntries(entries);
 });
 

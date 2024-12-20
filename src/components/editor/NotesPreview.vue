@@ -2,11 +2,7 @@
   <div class="notes-preview">
     <h2>Preview</h2>
     <div class="notes-grid">
-      <div 
-        v-for="(note, index) in notes" 
-        :key="index" 
-        class="note-item"
-      >
+      <div v-for="(note, index) in notes" :key="index" class="note-item">
         <div class="note-pitch">{{ note.pitch }}{{ note.octave }}</div>
         <div class="note-duration">Duration: {{ note.duration }}</div>
       </div>
@@ -15,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ParsedNote } from '../../types/musicxml';
+import type {ParsedNote} from '../../types/musicxml';
 
 defineProps<{
   notes: ParsedNote[];

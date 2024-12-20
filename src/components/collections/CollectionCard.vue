@@ -4,27 +4,35 @@
       <h2>{{ collection.metadata.name }}</h2>
       <p class="description">{{ collection.metadata.description }}</p>
     </div>
-    
+
     <div class="song-list">
-      <div 
-        v-for="song in collection.songs" 
-        :key="song.id" 
+      <div
+        v-for="song in collection.songs"
+        :key="song.id"
         class="song-item"
-        :class="{ 'imported': isImported(song.id) }"
+        :class="{ imported: isImported(song.id) }"
       >
         <div class="song-info">
           <span class="song-name">{{ song.name }}</span>
-          <div class="song-details" v-if="song.composer || song.arranger">
-            <span v-if="song.composer" class="composer">{{ song.composer }}</span>
-            <span v-if="song.arranger" class="arranger">arr. {{ song.arranger }}</span>
+          <div v-if="song.composer || song.arranger" class="song-details">
+            <span v-if="song.composer" class="composer">{{
+                song.composer
+              }}</span>
+            <span v-if="song.arranger" class="arranger"
+            >arr. {{ song.arranger }}</span
+            >
           </div>
         </div>
-        <button 
+        <button
           class="btn btn-primary btn-sm"
-          @click="$emit('import', collection.metadata.id, song)"
           :disabled="isImported(song.id)"
+          @click="$emit('import', collection.metadata.id, song)"
         >
-          {{ isImported(song.id) ? t('collections.added') : t('collections.addToLibrary') }}
+          {{
+            isImported(song.id)
+              ? t('collections.added')
+              : t('collections.addToLibrary')
+          }}
         </button>
       </div>
     </div>
@@ -32,8 +40,8 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
-import type { MusicCollection, CollectionSong } from '../../types/collection';
+import {useI18n} from 'vue-i18n';
+import type {CollectionSong, MusicCollection} from '../../types/collection';
 
 const { t } = useI18n();
 

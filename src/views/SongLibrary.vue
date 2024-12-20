@@ -7,16 +7,16 @@
         </button>
       </template>
     </PageHeader>
-    
-    <div class="song-list" v-if="!loading">
+
+    <div v-if="!loading" class="song-list">
       <div v-if="songs.length === 0" class="empty-state">
         <p>{{ t('library.noSongs') }}</p>
       </div>
-      
+
       <div v-else class="song-grid">
-        <div 
-          v-for="song in songs" 
-          :key="song.id" 
+        <div
+          v-for="song in songs"
+          :key="song.id"
           class="song-card"
           @click="navigateToSong(song.id)"
         >
@@ -25,10 +25,7 @@
             {{ t('library.created') }}: {{ formatDate(song.createdAt) }}
           </p>
           <div class="song-actions">
-            <button 
-              class="btn btn-danger"
-              @click.stop="deleteSong(song.id)"
-            >
+            <button class="btn btn-danger" @click.stop="deleteSong(song.id)">
               {{ t('library.delete') }}
             </button>
           </div>
@@ -40,7 +37,7 @@
       {{ t('library.loading') }}
     </div>
 
-    <ImportDialog 
+    <ImportDialog
       :is-open="isImportDialogOpen"
       @close="isImportDialogOpen = false"
       @imported="handleImported"
@@ -49,14 +46,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
-import { SongService } from '../services/songService';
-import { formatDate } from '../utils/dateFormatter';
+import {onMounted, ref} from 'vue';
+import {useRouter} from 'vue-router';
+import {useI18n} from 'vue-i18n';
+import {SongService} from '../services/songService';
+import {formatDate} from '../utils/dateFormatter';
 import PageHeader from '../components/layout/PageHeader.vue';
 import ImportDialog from '../components/library/ImportDialog.vue';
-import type { Song } from '../types/song';
+import type {Song} from '../types/song';
 
 const { t } = useI18n();
 const router = useRouter();
@@ -80,7 +77,7 @@ const navigateToSong = (songId: string) => {
 
 const deleteSong = async (songId: string) => {
   if (!confirm(t('library.deleteConfirm'))) return;
-  
+
   try {
     await SongService.deleteSong(songId);
     await loadSongs();
@@ -120,7 +117,7 @@ onMounted(loadSongs);
   box-shadow: var(--shadow-sm);
   cursor: pointer;
   transition: transform var(--transition-normal),
-              box-shadow var(--transition-normal);
+  box-shadow var(--transition-normal);
 }
 
 .song-card:hover {

@@ -6,8 +6,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch, onUnmounted } from 'vue';
-import { OpenSheetMusicDisplay } from 'opensheetmusicdisplay';
+import {onMounted, onUnmounted, ref, watch} from 'vue';
+import {OpenSheetMusicDisplay} from 'opensheetmusicdisplay';
 
 const props = defineProps<{
   xmlContent: string;
@@ -19,11 +19,11 @@ let osmd: OpenSheetMusicDisplay | null = null;
 
 const initializeOSMD = async () => {
   if (!containerRef.value) return;
-  
+
   if (osmd) {
     osmd.clear();
   }
-  
+
   osmd = new OpenSheetMusicDisplay(containerRef.value, {
     autoResize: true,
     drawTitle: false,
@@ -31,21 +31,22 @@ const initializeOSMD = async () => {
     drawComposer: false,
     drawLyricist: false,
     drawCredits: false,
-    drawPartNames: false
+    drawPartNames: false,
   });
 };
 
 const renderScore = async () => {
   if (!osmd || !props.xmlContent) return;
-  
+
   error.value = '';
-  
+
   try {
     await osmd.load(props.xmlContent);
     await osmd.render();
   } catch (err) {
     console.error('Error rendering score:', err);
-    error.value = 'Error rendering the music sheet. Please check if the MusicXML is valid.';
+    error.value =
+      'Error rendering the music sheet. Please check if the MusicXML is valid.';
   }
 };
 
@@ -76,10 +77,13 @@ onUnmounted(() => {
   window.removeEventListener('resize', debouncedResize());
 });
 
-watch(() => props.xmlContent, async () => {
-  await initializeOSMD();
-  await renderScore();
-});
+watch(
+  () => props.xmlContent,
+  async () => {
+    await initializeOSMD();
+    await renderScore();
+  },
+);
 </script>
 
 <style scoped>

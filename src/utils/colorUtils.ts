@@ -1,8 +1,10 @@
-import { type RGB, type HSL } from '../types/colors';
+import {type RGB} from '../types/colors';
 
 export function getRGB(color: string): RGB {
-  let r = 0, g = 0, b = 0;
-  
+  let r = 0,
+    g = 0,
+    b = 0;
+
   // Handle hex colors
   if (color.startsWith('#')) {
     const hex = color.slice(1);
@@ -17,7 +19,7 @@ export function getRGB(color: string): RGB {
       [r, g, b] = matches.map(Number);
     }
   }
-  
+
   return { r, g, b };
 }
 
@@ -27,9 +29,12 @@ export function getLuminance({ r, g, b }: RGB): number {
   const gsRGB = g / 255;
   const bsRGB = b / 255;
 
-  const rL = rsRGB <= 0.03928 ? rsRGB / 12.92 : Math.pow((rsRGB + 0.055) / 1.055, 2.4);
-  const gL = gsRGB <= 0.03928 ? gsRGB / 12.92 : Math.pow((gsRGB + 0.055) / 1.055, 2.4);
-  const bL = bsRGB <= 0.03928 ? bsRGB / 12.92 : Math.pow((bsRGB + 0.055) / 1.055, 2.4);
+  const rL =
+    rsRGB <= 0.03928 ? rsRGB / 12.92 : Math.pow((rsRGB + 0.055) / 1.055, 2.4);
+  const gL =
+    gsRGB <= 0.03928 ? gsRGB / 12.92 : Math.pow((gsRGB + 0.055) / 1.055, 2.4);
+  const bL =
+    bsRGB <= 0.03928 ? bsRGB / 12.92 : Math.pow((bsRGB + 0.055) / 1.055, 2.4);
 
   return 0.2126 * rL + 0.7152 * gL + 0.0722 * bL;
 }

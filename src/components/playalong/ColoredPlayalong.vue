@@ -1,18 +1,15 @@
 <template>
   <div class="colored-playalong">
     <div class="screen-only">
-      <PlaybackControls 
-        :playback-service="playbackService"
+      <PlaybackControls
         v-model="selectedPart"
+        :playback-service="playbackService"
         :parts="parts"
       />
     </div>
-    
-    <div 
-      class="visualization-container"
-      ref="containerRef"
-    >
-      <NotesVisualization 
+
+    <div ref="containerRef" class="visualization-container">
+      <NotesVisualization
         :notes="notesForSelectedPart"
         :current-note-index="currentNoteIndex"
         :container-width="containerWidth"
@@ -22,9 +19,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue';
-import { usePartsExtractor } from '../../composables/usePartsExtractor';
-import { PlaybackService } from '../../services/playbackService';
+import {computed, onMounted, onUnmounted, ref, watch} from 'vue';
+import {usePartsExtractor} from '../../composables/usePartsExtractor';
+import {PlaybackService} from '../../services/playbackService';
 import NotesVisualization from './NotesVisualization.vue';
 import PlaybackControls from './PlaybackControls.vue';
 
@@ -54,16 +51,20 @@ const debouncedResize = () => {
   };
 };
 
-watch(() => props.xmlContent, () => {
-  const extractedParts = extractParts(props.xmlContent);
-  parts.value = extractedParts;
-  if (extractedParts.length > 0) {
-    selectedPart.value = extractedParts[0].id;
-  }
-}, { immediate: true });
+watch(
+  () => props.xmlContent,
+  () => {
+    const extractedParts = extractParts(props.xmlContent);
+    parts.value = extractedParts;
+    if (extractedParts.length > 0) {
+      selectedPart.value = extractedParts[0].id;
+    }
+  },
+  {immediate: true},
+);
 
 const notesForSelectedPart = computed(() => {
-  const part = parts.value.find(p => p.id === selectedPart.value);
+  const part = parts.value.find((p) => p.id === selectedPart.value);
   const notes = part?.notes || [];
   playbackService.setNotes(notes);
   return notes;

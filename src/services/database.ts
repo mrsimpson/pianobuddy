@@ -1,7 +1,7 @@
-import { createRxDatabase, addRxPlugin } from 'rxdb';
-import { getRxStorageDexie } from 'rxdb/plugins/storage-dexie';
-import { RxDBDevModePlugin } from 'rxdb/plugins/dev-mode';
-import { songSchema } from '../types/song';
+import {addRxPlugin, createRxDatabase} from 'rxdb';
+import {getRxStorageDexie} from 'rxdb/plugins/storage-dexie';
+import {RxDBDevModePlugin} from 'rxdb/plugins/dev-mode';
+import {songSchema} from '../types/song';
 
 // Add dev-mode plugin in development
 if (import.meta.env.DEV) {
@@ -14,13 +14,13 @@ const createDatabase = async () => {
   const db = await createRxDatabase({
     name: 'pianolearningdb',
     storage: getRxStorageDexie(),
-    ignoreDuplicate: true
+    ignoreDuplicate: true,
   });
 
   await db.addCollections({
     songs: {
-      schema: songSchema
-    }
+      schema: songSchema,
+    },
   });
 
   return db;

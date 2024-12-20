@@ -2,7 +2,7 @@ export default {
   navigation: {
     library: 'Library',
     collections: 'Collections',
-    configuration: 'Configuration'
+    configuration: 'Configuration',
   },
   library: {
     title: 'Song Library',
@@ -11,28 +11,28 @@ export default {
     deleteConfirm: 'Are you sure you want to delete this song?',
     created: 'Created',
     loading: 'Loading songs...',
-    delete: 'Delete'
+    delete: 'Delete',
   },
   collections: {
     title: 'Music Collections',
     loading: 'Loading collections...',
     error: 'Failed to load collections. Please try again later.',
     addToLibrary: 'Add to Library',
-    added: 'Added'
+    added: 'Added',
   },
   import: {
     title: 'Import MusicXML File',
     dropzone: {
       text: 'Drag and drop your MusicXML file here',
       or: 'or',
-      button: 'Choose File'
+      button: 'Choose File',
     },
     selectedFile: 'Selected file',
     nameInput: 'Enter song name',
     buttons: {
       cancel: 'Cancel',
-      import: 'Import'
-    }
+      import: 'Import',
+    },
   },
   playback: {
     tempo: 'Tempo',
@@ -41,14 +41,14 @@ export default {
       label: 'Preset',
       slow: 'Slow (40 BPM)',
       medium: 'Medium (80 BPM)',
-      fast: 'Fast (120 BPM)'
-    }
+      fast: 'Fast (120 BPM)',
+    },
   },
   colorConfig: {
-    title: 'Color Configuration'
+    title: 'Color Configuration',
   },
   common: {
     backToLibrary: 'Back to Library',
-    loading: 'Loading...'
-  }
+    loading: 'Loading...',
+  },
 };
