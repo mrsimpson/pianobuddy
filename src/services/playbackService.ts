@@ -8,7 +8,7 @@ export class PlaybackService {
   private isPlaying: boolean = false;
   private tempo: number = 120; // beats per minute
   private playbackInterval: number | null = null;
-  private onNoteCallback: ((index: number) => void) | null = null;
+  private onNoteCallback: ((index: number) => void)[] = [];
 
   constructor() {
     this.audioService = new AudioService();
@@ -28,7 +28,10 @@ export class PlaybackService {
   }
 
   onNote(callback: (index: number) => void): void {
-    this.onNoteCallback = callback;
+    if (!this.onNoteCallback) {
+      this.onNoteCallback = [];
+    }
+    this.onNoteCallback.push(callback);
   }
 
   private getNoteDurationInSeconds(duration: number): number {
@@ -37,29 +40,12 @@ export class PlaybackService {
     return (duration / 4) * (60 / this.tempo);
   }
 
-  private playCurrentNote(): void {
-    if (this.currentIndex >= this.notes.length) {
-      this.stop();
-      return;
-    }
-
-    const note = this.notes[this.currentIndex];
+  stop(): void {
+    this.pause();
+    this.currentIndex = 0;
     if (this.onNoteCallback) {
-      this.onNoteCallback(this.currentIndex);
+      this.onNoteCallback.forEach((cb) => cb(-1)); // Indicate no note is playing
     }
-
-    if (!note.isRest) {
-      const durationInSeconds = this.getNoteDurationInSeconds(note.duration);
-      this.audioService.playNote(note.pitch, note.octave, durationInSeconds);
-    }
-
-    const nextNoteDelay = this.getNoteDurationInSeconds(note.duration) * 1000;
-    this.playbackInterval = window.setTimeout(() => {
-      this.currentIndex++;
-      if (this.isPlaying) {
-        this.playCurrentNote();
-      }
-    }, nextNoteDelay);
   }
 
   play(): void {
@@ -79,12 +65,32 @@ export class PlaybackService {
     this.audioService.suspend();
   }
 
-  stop(): void {
-    this.pause();
-    this.currentIndex = 0;
-    if (this.onNoteCallback) {
-      this.onNoteCallback(-1); // Indicate no note is playing
+  private playCurrentNote(): void {
+    if (this.currentIndex >= this.notes.length) {
+      this.stop();
+      return;
     }
+
+    const note = this.notes[this.currentIndex];
+    if (this.onNoteCallback) {
+      this.onNoteCallback.forEach((cb) => cb(this.currentIndex));
+    }
+
+    if (!note.isRest) {
+      const durationInSeconds = this.getNoteDurationInSeconds(note.duration);
+      this.audioService.playNote(note.pitch, note.octave, durationInSeconds);
+    }
+
+    const nextNoteDelay = this.getNoteDurationInSeconds(note.duration) * 1000;
+    this.playbackInterval = window.setTimeout(() => {
+      this.currentIndex++;
+      if (this.isPlaying) {
+        this.playCurrentNote();
+      }
+      if (this.currentIndex === this.notes.length - 1) {
+        this.stop();
+      }
+    }, nextNoteDelay);
   }
 
   rewind(): void {

@@ -33,7 +33,7 @@ const { parts, extractParts } = usePartsExtractor();
 const containerRef = ref<HTMLElement | null>(null);
 const containerWidth = ref(0);
 const selectedPart = ref('');
-const currentNoteIndex = ref(0);
+const currentNoteIndex = ref(-1);
 const playbackService = new PlaybackService();
 
 const updateContainerWidth = () => {
