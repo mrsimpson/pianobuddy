@@ -31,7 +31,7 @@ const initializeOSMD = async () => {
     drawComposer: false,
     drawLyricist: false,
     drawCredits: false,
-    drawPartNames: true
+    drawPartNames: false
   });
 };
 
