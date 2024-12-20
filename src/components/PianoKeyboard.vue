@@ -1,8 +1,7 @@
 <script lang="ts" setup>
-import { computed, provide } from 'vue';
+import { computed } from 'vue';
 import PianoKey from './PianoKey.vue';
 import { pianoKeys } from '../types/piano';
-import { AudioService } from '../services/audio';
 
 const whiteKeys = computed(() => pianoKeys.filter((key) => !key.isBlack));
 const blackKeys = computed(() => pianoKeys.filter((key) => key.isBlack));
@@ -30,10 +29,6 @@ const groupedBlackKeys = computed(() => {
   });
   return Object.values(groups);
 });
-
-// Create and provide the audio service
-const audioService = new AudioService();
-provide('audioService', audioService);
 </script>
 
 <template>

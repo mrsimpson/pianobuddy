@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, provide, ref } from 'vue';
 import { PlaybackService } from '../../services/playbackService';
 import type { PartInfo } from '../../types/musicxml';
 import TempoControl from './TempoControl.vue';
@@ -52,6 +52,8 @@ const emit = defineEmits<{
 
 const tempo = ref(60);
 const isPlaying = ref(false);
+
+provide('tempo', tempo);
 
 onMounted(() => {
   props.playbackService.onNote((index) => {

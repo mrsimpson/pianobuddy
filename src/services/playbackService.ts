@@ -1,5 +1,6 @@
 import { AudioService } from './audio';
 import type { ParsedNote } from '../types/musicxml';
+import { getNoteDurationInSeconds } from '../utils/durationUtils.ts';
 
 export class PlaybackService {
   private audioService: AudioService;
@@ -34,10 +35,10 @@ export class PlaybackService {
     this.onNoteCallback.push(callback);
   }
 
-  private getNoteDurationInSeconds(duration: number): number {
+  private _getNoteDurationInSeconds(duration: number): number {
     // Convert note duration to seconds based on tempo
     // duration 4 = quarter note, tempo is in quarter notes per minute
-    return (duration / 4) * (60 / this.tempo);
+    return getNoteDurationInSeconds(duration, this.tempo);
   }
 
   stop(): void {
@@ -77,14 +78,14 @@ export class PlaybackService {
     }
 
     if (!note.isRest) {
-      const durationInSeconds = this.getNoteDurationInSeconds(
+      const durationInSeconds = this._getNoteDurationInSeconds(
         note.duration.divisions,
       );
       this.audioService.playNote(note.pitch, note.octave, durationInSeconds);
     }
 
     const nextNoteDelay =
-      this.getNoteDurationInSeconds(note.duration.divisions) * 1000;
+      this._getNoteDurationInSeconds(note.duration.divisions) * 1000;
     this.playbackInterval = window.setTimeout(() => {
       this.currentIndex++;
       if (this.isPlaying) {
