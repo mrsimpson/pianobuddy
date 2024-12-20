@@ -97,10 +97,6 @@ const closeMenu = () => {
   color: var(--primary);
 }
 
-.nav-links a.router-link-active {
-  color: var(--primary);
-}
-
 .burger-menu {
   display: none;
   flex-direction: column;

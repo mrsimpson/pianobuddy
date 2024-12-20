@@ -49,10 +49,9 @@ const loadImportedSongs = async () => {
 const loadCollections = async () => {
   try {
     const collectionIds = await CollectionService.getCollections();
-    const loadedCollections = await Promise.all(
+    collections.value = await Promise.all(
       collectionIds.map((id) => CollectionService.getCollection(id)),
     );
-    collections.value = loadedCollections;
     await loadImportedSongs();
   } catch {
     error.value = 'Failed to load collections. Please try again later.';

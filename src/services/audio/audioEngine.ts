@@ -72,12 +72,10 @@ export class AudioEngine {
       });
 
       // Cleanup
-      const cleanup = () => {
+      oscillators[0].onended = () => {
         oscillators.forEach((osc) => osc.disconnect());
         noteGain.disconnect();
       };
-
-      oscillators[0].onended = cleanup;
     } catch (error) {
       console.error('AudioEngine playNote error:', error);
       throw new Error('Failed to play note');

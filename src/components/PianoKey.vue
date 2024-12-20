@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { computed, inject, ref } from 'vue';
-import type { AudioService } from '../services/audio/audioService';
+import type { AudioService } from '../services/audio';
 import { getPianoKeyDisplayName } from '../types/piano';
 import { usePianoKey } from '../composables/usePianoKey';
 
