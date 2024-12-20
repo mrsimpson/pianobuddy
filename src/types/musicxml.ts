@@ -6,7 +6,7 @@ export interface DurationInfo {
 
 export interface ParsedNote {
   pitch: string;
-  duration: number;
+  duration: DurationInfo;
   octave: number;
   isRest?: boolean;
   lyric?: string;

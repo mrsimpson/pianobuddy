@@ -77,11 +77,14 @@ export class PlaybackService {
     }
 
     if (!note.isRest) {
-      const durationInSeconds = this.getNoteDurationInSeconds(note.duration);
+      const durationInSeconds = this.getNoteDurationInSeconds(
+        note.duration.divisions,
+      );
       this.audioService.playNote(note.pitch, note.octave, durationInSeconds);
     }
 
-    const nextNoteDelay = this.getNoteDurationInSeconds(note.duration) * 1000;
+    const nextNoteDelay =
+      this.getNoteDurationInSeconds(note.duration.divisions) * 1000;
     this.playbackInterval = window.setTimeout(() => {
       this.currentIndex++;
       if (this.isPlaying) {
