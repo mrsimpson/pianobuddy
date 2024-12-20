@@ -27,10 +27,10 @@
 </template>
 
 <script setup lang="ts">
-import {computed, provide} from 'vue';
+import { computed, provide } from 'vue';
 import PianoKey from './PianoKey.vue';
-import {pianoKeys} from '../types/piano';
-import {AudioService} from '../services/audioService';
+import { pianoKeys } from '../types/piano';
+import { AudioService } from '../services/audioService';
 
 const whiteKeys = computed(() => pianoKeys.filter((key) => !key.isBlack));
 const blackKeys = computed(() => pianoKeys.filter((key) => key.isBlack));

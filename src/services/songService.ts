@@ -1,6 +1,6 @@
-import type {Song} from '../types/song';
-import {getDatabase} from './database';
-import {v4 as uuidv4} from 'uuid';
+import type { Song } from '../types/song';
+import { getDatabase } from './database';
+import { v4 as uuidv4 } from 'uuid';
 
 export class SongService {
   static async getAllSongs(): Promise<Song[]> {

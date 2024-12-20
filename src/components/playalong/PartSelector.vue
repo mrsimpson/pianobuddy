@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import type {PartInfo} from '../../types/musicxml';
+import type { PartInfo } from '../../types/musicxml';
 
 defineProps<{
   modelValue: string;

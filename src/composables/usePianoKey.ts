@@ -1,4 +1,4 @@
-import {computed} from 'vue';
+import { computed } from 'vue';
 
 export function usePianoKey(props: {
   name: string;

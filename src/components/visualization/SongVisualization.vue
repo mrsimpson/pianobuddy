@@ -14,9 +14,10 @@
 
 <script setup lang="ts">
 import NoteBar from './NoteBar.vue';
-import {pianoKeys} from '../../types/piano';
-import type {ParsedNote} from '../../types/musicxml';
+import { pianoKeys } from '../../types/piano';
+import type { ParsedNote } from '../../types/musicxml';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps<{
   notes: ParsedNote[];
 }>();

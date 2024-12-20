@@ -23,13 +23,13 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from 'vue';
-import {useI18n} from 'vue-i18n';
-import {CollectionService} from '../services/collectionService';
-import {SongService} from '../services/songService';
+import { onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { CollectionService } from '../services/collectionService';
+import { SongService } from '../services/songService';
 import PageHeader from '../components/layout/PageHeader.vue';
 import CollectionCard from '../components/collections/CollectionCard.vue';
-import type {CollectionSong, MusicCollection} from '../types/collection';
+import type { CollectionSong, MusicCollection } from '../types/collection';
 
 const { t } = useI18n();
 const collections = ref<MusicCollection[]>([]);
@@ -54,7 +54,7 @@ const loadCollections = async () => {
     );
     collections.value = loadedCollections;
     await loadImportedSongs();
-  } catch (err) {
+  } catch {
     error.value = 'Failed to load collections. Please try again later.';
   } finally {
     loading.value = false;

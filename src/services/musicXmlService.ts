@@ -1,7 +1,7 @@
-import {parseXml} from '../utils/xmlParser';
-import {ParsedNote, ValidationResult} from '../types/musicxml';
-import {MusicXmlValidator} from './validators/musicXmlValidator';
-import {PartParser} from './parsers/partParser';
+import { parseXml } from '../utils/xmlParser';
+import { ParsedNote, ValidationResult } from '../types/musicxml';
+import { MusicXmlValidator } from './validators/musicXmlValidator';
+import { PartParser } from './parsers/partParser';
 
 export class MusicXmlService {
   validateXml(xmlContent: string): ValidationResult {
@@ -20,7 +20,7 @@ export class MusicXmlService {
       }
 
       return { isValid: true };
-    } catch (error) {
+    } catch {
       return { isValid: false, error: 'Invalid XML format' };
     }
   }

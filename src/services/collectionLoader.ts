@@ -1,5 +1,9 @@
-import {parseXml} from '../utils/xmlParser';
-import type {CollectionMetadata, CollectionSong, MusicCollection,} from '../types/collection';
+import { parseXml } from '../utils/xmlParser';
+import type {
+  CollectionMetadata,
+  CollectionSong,
+  MusicCollection,
+} from '../types/collection';
 
 export class CollectionLoader {
   static async loadCollection(collectionId: string): Promise<MusicCollection> {

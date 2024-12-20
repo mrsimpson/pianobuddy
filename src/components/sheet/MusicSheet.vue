@@ -7,8 +7,8 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref, watch} from 'vue';
-import {OpenSheetMusicDisplay} from 'opensheetmusicdisplay';
+import { onMounted, ref, watch } from 'vue';
+import { OpenSheetMusicDisplay } from 'opensheetmusicdisplay';
 
 const props = defineProps<{
   title?: string;

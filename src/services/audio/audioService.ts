@@ -1,5 +1,5 @@
-import {AudioEngine} from './audioEngine';
-import {NoteMapper} from './noteMapper';
+import { AudioEngine } from './audioEngine';
+import { NoteMapper } from './noteMapper';
 
 export class AudioService {
   private audioEngine: AudioEngine;

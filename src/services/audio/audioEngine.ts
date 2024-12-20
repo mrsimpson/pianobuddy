@@ -1,4 +1,4 @@
-import {type AudioConfig} from './types';
+import { type AudioConfig } from './types';
 
 export class AudioEngine {
   private context: AudioContext;
@@ -25,10 +25,10 @@ export class AudioEngine {
 
       // Create multiple oscillators for richer sound
       const oscillators = [
-        {type: 'triangle', gain: 0.6, detune: 0}, // Base tone
-        {type: 'sine', gain: 0.4, detune: -5}, // Slight detune for warmth
-        {type: 'sine', gain: 0.3, detune: 5}, // Slight detune opposite
-        {type: 'square', gain: 0.1, detune: 0}, // Harmonic content
+        { type: 'triangle', gain: 0.6, detune: 0 }, // Base tone
+        { type: 'sine', gain: 0.4, detune: -5 }, // Slight detune for warmth
+        { type: 'sine', gain: 0.3, detune: 5 }, // Slight detune opposite
+        { type: 'square', gain: 0.1, detune: 0 }, // Harmonic content
       ].map((config) => {
         const osc = this.context.createOscillator();
         const oscGain = this.context.createGain();

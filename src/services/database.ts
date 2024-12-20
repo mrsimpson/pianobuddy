@@ -1,7 +1,7 @@
-import {addRxPlugin, createRxDatabase} from 'rxdb';
-import {getRxStorageDexie} from 'rxdb/plugins/storage-dexie';
-import {RxDBDevModePlugin} from 'rxdb/plugins/dev-mode';
-import {songSchema} from '../types/song';
+import { addRxPlugin, createRxDatabase } from 'rxdb';
+import { getRxStorageDexie } from 'rxdb/plugins/storage-dexie';
+import { RxDBDevModePlugin } from 'rxdb/plugins/dev-mode';
+import { songSchema } from '../types/song';
 
 // Add dev-mode plugin in development
 if (import.meta.env.DEV) {

@@ -20,10 +20,10 @@
 </template>
 
 <script setup lang="ts">
-import {computed, ref, watch} from 'vue';
-import type {ParsedNote} from '../../types/musicxml';
+import { computed, ref, watch } from 'vue';
+import type { ParsedNote } from '../../types/musicxml';
 import NoteWithLyric from './NoteWithLyric.vue';
-import {useNoteVisualizer} from '../../composables/useNoteVisualizer';
+import { useNoteVisualizer } from '../../composables/useNoteVisualizer';
 
 const props = defineProps<{
   notes: ParsedNote[];

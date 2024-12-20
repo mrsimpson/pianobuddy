@@ -2,7 +2,7 @@
   <div class="playback-controls">
     <div class="controls-wrapper">
       <div class="controls-group">
-        <TempoControl :on-tempo-change="updateTempo" :tempo="tempo"/>
+        <TempoControl :on-tempo-change="updateTempo" :tempo="tempo" />
 
         <div class="transport-controls">
           <button class="control-button" title="Rewind" @click="rewind">
@@ -35,13 +35,10 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from 'vue';
-import {useI18n} from 'vue-i18n';
-import {PlaybackService} from '../../services/playbackService';
-import type {PartInfo} from '../../types/musicxml';
+import { ref } from 'vue';
+import { PlaybackService } from '../../services/playbackService';
+import type { PartInfo } from '../../types/musicxml';
 import TempoControl from './TempoControl.vue';
-
-const { t } = useI18n();
 
 const props = defineProps<{
   playbackService: PlaybackService;
@@ -53,7 +50,7 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void;
 }>();
 
-const tempo = ref(80);
+const tempo = ref(60);
 const isPlaying = ref(false);
 
 const updateTempo = (newTempo: number) => {

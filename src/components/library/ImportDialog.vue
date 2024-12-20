@@ -64,14 +64,15 @@
 </template>
 
 <script setup lang="ts">
-import {computed, ref} from 'vue';
-import {useI18n} from 'vue-i18n';
-import {MusicXmlService} from '../../services/musicXmlService';
-import {SongService} from '../../services/songService';
-import {v4 as uuidv4} from 'uuid';
+import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { MusicXmlService } from '../../services/musicXmlService';
+import { SongService } from '../../services/songService';
+import { v4 as uuidv4 } from 'uuid';
 
 const { t } = useI18n();
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps<{
   isOpen: boolean;
 }>();
@@ -172,7 +173,7 @@ const importFile = async () => {
     await SongService.saveSong(song);
     emit('imported');
     close();
-  } catch (err: any) {
+  } catch {
     error.value = 'Failed to import file. Please try again.';
   }
 };

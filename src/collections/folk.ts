@@ -1,4 +1,4 @@
-import type {MusicCollection} from './types';
+import type { MusicCollection } from './types';
 
 export const folkCollection: MusicCollection = {
   id: 'folk',

@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import {pianoKeys} from '../../types/piano';
+import { pianoKeys } from '../../types/piano';
 
 const props = defineProps<{
   pitch: string;

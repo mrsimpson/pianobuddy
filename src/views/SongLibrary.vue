@@ -46,14 +46,14 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from 'vue';
-import {useRouter} from 'vue-router';
-import {useI18n} from 'vue-i18n';
-import {SongService} from '../services/songService';
-import {formatDate} from '../utils/dateFormatter';
+import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+import { SongService } from '../services/songService';
+import { formatDate } from '../utils/dateFormatter';
 import PageHeader from '../components/layout/PageHeader.vue';
 import ImportDialog from '../components/library/ImportDialog.vue';
-import type {Song} from '../types/song';
+import type { Song } from '../types/song';
 
 const { t } = useI18n();
 const router = useRouter();
@@ -116,8 +116,9 @@ onMounted(loadSongs);
   padding: var(--spacing-lg);
   box-shadow: var(--shadow-sm);
   cursor: pointer;
-  transition: transform var(--transition-normal),
-  box-shadow var(--transition-normal);
+  transition:
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal);
 }
 
 .song-card:hover {

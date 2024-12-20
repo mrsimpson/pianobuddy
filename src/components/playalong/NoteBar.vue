@@ -9,10 +9,10 @@
 </template>
 
 <script setup lang="ts">
-import {computed} from 'vue';
-import type {ParsedNote} from '../../types/musicxml';
-import {useNoteVisualizer} from '../../composables/useNoteVisualizer';
-import {formatNoteForDisplay} from '../../utils/noteMapping';
+import { computed } from 'vue';
+import type { ParsedNote } from '../../types/musicxml';
+import { useNoteVisualizer } from '../../composables/useNoteVisualizer';
+import { formatNoteForDisplay } from '../../utils/noteMapping';
 
 const props = defineProps<{
   note: ParsedNote;

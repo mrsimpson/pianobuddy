@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import type {ParsedNote} from '../../types/musicxml';
+import type { ParsedNote } from '../../types/musicxml';
 
 defineProps<{
   notes: ParsedNote[];

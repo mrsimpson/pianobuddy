@@ -14,10 +14,10 @@
 </template>
 
 <script setup lang="ts">
-import {computed, inject, ref} from 'vue';
-import type {AudioService} from '../services/audio/audioService';
-import {getPianoKeyDisplayName} from '../types/piano';
-import {usePianoKey} from '../composables/usePianoKey';
+import { computed, inject, ref } from 'vue';
+import type { AudioService } from '../services/audio/audioService';
+import { getPianoKeyDisplayName } from '../types/piano';
+import { usePianoKey } from '../composables/usePianoKey';
 
 const props = defineProps<{
   name: string;

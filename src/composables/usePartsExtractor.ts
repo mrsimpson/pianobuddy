@@ -1,7 +1,7 @@
-import {ref} from 'vue';
-import {parseXml} from '../utils/xmlParser';
-import type {MusicPart} from '../types/musicxml';
-import {NoteParser} from '../services/parsers/noteParser';
+import { ref } from 'vue';
+import { parseXml } from '../utils/xmlParser';
+import type { MusicPart } from '../types/musicxml';
+import { NoteParser } from '../services/parsers/noteParser';
 
 export function usePartsExtractor() {
   const parts = ref<MusicPart[]>([]);

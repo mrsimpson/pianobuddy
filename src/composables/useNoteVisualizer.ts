@@ -1,6 +1,6 @@
-import {pianoKeys} from '../types/piano';
-import type {ParsedNote} from '../types/musicxml';
-import {shouldUseDarkText} from '../utils/colorUtils';
+import { pianoKeys } from '../types/piano';
+import type { ParsedNote } from '../types/musicxml';
+import { shouldUseDarkText } from '../utils/colorUtils';
 
 const UNIT_WIDTH = 120; // Base width for quarter notes
 const MIN_NOTE_WIDTH = 40; // Reduced minimum width

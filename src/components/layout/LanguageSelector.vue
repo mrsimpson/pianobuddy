@@ -11,24 +11,24 @@
 
     <div v-if="isOpen" class="language-dropdown">
       <button
-        v-for="(locale, code) in sortedLocales"
+        v-for="(localeId, code) in sortedLocales"
         v-show="code !== currentLocale"
         :key="code"
         class="language-option"
         :class="{ active: currentLocale === code }"
         @click="changeLocale(code)"
       >
-        <span class="flag">{{ locale.flag }}</span>
-        <span class="name">{{ locale.name }}</span>
+        <span class="flag">{{ localeId.flag }}</span>
+        <span class="name">{{ localeId.name }}</span>
       </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, onUnmounted, ref} from 'vue';
-import {useI18n} from 'vue-i18n';
-import {type LocaleCode, SUPPORTED_LOCALES} from '../../i18n/constants';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { type LocaleCode, SUPPORTED_LOCALES } from '../../i18n/constants';
 
 const { locale } = useI18n();
 const currentLocale = ref(locale.value as LocaleCode);

@@ -1,5 +1,5 @@
-import {CollectionLoader} from './collectionLoader';
-import type {MusicCollection} from '../types/collection';
+import { CollectionLoader } from './collectionLoader';
+import type { MusicCollection } from '../types/collection';
 
 export class CollectionService {
   private static collections = new Map<string, MusicCollection>();

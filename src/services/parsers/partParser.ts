@@ -1,6 +1,6 @@
-import {MusicPart} from '../../types/musicxml';
-import {NoteParser} from './noteParser';
-import {MusicXmlValidator} from '../validators/musicXmlValidator';
+import { MusicPart } from '../../types/musicxml';
+import { NoteParser } from './noteParser';
+import { MusicXmlValidator } from '../validators/musicXmlValidator';
 
 export class PartParser {
   static parseFirstPart(doc: Document): MusicPart | null {

@@ -19,9 +19,9 @@
 </template>
 
 <script setup lang="ts">
-import {computed, onMounted, onUnmounted, ref, watch} from 'vue';
-import {usePartsExtractor} from '../../composables/usePartsExtractor';
-import {PlaybackService} from '../../services/playbackService';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
+import { usePartsExtractor } from '../../composables/usePartsExtractor';
+import { PlaybackService } from '../../services/playbackService';
 import NotesVisualization from './NotesVisualization.vue';
 import PlaybackControls from './PlaybackControls.vue';
 
@@ -60,7 +60,7 @@ watch(
       selectedPart.value = extractedParts[0].id;
     }
   },
-  {immediate: true},
+  { immediate: true },
 );
 
 const notesForSelectedPart = computed(() => {

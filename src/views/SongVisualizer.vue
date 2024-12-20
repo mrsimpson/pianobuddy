@@ -23,15 +23,15 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from 'vue';
-import {useRoute} from 'vue-router';
-import {useI18n} from 'vue-i18n';
-import {useResponsive} from '../composables/useResponsive';
-import {SongService} from '../services/songService';
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+import { useResponsive } from '../composables/useResponsive';
+import { SongService } from '../services/songService';
 import PageHeader from '../components/layout/PageHeader.vue';
 import MusicSheetDisplay from '../components/sheet/MusicSheetDisplay.vue';
 import ColoredPlayalong from '../components/playalong/ColoredPlayalong.vue';
-import type {Song} from '../types/song';
+import type { Song } from '../types/song';
 
 const route = useRoute();
 const { t } = useI18n();

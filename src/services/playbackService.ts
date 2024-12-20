@@ -1,5 +1,5 @@
-import {AudioService} from './audio/audioService';
-import type {ParsedNote} from '../types/musicxml';
+import { AudioService } from './audio/audioService';
+import type { ParsedNote } from '../types/musicxml';
 
 export class PlaybackService {
   private audioService: AudioService;

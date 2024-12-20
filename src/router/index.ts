@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import ColorConfig from '../views/ColorConfig.vue';
 import SongVisualizer from '../views/SongVisualizer.vue';
 import SongLibrary from '../views/SongLibrary.vue';

@@ -6,8 +6,8 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, onUnmounted, ref, watch} from 'vue';
-import {OpenSheetMusicDisplay} from 'opensheetmusicdisplay';
+import { onMounted, onUnmounted, ref, watch } from 'vue';
+import { OpenSheetMusicDisplay } from 'opensheetmusicdisplay';
 
 const props = defineProps<{
   xmlContent: string;

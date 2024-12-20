@@ -16,10 +16,10 @@
           <span class="song-name">{{ song.name }}</span>
           <div v-if="song.composer || song.arranger" class="song-details">
             <span v-if="song.composer" class="composer">{{
-                song.composer
-              }}</span>
+              song.composer
+            }}</span>
             <span v-if="song.arranger" class="arranger"
-            >arr. {{ song.arranger }}</span
+              >arr. {{ song.arranger }}</span
             >
           </div>
         </div>
@@ -40,8 +40,8 @@
 </template>
 
 <script setup lang="ts">
-import {useI18n} from 'vue-i18n';
-import type {CollectionSong, MusicCollection} from '../../types/collection';
+import { useI18n } from 'vue-i18n';
+import type { CollectionSong, MusicCollection } from '../../types/collection';
 
 const { t } = useI18n();
 

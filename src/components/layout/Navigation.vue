@@ -20,17 +20,14 @@
         :class="{ show: isMenuOpen }"
         class="nav-links"
       >
-        <router-link to="/library" @click="closeMenu">{{
-            t('navigation.library')
-          }}
+        <router-link to="/library" @click="closeMenu"
+          >{{ t('navigation.library') }}
         </router-link>
-        <router-link to="/collections" @click="closeMenu">{{
-            t('navigation.collections')
-          }}
+        <router-link to="/collections" @click="closeMenu"
+          >{{ t('navigation.collections') }}
         </router-link>
-        <router-link to="/config" @click="closeMenu">{{
-            t('navigation.configuration')
-          }}
+        <router-link to="/config" @click="closeMenu"
+          >{{ t('navigation.configuration') }}
         </router-link>
         <LanguageSelector />
       </div>
@@ -39,9 +36,9 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from 'vue';
-import {useI18n} from 'vue-i18n';
-import {useResponsive} from '../../composables/useResponsive';
+import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useResponsive } from '../../composables/useResponsive';
 import LanguageSelector from './LanguageSelector.vue';
 
 const { t } = useI18n();

@@ -1,4 +1,4 @@
-import {type RGB} from '../types/colors';
+import { type RGB } from '../types/colors';
 
 export function getRGB(color: string): RGB {
   let r = 0,
