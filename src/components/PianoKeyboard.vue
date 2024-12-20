@@ -16,6 +16,21 @@ const totalWidth = computed(
     whiteKeySpacing,
 );
 
+// Group black keys by offset and concatenate their names
+const groupedBlackKeys = computed(() => {
+  const groups: { [key: number]: { name: string; offset: number } } = {};
+  blackKeys.value.forEach((key) => {
+    if (key.offset !== undefined) {
+      if (!groups[key.offset]) {
+        groups[key.offset] = { name: key.name, offset: key.offset };
+      } else {
+        groups[key.offset].name += `/${key.name}`;
+      }
+    }
+  });
+  return Object.values(groups);
+});
+
 // Create and provide the audio service
 const audioService = new AudioService();
 provide('audioService', audioService);
@@ -23,27 +38,33 @@ provide('audioService', audioService);
 
 <template>
   <div :style="{ width: `${totalWidth}px` }" class="piano-keyboard">
-    <div class="keyboard-layout">
-      <!-- White keys -->
-      <div class="white-keys">
-        <PianoKey
-          v-for="key in whiteKeys"
-          :key="key.name"
-          :name="key.name"
-          :color="key.color"
-          :isBlack="false"
-        />
-      </div>
-      <!-- Black keys -->
-      <div class="black-keys">
-        <PianoKey
-          v-for="key in blackKeys"
-          :key="key.name"
-          :name="key.name"
-          :isBlack="true"
-          :style="{ left: `${key.offset}%` }"
-          class="black-key-absolute"
-        />
+    <div v-for="octave in [4, 5]" :key="octave" class="keyboard-octave">
+      <div class="keyboard-layout">
+        <!-- White keys -->
+        <div class="white-keys">
+          <PianoKey
+            v-for="key in whiteKeys"
+            :key="key.name"
+            :color="key.color"
+            :isBlack="false"
+            :name="key.name + octave"
+            :octave="octave"
+            :pitch="key.name"
+          />
+        </div>
+        <!-- Black keys -->
+        <div class="black-keys">
+          <PianoKey
+            v-for="key in groupedBlackKeys"
+            :key="key.name"
+            :isBlack="true"
+            :name="key.name + octave"
+            :octave="octave"
+            :pitch="key.name.split('/')[0]"
+            :style="{ left: `${key.offset}%` }"
+            class="black-key-absolute"
+          />
+        </div>
       </div>
     </div>
   </div>

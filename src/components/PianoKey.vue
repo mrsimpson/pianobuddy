@@ -23,6 +23,8 @@ const props = defineProps<{
   name: string;
   isBlack: boolean;
   color?: string;
+  pitch: string;
+  octave: number;
 }>();
 
 const audioService = inject<AudioService>('audioService');
@@ -36,7 +38,7 @@ const displayName = computed(() => {
 
 const playNote = () => {
   isPressed.value = true;
-  audioService?.playNote(props.name, 4, 0.5); // Default to octave 4 and 0.5s duration
+  audioService?.playNote(props.pitch, props.octave, 0.5); // Default to octave 4 and 0.5s duration
 };
 
 const stopNote = () => {
