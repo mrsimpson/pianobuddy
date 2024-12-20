@@ -2,14 +2,18 @@
 
 A modern web application for learning piano through interactive music sheet visualization and playback. Built with Vue 3, TypeScript, and RxDB.
 
-![Piano Buddy](https://github.com/yourusername/piano-learning-app/raw/main/docs/preview.png)
+![Piano Buddy](./public/screenshot-playalong.png)
+
+Use it online, for free, with no tracking or whatsoever: [🔗Piano Buddy](https://piano-buddy.netlify.app/)
 
 ## Features 🌟
 
 - **Interactive Music Sheet Display**: Visualize sheet music using OpenSheetMusicDisplay
 - **Colored Note Visualization**: Each note is color-coded for easier learning
 - **Part Selection**: Support for multiple instrument parts in a single sheet
-- **Local Storage**: Save and manage your music sheets locally
+- **Pre-configured songs and upload feature**: Save and manage your music by either uploading a MusicXML file (there are
+  many free "community sheets" at [MuseScore](https://musescore.com/sheetmusic/free-download) ). or selecting a
+  pre-configured song from a library 📚
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 
 ## Technology Stack 💻
