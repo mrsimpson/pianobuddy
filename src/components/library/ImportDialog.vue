@@ -123,7 +123,7 @@ const validateFile = async (file: File) => {
 
 const handleFileSelect = async (event: Event) => {
   const input = event.target as HTMLInputElement;
-  if (!input.files?.length) return;
+  if (!input?.files?.length) return;
 
   try {
     const file = input.files[0];

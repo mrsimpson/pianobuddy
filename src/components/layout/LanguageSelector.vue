@@ -16,7 +16,7 @@
         :key="code"
         class="language-option"
         :class="{ active: currentLocale === code }"
-        @click="changeLocale(code)"
+        @click="changeLocale(code as LocaleCode)"
       >
         <span class="flag">{{ localeId.flag }}</span>
         <span class="name">{{ localeId.name }}</span>

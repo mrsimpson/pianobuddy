@@ -18,6 +18,8 @@
 </template>
 
 <script setup lang="ts">
+import { useNoteVisualizer } from '../../composables/useNoteVisualizer.ts';
+
 const { getNoteColor } = useNoteVisualizer();
 
 const props = defineProps<{

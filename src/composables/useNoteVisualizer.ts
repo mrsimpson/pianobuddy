@@ -1,5 +1,5 @@
 import { pianoKeys } from '../types/piano';
-import type { ParsedNote } from '../types/musicxml';
+import type { DurationInfo, ParsedNote } from '../types/musicxml';
 import { shouldUseDarkText } from '../utils/colorUtils';
 
 const BASE_WIDTH = 60;

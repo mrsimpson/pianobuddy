@@ -8,9 +8,9 @@ export interface CollectionMetadata {
 export interface CollectionSong {
   id: string;
   name: string;
-  composer?: string;
-  arranger?: string;
-  copyright?: string;
+  composer?: string | null;
+  arranger?: string | null;
+  copyright?: string | null;
   filename: string;
 }
 

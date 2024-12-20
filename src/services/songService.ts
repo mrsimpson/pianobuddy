@@ -6,7 +6,7 @@ export class SongService {
   static async getAllSongs(): Promise<Song[]> {
     const db = await getDatabase();
     const songs = await db.songs.find().exec();
-    return songs.map((doc) => doc.toJSON());
+    return songs.map((doc: any) => doc.toJSON());
   }
 
   static async getSongById(id: string): Promise<Song | null> {

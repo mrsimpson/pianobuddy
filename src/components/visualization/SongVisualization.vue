@@ -3,7 +3,7 @@
     <div class="visualization-container">
       <div v-for="(note, index) in notes" :key="index" class="note-container">
         <NoteBar
-          :note="note.pitch"
+          :note="note"
           :color="getNoteColor(note.pitch)"
           :duration="note.duration"
         />

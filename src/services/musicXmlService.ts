@@ -33,7 +33,7 @@ export class MusicXmlService {
       }
 
       const doc = parseXml(xmlContent);
-      const part = PartParser.parseFirstPart(doc);
+      const part = PartParser.parseAllParts(doc)[0];
 
       if (!part) {
         throw new Error('No valid part found in the MusicXML');
