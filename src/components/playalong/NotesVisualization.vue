@@ -39,23 +39,7 @@ const updateContainerWidth = () => {
 };
 
 const breakIndices = computed(() => {
-  const breaks: number[] = [];
-  let currentWidth = 0;
-  const maxWidth = Math.max(600, containerWidth.value / scaleFactor.value);
-  const spacing = 24; // Gap between notes
-
-  props.notes.forEach((note, index) => {
-    const noteWidth = getDurationWidth(note.duration);
-
-    if (currentWidth + noteWidth + spacing > maxWidth) {
-      breaks.push(index);
-      currentWidth = noteWidth + spacing;
-    } else {
-      currentWidth += noteWidth + spacing;
-    }
-  });
-
-  return breaks;
+  return []; // we don't need manual breaks for now. Keeping the method for future reference
 });
 
 const isCurrentNote = (index: number): boolean => {
