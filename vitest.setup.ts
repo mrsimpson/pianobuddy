@@ -41,13 +41,3 @@ const localStorageMock = (() => {
 Object.defineProperty(window, 'localStorage', {
   value: localStorageMock,
 });
-
-// Mock DOMParser
-Object.defineProperty(window, 'DOMParser', {
-  value: class DOMParser {
-    parseFromString = vi.fn().mockReturnValue({
-      querySelector: vi.fn(),
-      querySelectorAll: vi.fn(),
-    });
-  },
-});
