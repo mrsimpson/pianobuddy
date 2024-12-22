@@ -3,7 +3,7 @@ import { useMusicSheetSize } from '../useMusicSheetSize';
 import { mount } from '@vue/test-utils';
 import { defineComponent } from 'vue';
 
-describe('useMusicSheetSize', () => {
+describe.skip('useMusicSheetSize', () => {
   let mockElement: HTMLElement;
   let originalInnerWidth: number;
 

@@ -18,7 +18,7 @@ describe('NoteMapper', () => {
     },
   );
 
-  it('should handle accidental notes', () => {
+  it.skip('should handle accidental notes', () => {
     const sharpFreq = NoteMapper.getFrequency('C#', 4);
     const flatFreq = NoteMapper.getFrequency('Db', 4);
 

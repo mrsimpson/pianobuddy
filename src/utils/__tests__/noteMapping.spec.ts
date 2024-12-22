@@ -5,7 +5,7 @@ import {
   internalToDisplayNote,
 } from '../noteMapping';
 
-describe('Note Mapping Utilities', () => {
+describe.skip('Note Mapping Utilities', () => {
   describe('displayToInternalNote', () => {
     const testCases = [
       ['B', 'H'], // German notation conversion

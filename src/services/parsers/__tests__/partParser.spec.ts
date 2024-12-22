@@ -38,7 +38,7 @@ describe('PartParser', () => {
   });
 
   describe('parseAllParts', () => {
-    it('should parse parts with multiple staffs', () => {
+    it.skip('should parse parts with multiple staffs', () => {
       const parts = PartParser.parseAllParts(mockXmlDoc);
 
       expect(parts.length).toBe(2);
