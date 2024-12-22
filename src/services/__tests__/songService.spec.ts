@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { SongService } from '../songService';
-import { getDatabase } from '../database';
+import { getDatabase } from '../database'; // Mock database and its methods
 
 // Mock database and its methods
 vi.mock('../database', () => ({
@@ -23,10 +23,26 @@ describe('SongService', () => {
     // Reset mocks
     mockSongCollection = {
       find: vi.fn().mockReturnThis(),
-      exec: vi.fn().mockResolvedValue([mockSong]),
-      findOne: vi.fn().mockReturnThis(),
-      insert: vi.fn().mockResolvedValue(mockSong),
-      atomicUpdate: vi.fn().mockResolvedValue(mockSong),
+      exec: vi.fn().mockResolvedValue([
+        {
+          ...mockSong,
+          toJSON: () => mockSong,
+        },
+      ]),
+      findOne: vi.fn().mockReturnValue({
+        exec: vi.fn().mockResolvedValue({
+          ...mockSong,
+          toJSON: () => mockSong,
+        }),
+      }),
+      insert: vi.fn().mockResolvedValue({
+        ...mockSong,
+        toJSON: () => mockSong,
+      }),
+      atomicUpdate: vi.fn().mockResolvedValue({
+        ...mockSong,
+        toJSON: () => mockSong,
+      }),
       remove: vi.fn().mockResolvedValue(null),
     };
 
