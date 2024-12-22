@@ -2,10 +2,14 @@ import { type DurationInfo } from '../../types/musicxml';
 import { getNoteTypeLength } from '../../utils/noteTypeMapping';
 
 export class DurationParser {
-  static divisionsPerQuarter = 1;
+  static #divisionsPerQuarter = 1;
 
   static setDivisionsPerQuarter(divisions: number) {
-    this.divisionsPerQuarter = divisions;
+    this.#divisionsPerQuarter = divisions;
+  }
+
+  static getDivisionsPerQuarter() {
+    return DurationParser.#divisionsPerQuarter;
   }
 
   static parseDuration(noteElement: Element): DurationInfo {

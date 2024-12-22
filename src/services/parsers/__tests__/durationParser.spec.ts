@@ -19,7 +19,7 @@ describe('DurationParser', () => {
       DurationParser.parseAttributes(mockMeasureElement);
 
       // Use private method access via reflection
-      expect((DurationParser as any)['divisionsPerQuarter']).toBe(4);
+      expect(DurationParser.getDivisionsPerQuarter()).toBe(4);
     });
 
     it('should handle missing divisions', () => {
