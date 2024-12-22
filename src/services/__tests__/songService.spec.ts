@@ -18,9 +18,13 @@ describe('SongService', () => {
 
   let mockDb: any;
   let mockSongCollection: any;
+  let removeMock: vi.MockInstance<any, any>;
 
   beforeEach(() => {
     // Reset mocks
+
+    removeMock = vi.fn().mockResolvedValue(null);
+
     mockSongCollection = {
       find: vi.fn().mockReturnThis(),
       exec: vi.fn().mockResolvedValue([
@@ -34,6 +38,7 @@ describe('SongService', () => {
           ...mockSong,
           toJSON: () => mockSong,
         }),
+        remove: removeMock,
       }),
       insert: vi.fn().mockResolvedValue({
         ...mockSong,
@@ -43,7 +48,7 @@ describe('SongService', () => {
         ...mockSong,
         toJSON: () => mockSong,
       }),
-      remove: vi.fn().mockResolvedValue(null),
+      remove: removeMock,
     };
 
     mockDb = {
@@ -80,7 +85,9 @@ describe('SongService', () => {
     });
 
     it('should return null for non-existent song', async () => {
-      mockSongCollection.exec.mockResolvedValue(null);
+      mockSongCollection.findOne.mockReturnValue({
+        exec: vi.fn().mockResolvedValue(null),
+      });
 
       const song = await SongService.getSongById('non-existent');
       expect(song).toBeNull();
@@ -122,7 +129,7 @@ describe('SongService', () => {
       await SongService.deleteSong('test-id');
 
       expect(mockSongCollection.findOne).toHaveBeenCalledWith('test-id');
-      expect(mockSongCollection.remove).toHaveBeenCalled();
+      expect(removeMock).toHaveBeenCalled();
     });
   });
 });
