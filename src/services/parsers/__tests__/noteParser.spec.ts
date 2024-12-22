@@ -89,7 +89,7 @@ describe('NoteParser', () => {
 
       const parsedNote = NoteParser.parseNote(noteWithoutLyric);
 
-      expect(parsedNote?.lyric).toBeUndefined();
+      expect(parsedNote?.lyric).toBe('');
     });
 
     it('should return null for note without pitch', () => {

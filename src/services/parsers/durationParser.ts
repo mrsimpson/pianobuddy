@@ -2,11 +2,10 @@ import { type DurationInfo } from '../../types/musicxml';
 import { getNoteTypeLength } from '../../utils/noteTypeMapping';
 
 export class DurationParser {
-  // eslint-disable-next-line no-unused-private-class-members
-  static #divisionsPerQuarter = 1;
+  static divisionsPerQuarter = 1;
 
   static setDivisionsPerQuarter(divisions: number) {
-    this.#divisionsPerQuarter = divisions;
+    this.divisionsPerQuarter = divisions;
   }
 
   static parseDuration(noteElement: Element): DurationInfo {
