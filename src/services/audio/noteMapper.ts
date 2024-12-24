@@ -5,16 +5,21 @@ export class NoteMapper {
   private static readonly NOTE_OFFSETS: Record<string, number> = {
     C: -9,
     'C#': -8,
+    DB: -8,
     D: -7,
     'D#': -6,
+    EB: -6,
     E: -5,
     F: -4,
     'F#': -3,
+    GB: -3,
     G: -2,
     'G#': -1,
+    AB: -1,
     A: 0,
     'A#': 1,
-    B: 2, // Changed from H to B
+    BB: 1,
+    B: 2,
   };
 
   static getFrequency(note: string, octave: number): number {
