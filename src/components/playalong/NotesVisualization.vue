@@ -1,6 +1,6 @@
 <template>
   <div ref="containerRef" class="notes-visualization">
-    <div :style="{ transform: `scale(${scaleFactor})` }" class="notes-content">
+    <div class="notes-content">
       <NoteWithLyric
         v-for="(note, index) in props.notes"
         :key="index"
