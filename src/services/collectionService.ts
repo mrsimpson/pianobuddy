@@ -1,8 +1,10 @@
 import { CollectionLoader } from './collectionLoader';
 import type { MusicCollection } from '../types/collection';
+import { MusicXmlService } from './musicXmlService';
 
 export class CollectionService {
   private static collections = new Map<string, MusicCollection>();
+  private static musicXmlService = new MusicXmlService();
 
   static async loadCollectionSong(
     collectionId: string,
@@ -29,7 +31,17 @@ export class CollectionService {
         throw new Error(`Failed to load song file: ${song.filename}`);
       }
 
-      return await response.text();
+      const fileBlob = await response.blob();
+      const fileExtension = song.filename.split('.').pop()?.toLowerCase();
+
+      // Handle MXL files
+      if (fileExtension === 'mxl') {
+        return await this.musicXmlService.unzipMxlFile(
+          new File([fileBlob], song.filename),
+        );
+      }
+
+      return await fileBlob.text();
     } catch (error) {
       console.error('Error loading collection song:', error);
       throw error;

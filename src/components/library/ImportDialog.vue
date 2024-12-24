@@ -68,11 +68,9 @@ import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { MusicXmlService } from '../../services/musicXmlService';
 import { SongService } from '../../services/songService';
-import { v4 as uuidv4 } from 'uuid';
 
 const { t } = useI18n();
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps<{
   isOpen: boolean;
 }>();
@@ -101,24 +99,28 @@ const close = () => {
 };
 
 const validateFile = async (file: File) => {
-  if (
-    !file.name.endsWith('.xml') &&
-    !file.name.endsWith('.musicxml') &&
-    !file.name.endsWith('.mxl')
-  ) {
+  const fileExtension = file.name.split('.').pop()?.toLowerCase();
+
+  if (!['xml', 'musicxml', 'mxl'].includes(fileExtension || '')) {
     throw new Error(
       'Please select a valid MusicXML file (.xml, .mxl or .musicxml)',
     );
   }
 
-  const content = await file.text();
-  const validation = musicXmlService.validateXml(content);
+  let xmlContent: string;
+  if (fileExtension === 'mxl') {
+    xmlContent = await musicXmlService.unzipMxlFile(file);
+  } else {
+    xmlContent = await file.text();
+  }
+
+  const validation = musicXmlService.validateXml(xmlContent);
 
   if (!validation.isValid) {
     throw new Error(validation.error || 'Invalid MusicXML file');
   }
 
-  return content;
+  return xmlContent;
 };
 
 const handleFileSelect = async (event: Event) => {
@@ -159,11 +161,9 @@ const importFile = async () => {
   if (!selectedFile.value || !songName.value.trim()) return;
 
   try {
-    const content = await selectedFile.value.text();
-    const formattedXml = musicXmlService.formatXml(content);
+    const formattedXml = await validateFile(selectedFile.value);
 
     const song = {
-      id: uuidv4(),
       name: songName.value.trim(),
       xmlContent: formattedXml,
       createdAt: Date.now(),
