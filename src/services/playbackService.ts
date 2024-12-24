@@ -91,7 +91,7 @@ export class PlaybackService {
       if (this.isPlaying) {
         this.playCurrentNote();
       }
-      if (this.currentIndex === this.notes.length - 1) {
+      if (this.currentIndex === this.notes.length) {
         this.stop();
       }
     }, nextNoteDelay);
