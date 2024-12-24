@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": "vue-tsc -p tsconfig.app.json && vite build",
     "preview": "vite preview",
     "lint": "eslint src --fix",
     "prepare": "husky",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "tsc:test": "vue-tsc -p tsconfig.test.json"
   },
   "dependencies": {
     "opensheetmusicdisplay": "^1.8.6",
