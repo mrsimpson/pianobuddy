@@ -1,5 +1,6 @@
 import { ParsedNote } from '../../types/musicxml';
 import { DurationParser } from './durationParser';
+import { getNoteColor } from '../../types/piano';
 
 export class NoteParser {
   static parseNoteElements(notes: Element[]): ParsedNote[] {
@@ -60,5 +61,36 @@ export class NoteParser {
       lyric,
       alter,
     };
+  }
+
+  static addNoteHeadColor(xmlContent: string): string {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xmlContent, 'text/xml');
+
+    const notes = xmlDoc.querySelectorAll('note');
+    notes.forEach((note) => {
+      // Skip rest notes
+      if (note.querySelector('rest')) return;
+
+      const pitchEl = note.querySelector('pitch');
+      if (!pitchEl) return;
+
+      const step = pitchEl.querySelector('step')?.textContent || '';
+      const color = getNoteColor(step);
+
+      // Create or modify notehead element
+      let noteheadEl = note.querySelector('notehead');
+      if (!noteheadEl) {
+        noteheadEl = xmlDoc.createElement('notehead');
+        note.appendChild(noteheadEl);
+      }
+
+      noteheadEl.setAttribute('color', color);
+      noteheadEl.textContent = 'normal';
+    });
+
+    // Convert back to XML string
+    const serializer = new XMLSerializer();
+    return serializer.serializeToString(xmlDoc);
   }
 }

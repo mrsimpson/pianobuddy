@@ -27,6 +27,11 @@ export const pianoKeys: PianoKey[] = [
   { name: 'Bb', isBlack: true, color: '#7600A9', offset: 84 },
 ];
 
+export function getNoteColor(pitch: string): string {
+  const key = pianoKeys.find((k) => k.name === pitch);
+  return key?.color || '#999999';
+}
+
 export const getPianoKeyDisplayName = (key: PianoKey): string => {
   return internalToDisplayNote(key.name);
 };

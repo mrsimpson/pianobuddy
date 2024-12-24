@@ -8,6 +8,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue';
 import { OpenSheetMusicDisplay } from 'opensheetmusicdisplay';
+import { NoteParser } from '../../services/parsers/noteParser';
 
 const props = defineProps<{
   xmlContent: string;
@@ -28,7 +29,10 @@ const renderScore = async () => {
   error.value = '';
 
   try {
-    await osmd.value.load(props.xmlContent);
+    // Add note head colors before loading
+    const coloredXmlContent = NoteParser.addNoteHeadColor(props.xmlContent);
+
+    await osmd.value.load(coloredXmlContent);
     await osmd.value.render();
     emit('rendered');
   } catch (err) {
