@@ -76,9 +76,13 @@ describe('CollectionService', () => {
 
   describe('loadCollectionSong', () => {
     it('should load song from collection', async () => {
+      const mockBlob = new Blob([mockXmlContent], { type: 'text/xml' });
+      // Explicitly add text method to the blob
+      mockBlob.text = () => Promise.resolve(mockXmlContent);
+
       const mockFetch = vi.fn().mockResolvedValue({
         ok: true,
-        text: () => Promise.resolve(mockXmlContent),
+        blob: () => Promise.resolve(mockBlob),
       });
       global.fetch = mockFetch;
 
