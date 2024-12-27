@@ -71,7 +71,7 @@ import { SongService } from '../../services/songService';
 
 const { t } = useI18n();
 
-const props = defineProps<{
+defineProps<{
   isOpen: boolean;
 }>();
 

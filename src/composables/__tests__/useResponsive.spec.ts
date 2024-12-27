@@ -1,3 +1,4 @@
+/* eslint-disable vue/one-component-per-file */
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { MOBILE_BREAKPOINT, useResponsive } from '../useResponsive';
 import { mount } from '@vue/test-utils';

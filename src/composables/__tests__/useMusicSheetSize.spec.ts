@@ -1,3 +1,4 @@
+/* eslint-disable vue/one-component-per-file */
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { useMusicSheetSize } from '../useMusicSheetSize';
 import { mount } from '@vue/test-utils';

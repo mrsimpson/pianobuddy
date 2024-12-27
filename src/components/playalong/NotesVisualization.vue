@@ -18,7 +18,6 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import type { ParsedNote } from '../../types/musicxml';
 import NoteWithLyric from './NoteWithLyric.vue';
-import { useNoteVisualizer } from '../../composables/useNoteVisualizer';
 import { useMusicSheetSize } from '../../composables/useMusicSheetSize';
 
 const props = defineProps<{
@@ -26,10 +25,8 @@ const props = defineProps<{
   currentNoteIndex: number;
 }>();
 
-const { getDurationWidth } = useNoteVisualizer();
-const { containerRef, getScaleFactor, updateWidth } = useMusicSheetSize();
+const { containerRef, updateWidth } = useMusicSheetSize();
 const containerWidth = ref(0);
-const scaleFactor = computed(() => getScaleFactor());
 
 const updateContainerWidth = () => {
   if (containerRef.value) {

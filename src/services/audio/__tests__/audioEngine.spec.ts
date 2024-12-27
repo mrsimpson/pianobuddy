@@ -4,7 +4,6 @@ import { AudioEngine } from '../audioEngine';
 describe('AudioEngine', () => {
   let audioEngine: AudioEngine;
   let mockContext: any;
-  let mockGainNode: any;
 
   beforeEach(() => {
     mockContext = {

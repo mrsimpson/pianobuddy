@@ -24,8 +24,8 @@ describe('Database Service', () => {
     // Configure mock createRxDatabase
     vi.mocked(createRxDatabase).mockResolvedValue(mockDb);
 
-    // Get database
-    const db = await getDatabase();
+    // Initialize database
+    await getDatabase();
 
     // Verify database creation
     expect(createRxDatabase).toHaveBeenCalledWith({

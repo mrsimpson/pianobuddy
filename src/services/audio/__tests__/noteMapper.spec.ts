@@ -23,6 +23,7 @@ describe('NoteMapper', () => {
     const flatFreq = NoteMapper.getFrequency('Db', 4);
 
     expect(Math.round(sharpFreq)).toBe(277);
+    expect(Math.round(flatFreq)).toBe(277);
   });
 
   it('should throw error for invalid notes', () => {
