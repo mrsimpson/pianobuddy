@@ -1,4 +1,4 @@
-import { MusicPart } from '../../types/musicxml';
+import { type MusicPart } from '../../types/musicxml';
 import { NoteParser } from './noteParser';
 import { DurationParser } from './durationParser';
 

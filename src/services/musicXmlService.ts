@@ -1,5 +1,5 @@
 import { parseXml } from '../utils/xmlParser';
-import { ParsedNote, ValidationResult } from '../types/musicxml';
+import { type ParsedNote, type ValidationResult } from '../types/musicxml';
 import { MusicXmlValidator } from './validators/musicXmlValidator';
 import { PartParser } from './parsers/partParser';
 import JSZip from 'jszip';

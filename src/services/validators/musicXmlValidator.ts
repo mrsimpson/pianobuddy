@@ -1,4 +1,4 @@
-import { ValidationResult } from '../../types/musicxml';
+import { type ValidationResult } from '../../types/musicxml';
 
 export class MusicXmlValidator {
   static validateStructure(doc: Document): ValidationResult {

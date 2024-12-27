@@ -1,4 +1,4 @@
-import { ParsedNote } from '../../types/musicxml';
+import { type ParsedNote } from '../../types/musicxml';
 import { DurationParser } from './durationParser';
 import { getNoteColor } from '../../types/piano';
 

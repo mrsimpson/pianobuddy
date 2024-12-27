@@ -1,4 +1,4 @@
-import { LocaleCode, SUPPORTED_LOCALES } from './constants';
+import { type LocaleCode, SUPPORTED_LOCALES } from './constants';
 
 export function getBrowserLocale(): LocaleCode {
   // Get browser language (e.g., "en-US" or "de")
