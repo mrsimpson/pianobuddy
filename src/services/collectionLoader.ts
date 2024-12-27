@@ -35,7 +35,9 @@ export class CollectionLoader {
           songs.push({
             id: filename.replace(/\.(musicxml|xml)$/, ''),
             filename,
-            name: songMetadata.name || filename,
+            name:
+              songMetadata.name ||
+              filename.replace(/[-_]/g, ' ').replace(/\.(musicxml|mxl)$/, ''),
             composer: songMetadata.composer,
             arranger: songMetadata.arranger,
             copyright: songMetadata.copyright,
