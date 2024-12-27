@@ -83,10 +83,6 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.song-visualizer {
-  padding: var(--spacing-lg);
-}
-
 .visualizer-content {
   display: flex;
   flex-direction: column;
@@ -112,17 +108,7 @@ onMounted(async () => {
   color: black;
 }
 
-@media (max-width: 800px) {
-  .song-visualizer {
-    padding: var(--spacing-sm);
-  }
-}
-
 @media print {
-  .song-visualizer {
-    padding: 0;
-  }
-
   .screen-only {
     display: none !important;
   }

@@ -1,46 +1,46 @@
 /* Breakpoint variables and utility classes */
 :root {
-    --breakpoint-sm: 480px; /* Mobile */
-    --breakpoint-md: 1024px; /* Tablet */
-    --breakpoint-lg: 1440px; /* Desktop */
-    --breakpoint-xl: 2000px; /* Large Desktop */
+  --breakpoint-sm: 480px; /* Mobile */
+  --breakpoint-md: 1024px; /* Tablet */
+  --breakpoint-lg: 1440px; /* Desktop */
+  --breakpoint-xl: 2000px; /* Large Desktop */
 
-    --container-padding: 1rem;
-    --container-width: calc(100vw - 2 * var(--container-padding));
-    --container-max-width: 1800px;
+  --container-padding: 1rem;
+  --container-width: calc(100vw - 2 * var(--container-padding));
+  --container-max-width: 1800px;
 }
 
 .container {
-    width: var(--container-width);
-    max-width: var(--container-max-width);
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: var(--container-padding);
-    padding-right: var(--container-padding);
-    box-sizing: border-box;
+  width: var(--container-width);
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+  box-sizing: border-box;
 }
 
 /* Responsive padding adjustments */
 @media (min-width: 480px) {
-    :root {
-        --container-padding: 1.5rem;
-    }
+  :root {
+    --container-padding: 0.25rem;
+  }
 }
 
 @media (min-width: 1024px) {
-    :root {
-        --container-padding: 2rem;
-    }
+  :root {
+    --container-padding: 1rem;
+  }
 }
 
 @media (min-width: 1440px) {
-    :root {
-        --container-padding: 2.5rem;
-    }
+  :root {
+    --container-padding: 1.5rem;
+  }
 }
 
 @media (min-width: 2000px) {
-    :root {
-        --container-padding: 3rem;
-    }
+  :root {
+    --container-padding: 2rem;
+  }
 }

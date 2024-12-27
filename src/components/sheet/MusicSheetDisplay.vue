@@ -99,7 +99,7 @@ defineExpose({
 <style scoped>
 .music-sheet-display {
   background-color: white;
-  padding: var(--spacing-lg);
+  padding: var(--spacing-sm);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
   margin-bottom: var(--spacing-lg);
@@ -122,7 +122,7 @@ defineExpose({
 
 @media (max-width: 800px) {
   .music-sheet-display {
-    padding: var(--spacing-sm);
+    padding: 0px;
   }
 }
 </style>
