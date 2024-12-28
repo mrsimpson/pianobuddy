@@ -1,0 +1,191 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PianoKeyboard Component > renders default piano keyboard snapshot 1`] = `
+"<div data-v-32ce5279="" style="width: 432px;" class="piano-keyboard">
+  <div data-v-32ce5279="" class="keyboard-octave">
+    <div data-v-32ce5279="" class="keyboard-layout">
+      <!-- White keys -->
+      <div data-v-32ce5279="" class="white-keys">
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(255, 0, 0);">
+          <div data-v-a7454f0c="" class="key-label">C4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(255, 165, 0);">
+          <div data-v-a7454f0c="" class="key-label">D4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(255, 255, 0);">
+          <div data-v-a7454f0c="" class="key-label">E4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(0, 128, 0);">
+          <div data-v-a7454f0c="" class="key-label">F4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(0, 0, 255);">
+          <div data-v-a7454f0c="" class="key-label">G4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(75, 0, 130);">
+          <div data-v-a7454f0c="" class="key-label">A4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(148, 0, 211);">
+          <div data-v-a7454f0c="" class="key-label">B4</div>
+        </div>
+      </div><!-- Black keys -->
+      <div data-v-32ce5279="" class="black-keys">
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 12%;">
+          <div data-v-a7454f0c="" class="key-label">C#/Db4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 26%;">
+          <div data-v-a7454f0c="" class="key-label">D#/Eb4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 55%;">
+          <div data-v-a7454f0c="" class="key-label">F#/Gb4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 70%;">
+          <div data-v-a7454f0c="" class="key-label">G#/Ab4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 84%;">
+          <div data-v-a7454f0c="" class="key-label">A#/Bb4</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-v-32ce5279="" class="keyboard-octave">
+    <div data-v-32ce5279="" class="keyboard-layout">
+      <!-- White keys -->
+      <div data-v-32ce5279="" class="white-keys">
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(255, 0, 0);">
+          <div data-v-a7454f0c="" class="key-label">C5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(255, 165, 0);">
+          <div data-v-a7454f0c="" class="key-label">D5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(255, 255, 0);">
+          <div data-v-a7454f0c="" class="key-label">E5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(0, 128, 0);">
+          <div data-v-a7454f0c="" class="key-label">F5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(0, 0, 255);">
+          <div data-v-a7454f0c="" class="key-label">G5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(75, 0, 130);">
+          <div data-v-a7454f0c="" class="key-label">A5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(148, 0, 211);">
+          <div data-v-a7454f0c="" class="key-label">B5</div>
+        </div>
+      </div><!-- Black keys -->
+      <div data-v-32ce5279="" class="black-keys">
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 12%;">
+          <div data-v-a7454f0c="" class="key-label">C#/Db5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 26%;">
+          <div data-v-a7454f0c="" class="key-label">D#/Eb5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 55%;">
+          <div data-v-a7454f0c="" class="key-label">F#/Gb5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 70%;">
+          <div data-v-a7454f0c="" class="key-label">G#/Ab5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 84%;">
+          <div data-v-a7454f0c="" class="key-label">A#/Bb5</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`PianoKeyboard Component > renders keyboard with correct number of keys 1`] = `
+"<div data-v-32ce5279="" style="width: 432px;" class="piano-keyboard">
+  <div data-v-32ce5279="" class="keyboard-octave">
+    <div data-v-32ce5279="" class="keyboard-layout">
+      <!-- White keys -->
+      <div data-v-32ce5279="" class="white-keys">
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(255, 0, 0);">
+          <div data-v-a7454f0c="" class="key-label">C4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(255, 165, 0);">
+          <div data-v-a7454f0c="" class="key-label">D4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(255, 255, 0);">
+          <div data-v-a7454f0c="" class="key-label">E4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(0, 128, 0);">
+          <div data-v-a7454f0c="" class="key-label">F4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(0, 0, 255);">
+          <div data-v-a7454f0c="" class="key-label">G4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(75, 0, 130);">
+          <div data-v-a7454f0c="" class="key-label">A4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(148, 0, 211);">
+          <div data-v-a7454f0c="" class="key-label">B4</div>
+        </div>
+      </div><!-- Black keys -->
+      <div data-v-32ce5279="" class="black-keys">
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 12%;">
+          <div data-v-a7454f0c="" class="key-label">C#/Db4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 26%;">
+          <div data-v-a7454f0c="" class="key-label">D#/Eb4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 55%;">
+          <div data-v-a7454f0c="" class="key-label">F#/Gb4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 70%;">
+          <div data-v-a7454f0c="" class="key-label">G#/Ab4</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 84%;">
+          <div data-v-a7454f0c="" class="key-label">A#/Bb4</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div data-v-32ce5279="" class="keyboard-octave">
+    <div data-v-32ce5279="" class="keyboard-layout">
+      <!-- White keys -->
+      <div data-v-32ce5279="" class="white-keys">
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(255, 0, 0);">
+          <div data-v-a7454f0c="" class="key-label">C5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(255, 165, 0);">
+          <div data-v-a7454f0c="" class="key-label">D5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(255, 255, 0);">
+          <div data-v-a7454f0c="" class="key-label">E5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(0, 128, 0);">
+          <div data-v-a7454f0c="" class="key-label">F5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(0, 0, 255);">
+          <div data-v-a7454f0c="" class="key-label">G5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(75, 0, 130);">
+          <div data-v-a7454f0c="" class="key-label">A5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="white-key piano-key" style="background-color: rgb(148, 0, 211);">
+          <div data-v-a7454f0c="" class="key-label">B5</div>
+        </div>
+      </div><!-- Black keys -->
+      <div data-v-32ce5279="" class="black-keys">
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 12%;">
+          <div data-v-a7454f0c="" class="key-label">C#/Db5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 26%;">
+          <div data-v-a7454f0c="" class="key-label">D#/Eb5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 55%;">
+          <div data-v-a7454f0c="" class="key-label">F#/Gb5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 70%;">
+          <div data-v-a7454f0c="" class="key-label">G#/Ab5</div>
+        </div>
+        <div data-v-a7454f0c="" data-v-32ce5279="" class="black-key piano-key black-key-absolute" style="left: 84%;">
+          <div data-v-a7454f0c="" class="key-label">A#/Bb5</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;

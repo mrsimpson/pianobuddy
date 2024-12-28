@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MusicSheetDisplay Component > renders error state snapshot 1`] = `
+"<div data-v-9b41d920="" class="music-sheet-display">
+  <!--v-if-->
+  <div data-v-9b41d920="" class="sheet-container"></div>
+</div>"
+`;
+
+exports[`MusicSheetDisplay Component > renders music sheet display snapshot 1`] = `
+"<div data-v-9b41d920="" class="music-sheet-display">
+  <!--v-if-->
+  <div data-v-9b41d920="" class="sheet-container"></div>
+</div>"
+`;

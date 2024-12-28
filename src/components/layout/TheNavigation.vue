@@ -15,14 +15,8 @@
         <span></span>
       </button>
 
-      <div
-        v-show="!isMobile || isMenuOpen"
-        :class="{ show: isMenuOpen }"
-        class="nav-links"
-      >
-        <router-link to="/library" @click="closeMenu"
-          >{{ t('navigation.library') }}
-        </router-link>
+      <div v-show="!isMobile || isMenuOpen" :class="{ show: isMenuOpen }" class="nav-links">
+        <router-link to="/library" @click="closeMenu">{{ t('navigation.library') }}</router-link>
         <router-link to="/collections" @click="closeMenu"
           >{{ t('navigation.collections') }}
         </router-link>
@@ -36,22 +30,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { useResponsive } from '../../composables/useResponsive';
-import LanguageSelector from './LanguageSelector.vue';
+import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useResponsive } from '../../composables/useResponsive'
+import LanguageSelector from './LanguageSelector.vue'
 
-const { t } = useI18n();
-const { isMobile } = useResponsive();
-const isMenuOpen = ref(false);
+const { t } = useI18n()
+const { isMobile } = useResponsive()
+const isMenuOpen = ref(false)
 
 const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value;
-};
+  isMenuOpen.value = !isMenuOpen.value
+}
 
 const closeMenu = () => {
-  isMenuOpen.value = false;
-};
+  isMenuOpen.value = false
+}
 </script>
 
 <style scoped>

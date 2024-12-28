@@ -1,10 +1,10 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { PlaybackService } from '../playbackService';
-import { AudioService } from '../audio';
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { PlaybackService } from '../playbackService'
+import { AudioService } from '../audio'
 
 describe('PlaybackService', () => {
-  let playbackService: PlaybackService;
-  let mockAudioService: AudioService;
+  let playbackService: PlaybackService
+  let mockAudioService: AudioService
 
   const mockNotes = [
     {
@@ -25,7 +25,7 @@ describe('PlaybackService', () => {
       duration: { divisions: 4, type: 'quarter', relativeLength: 1 },
       isRest: false,
     },
-  ];
+  ]
 
   beforeEach(() => {
     mockAudioService = {
@@ -33,81 +33,75 @@ describe('PlaybackService', () => {
       resume: vi.fn(),
       suspend: vi.fn(),
       setVolume: vi.fn(),
-    } as any;
+    } as unknown as AudioService
 
-    vi.spyOn(AudioService.prototype, 'playNote').mockImplementation(
-      mockAudioService.playNote,
-    );
-    vi.spyOn(AudioService.prototype, 'resume').mockImplementation(
-      mockAudioService.resume,
-    );
-    vi.spyOn(AudioService.prototype, 'suspend').mockImplementation(
-      mockAudioService.suspend,
-    );
+    vi.spyOn(AudioService.prototype, 'playNote').mockImplementation(mockAudioService.playNote)
+    vi.spyOn(AudioService.prototype, 'resume').mockImplementation(mockAudioService.resume)
+    vi.spyOn(AudioService.prototype, 'suspend').mockImplementation(mockAudioService.suspend)
 
-    playbackService = new PlaybackService();
-    playbackService['audioService'] = mockAudioService;
-  });
+    playbackService = new PlaybackService()
+    playbackService['audioService'] = mockAudioService
+  })
 
   it('should set notes correctly', () => {
-    playbackService.setNotes(mockNotes);
-    expect(playbackService['notes']).toEqual(mockNotes);
-  });
+    playbackService.setNotes(mockNotes)
+    expect(playbackService['notes']).toEqual(mockNotes)
+  })
 
   it('should set tempo within valid range', () => {
-    playbackService.setTempo(60);
-    expect(playbackService['tempo']).toBe(60);
+    playbackService.setTempo(60)
+    expect(playbackService['tempo']).toBe(60)
 
-    playbackService.setTempo(0); // Below minimum
-    expect(playbackService['tempo']).toBe(30);
+    playbackService.setTempo(0) // Below minimum
+    expect(playbackService['tempo']).toBe(30)
 
-    playbackService.setTempo(300); // Above maximum
-    expect(playbackService['tempo']).toBe(240);
-  });
+    playbackService.setTempo(300) // Above maximum
+    expect(playbackService['tempo']).toBe(240)
+  })
 
   it('should play notes sequentially', () => {
-    vi.useFakeTimers();
+    vi.useFakeTimers()
 
-    const noteCallback = vi.fn();
-    playbackService.onNote(noteCallback);
-    playbackService.setNotes(mockNotes);
-    playbackService.play();
+    const noteCallback = vi.fn()
+    playbackService.onNote(noteCallback)
+    playbackService.setNotes(mockNotes)
+    playbackService.play()
 
     // Simulate time passing
-    vi.runAllTimers();
+    vi.runAllTimers()
 
-    expect(mockAudioService.playNote).toHaveBeenCalledTimes(3);
-    expect(noteCallback).toHaveBeenCalledTimes(4); // 3 notes + final stop
-  });
+    expect(mockAudioService.playNote).toHaveBeenCalledTimes(3)
+    expect(noteCallback).toHaveBeenCalledTimes(4) // 3 notes + final stop
+  })
 
   it('should handle empty notes collection', () => {
-    const noteCallback = vi.fn();
-    playbackService.onNote(noteCallback);
-    playbackService.setNotes([]);
-    playbackService.play();
+    const noteCallback = vi.fn()
+    playbackService.onNote(noteCallback)
+    playbackService.setNotes([])
+    playbackService.play()
 
-    expect(mockAudioService.playNote).not.toHaveBeenCalled();
-    expect(noteCallback).not.toHaveBeenCalled();
-  });
+    expect(mockAudioService.playNote).not.toHaveBeenCalled()
+    expect(noteCallback).not.toHaveBeenCalled()
+  })
 
   it('should pause and resume playback', () => {
-    playbackService.setNotes(mockNotes);
-    playbackService.play();
-    playbackService.pause();
+    playbackService.setNotes(mockNotes)
+    playbackService.play()
+    playbackService.pause()
 
-    expect(mockAudioService.suspend).toHaveBeenCalled();
+    expect(mockAudioService.suspend).toHaveBeenCalled()
 
-    playbackService.play();
-    expect(mockAudioService.resume).toHaveBeenCalled();
-  });
+    playbackService.play()
+    expect(mockAudioService.resume).toHaveBeenCalled()
+  })
 
   it('should stop playback', () => {
-    const noteCallback = vi.fn();
-    playbackService.onNote(noteCallback);
-    playbackService.setNotes(mockNotes);
-    playbackService.play();
-    playbackService.stop();
+    const noteCallback = vi.fn()
+    playbackService.onNote(noteCallback)
+    playbackService.setNotes(mockNotes)
+    playbackService.play()
+    playbackService.stop()
 
-    expect(noteCallback).toHaveBeenCalledWith(-1);
-  });
-});
+    expect(noteCallback).toHaveBeenCalledWith(-1)
+  })
+})

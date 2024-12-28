@@ -1,0 +1,29 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MusicStaff Component > renders empty music staff snapshot 1`] = `
+"<div data-v-faaa3425="" class="music-staff">
+  <div class="staff-lines" data-v-faaa3425="">
+    <div class="line" data-v-faaa3425=""></div>
+    <div class="line" data-v-faaa3425=""></div>
+    <div class="line" data-v-faaa3425=""></div>
+    <div class="line" data-v-faaa3425=""></div>
+    <div class="line" data-v-faaa3425=""></div>
+  </div>
+  <div data-v-faaa3425="" class="notes-container"></div>
+</div>"
+`;
+
+exports[`MusicStaff Component > renders music staff snapshot 1`] = `
+"<div data-v-faaa3425="" class="music-staff">
+  <div class="staff-lines" data-v-faaa3425="">
+    <div class="line" data-v-faaa3425=""></div>
+    <div class="line" data-v-faaa3425=""></div>
+    <div class="line" data-v-faaa3425=""></div>
+    <div class="line" data-v-faaa3425=""></div>
+    <div class="line" data-v-faaa3425=""></div>
+  </div>
+  <div data-v-faaa3425="" class="notes-container">
+    <div class="test-note">Test Note</div>
+  </div>
+</div>"
+`;

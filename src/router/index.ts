@@ -1,8 +1,8 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
-import ColorConfig from '../views/ColorConfig.vue';
-import SongVisualizer from '../views/SongVisualizer.vue';
-import SongLibrary from '../views/SongLibrary.vue';
-import CollectionsView from '../views/CollectionsView.vue';
+import { createRouter, createWebHashHistory } from 'vue-router'
+import ColorConfig from '../views/ColorConfig.vue'
+import SongVisualizer from '../views/SongVisualizer.vue'
+import SongLibrary from '../views/SongLibrary.vue'
+import CollectionsView from '../views/CollectionsView.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -33,6 +33,6 @@ const router = createRouter({
       component: ColorConfig,
     },
   ],
-});
+})
 
-export default router;
+export default router

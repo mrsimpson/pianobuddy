@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PianoKey Component > renders black key snapshot 1`] = `
+"<div data-v-a7454f0c="" class="black-key piano-key">
+  <div data-v-a7454f0c="" class="key-label">C4</div>
+</div>"
+`;
+
+exports[`PianoKey Component > renders white key snapshot 1`] = `
+"<div data-v-a7454f0c="" class="white-key piano-key">
+  <div data-v-a7454f0c="" class="key-label">C4</div>
+</div>"
+`;

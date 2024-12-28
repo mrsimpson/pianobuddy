@@ -3,5 +3,5 @@ export function formatDate(timestamp: number): string {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
-  });
+  })
 }

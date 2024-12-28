@@ -1,9 +1,9 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { AudioEngine } from '../audioEngine';
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { AudioEngine } from '../audioEngine'
 
 describe('AudioEngine', () => {
-  let audioEngine: AudioEngine;
-  let mockContext: any;
+  let audioEngine: AudioEngine
+  let mockContext: AudioContext
 
   beforeEach(() => {
     mockContext = {
@@ -22,47 +22,47 @@ describe('AudioEngine', () => {
       }),
       currentTime: 0,
       destination: {},
-    };
+    }
 
-    vi.spyOn(window, 'AudioContext').mockImplementation(() => mockContext);
+    vi.spyOn(window, 'AudioContext').mockImplementation(() => mockContext)
 
-    audioEngine = new AudioEngine();
-  });
+    audioEngine = new AudioEngine()
+  })
 
   it('should create an AudioContext and gain node on initialization', () => {
-    expect(window.AudioContext).toHaveBeenCalled();
-    expect(mockContext.createGain).toHaveBeenCalled();
-  });
+    expect(window.AudioContext).toHaveBeenCalled()
+    expect(mockContext.createGain).toHaveBeenCalled()
+  })
 
   it.skip('should play note with correct frequency and duration', () => {
-    const frequency = 440; // A4 note
-    const duration = 1;
+    const frequency = 440 // A4 note
+    const duration = 1
 
-    audioEngine.playNote(frequency, duration);
+    audioEngine.playNote(frequency, duration)
 
     // Verify oscillator creation and configuration
-    expect(mockContext.createOscillator).toHaveBeenCalledTimes(4);
+    expect(mockContext.createOscillator).toHaveBeenCalledTimes(4)
 
     // Verify note start and stop
-    const oscillators = mockContext.createOscillator.mock.results;
-    oscillators.forEach((osc: any) => {
-      expect(osc.start).toHaveBeenCalledWith(0);
-      expect(osc.stop).toHaveBeenCalledWith(duration);
-    });
-  });
+    const oscillators = mockContext.createOscillator.mock.results
+    oscillators.forEach((osc: OscillatorNode) => {
+      expect(osc.start).toHaveBeenCalledWith(0)
+      expect(osc.stop).toHaveBeenCalledWith(duration)
+    })
+  })
 
   it.skip('should set volume correctly', () => {
-    audioEngine.setVolume(0.5);
+    audioEngine.setVolume(0.5)
 
-    const gainNode = mockContext.createGain.mock.results[0];
-    expect(gainNode.gain.value).toBe(0.5);
-  });
+    const gainNode = mockContext.createGain.mock.results[0]
+    expect(gainNode.gain.value).toBe(0.5)
+  })
 
   it('should handle volume boundary conditions', () => {
-    audioEngine.setVolume(-1); // Below minimum
-    expect(audioEngine['config'].volume).toBe(0);
+    audioEngine.setVolume(-1) // Below minimum
+    expect(audioEngine['config'].volume).toBe(0)
 
-    audioEngine.setVolume(2); // Above maximum
-    expect(audioEngine['config'].volume).toBe(1);
-  });
-});
+    audioEngine.setVolume(2) // Above maximum
+    expect(audioEngine['config'].volume).toBe(1)
+  })
+})

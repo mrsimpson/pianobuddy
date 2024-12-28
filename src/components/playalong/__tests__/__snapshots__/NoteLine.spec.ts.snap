@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`NoteLine Component > renders empty note line snapshot 1`] = `
+"<div data-v-1eaf1b14="" class="note-line-container">
+  <div data-v-1eaf1b14="" class="note-line"></div>
+  <div data-v-1eaf1b14="" class="lyrics-container"></div>
+</div>"
+`;
+
+exports[`NoteLine Component > renders note line snapshot 1`] = `
+"<div data-v-1eaf1b14="" class="note-line-container">
+  <div data-v-1eaf1b14="" class="note-line">
+    <div>Note 1</div>
+    <div>Note 2</div>
+  </div>
+  <div data-v-1eaf1b14="" class="lyrics-container">
+    <div>Lyric 1</div>
+    <div>Lyric 2</div>
+  </div>
+</div>"
+`;

@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PageHeader Component > renders basic page header snapshot 1`] = `
+"<header data-v-075db758="" class="page-header">
+  <h1 data-v-075db758="" class="page-title">Test Title</h1>
+  <div data-v-075db758="" class="page-actions"></div>
+</header>"
+`;
+
+exports[`PageHeader Component > renders page header with actions snapshot 1`] = `
+"<header data-v-075db758="" class="page-header">
+  <h1 data-v-075db758="" class="page-title">Test Title</h1>
+  <div data-v-075db758="" class="page-actions"><button>Action</button></div>
+</header>"
+`;
+
+exports[`PageHeader Component > renders page header with long title snapshot 1`] = `
+"<header data-v-075db758="" class="page-header">
+  <h1 data-v-075db758="" class="page-title">A very long title that should be displayed correctly</h1>
+  <div data-v-075db758="" class="page-actions"></div>
+</header>"
+`;

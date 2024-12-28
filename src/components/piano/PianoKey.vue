@@ -15,9 +15,9 @@
 
 <script setup lang="ts">
 import { computed, inject, ref } from 'vue';
-import type { AudioService } from '../services/audio';
-import { getPianoKeyDisplayName } from '../types/piano';
-import { usePianoKey } from '../composables/usePianoKey';
+import type { AudioService } from '../../services/audio';
+import { getPianoKeyDisplayName } from '../../types/piano.ts';
+import { usePianoKey } from '../../composables/usePianoKey.ts';
 
 const props = defineProps<{
   name: string;

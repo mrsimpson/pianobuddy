@@ -52,4 +52,4 @@ export default {
     loading: 'Loading...',
     print: 'Print',
   },
-};
+}

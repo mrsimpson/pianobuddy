@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LanguageSelector Component > renders language selector snapshot 1`] = `
+"<div data-v-5c78f2f1="" class="language-selector"><button data-v-5c78f2f1="" class="selected-language" title="English"><span data-v-5c78f2f1="" class="flag">🇬🇧</span><span data-v-5c78f2f1="" class="chevron">▼</span></button>
+  <!--v-if-->
+</div>"
+`;
+
+exports[`LanguageSelector Component > renders language selector with dropdown open snapshot 1`] = `
+"<div data-v-5c78f2f1="" class="language-selector"><button data-v-5c78f2f1="" class="selected-language" title="English"><span data-v-5c78f2f1="" class="flag">🇬🇧</span><span data-v-5c78f2f1="" class="chevron open">▼</span></button>
+  <div data-v-5c78f2f1="" class="language-dropdown"><button data-v-5c78f2f1="" class="language-option"><span data-v-5c78f2f1="" class="flag">🇩🇪</span><span data-v-5c78f2f1="" class="name">Deutsch</span></button><button data-v-5c78f2f1="" class="language-option active" style="display: none;"><span data-v-5c78f2f1="" class="flag">🇬🇧</span><span data-v-5c78f2f1="" class="name">English</span></button></div>
+</div>"
+`;

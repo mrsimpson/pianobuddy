@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PartSelector Component > renders part selector snapshot 1`] = `
+"<div data-v-a7238697="" class="part-selector"><label data-v-a7238697="" for="part-select">Select Part:</label><select data-v-a7238697="" id="part-select" class="part-select" value="part1">
+    <option data-v-a7238697="" value="part1">Part 1</option>
+    <option data-v-a7238697="" value="part2">Part 2</option>
+  </select></div>"
+`;
+
+exports[`PartSelector Component > renders part selector with different selected part snapshot 1`] = `
+"<div data-v-a7238697="" class="part-selector"><label data-v-a7238697="" for="part-select">Select Part:</label><select data-v-a7238697="" id="part-select" class="part-select" value="part2">
+    <option data-v-a7238697="" value="part1">Part 1</option>
+    <option data-v-a7238697="" value="part2">Part 2</option>
+  </select></div>"
+`;

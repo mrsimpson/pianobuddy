@@ -11,8 +11,8 @@ export const NOTE_TYPE_LENGTHS: Record<string, number> = {
   '64th': 0.0625,
   '128th': 0.03125,
   '256th': 0.015625,
-};
+}
 
 export function getNoteTypeLength(type: string): number {
-  return NOTE_TYPE_LENGTHS[type] || 1; // Default to quarter note length
+  return NOTE_TYPE_LENGTHS[type] || 1 // Default to quarter note length
 }

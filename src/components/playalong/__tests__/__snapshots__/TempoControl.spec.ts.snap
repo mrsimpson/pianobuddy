@@ -1,0 +1,23 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TempoControl Component > renders tempo control snapshot 1`] = `
+"<div data-v-b5d43374="" class="tempo-control">
+  <div data-v-b5d43374="" class="tempo-input"><label data-v-b5d43374="" for="tempo">Tempo:</label><input data-v-b5d43374="" id="tempo" max="240" min="30" type="number" step="1"><span data-v-b5d43374="">BPM</span></div><select data-v-b5d43374="" class="tempo-preset">
+    <option data-v-b5d43374="" value="">Preset</option>
+    <option data-v-b5d43374="" value="40">Slow (40 BPM)</option>
+    <option data-v-b5d43374="" value="80">Medium (80 BPM)</option>
+    <option data-v-b5d43374="" value="120">Fast (120 BPM)</option>
+  </select>
+</div>"
+`;
+
+exports[`TempoControl Component > renders tempo control with different tempo snapshot 1`] = `
+"<div data-v-b5d43374="" class="tempo-control">
+  <div data-v-b5d43374="" class="tempo-input"><label data-v-b5d43374="" for="tempo">Tempo:</label><input data-v-b5d43374="" id="tempo" max="240" min="30" type="number" step="1"><span data-v-b5d43374="">BPM</span></div><select data-v-b5d43374="" class="tempo-preset">
+    <option data-v-b5d43374="" value="">Preset</option>
+    <option data-v-b5d43374="" value="40">Slow (40 BPM)</option>
+    <option data-v-b5d43374="" value="80">Medium (80 BPM)</option>
+    <option data-v-b5d43374="" value="120">Fast (120 BPM)</option>
+  </select>
+</div>"
+`;

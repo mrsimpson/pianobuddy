@@ -1,10 +1,10 @@
-import { ref } from 'vue';
-import type { MusicPart } from '../types/musicxml';
+import { ref } from 'vue'
+import type { MusicPart } from '../types/musicxml'
 
 export function usePartsExtractor() {
-  const parts = ref<MusicPart[]>([]);
+  const parts = ref<MusicPart[]>([])
 
   return {
     parts,
-  };
+  }
 }

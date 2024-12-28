@@ -1,15 +1,15 @@
-import { describe, expect, it } from 'vitest';
-import { usePartsExtractor } from '../usePartsExtractor';
+import { describe, expect, it } from 'vitest'
+import { usePartsExtractor } from '../usePartsExtractor'
 
 describe('usePartsExtractor', () => {
   it('should initialize with empty parts', () => {
-    const { parts } = usePartsExtractor();
+    const { parts } = usePartsExtractor()
 
-    expect(parts.value).toEqual([]);
-  });
+    expect(parts.value).toEqual([])
+  })
 
   it('should allow updating parts', () => {
-    const { parts } = usePartsExtractor();
+    const { parts } = usePartsExtractor()
 
     const mockParts = [
       {
@@ -34,11 +34,11 @@ describe('usePartsExtractor', () => {
           },
         ],
       },
-    ];
+    ]
 
-    parts.value = mockParts;
+    parts.value = mockParts
 
-    expect(parts.value).toEqual(mockParts);
-    expect(parts.value.length).toBe(2);
-  });
-});
+    expect(parts.value).toEqual(mockParts)
+    expect(parts.value.length).toBe(2)
+  })
+})

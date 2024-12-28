@@ -23,61 +23,58 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { CollectionService } from '../services/collectionService';
-import { SongService } from '../services/songService';
-import PageHeader from '../components/layout/PageHeader.vue';
-import CollectionCard from '../components/collections/CollectionCard.vue';
-import type { CollectionSong, MusicCollection } from '../types/collection';
+import { onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { CollectionService } from '../services/collectionService'
+import { SongService } from '../services/songService'
+import PageHeader from '../components/layout/PageHeader.vue'
+import CollectionCard from '../components/collections/CollectionCard.vue'
+import type { CollectionSong, MusicCollection } from '../types/collection'
 
-const { t } = useI18n();
-const collections = ref<MusicCollection[]>([]);
-const loading = ref(true);
-const error = ref<string | null>(null);
-const importedSongIds = ref(new Set<string>());
+const { t } = useI18n()
+const collections = ref<MusicCollection[]>([])
+const loading = ref(true)
+const error = ref<string | null>(null)
+const importedSongIds = ref(new Set<string>())
 
 const loadImportedSongs = async () => {
   try {
-    const songs = await SongService.getAllSongs();
-    importedSongIds.value = new Set(songs.map((song) => song.id));
+    const songs = await SongService.getAllSongs()
+    importedSongIds.value = new Set(songs.map((song) => song.id))
   } catch (error) {
-    console.error('Error loading imported songs:', error);
+    console.error('Error loading imported songs:', error)
   }
-};
+}
 
 const loadCollections = async () => {
   try {
-    const collectionIds = await CollectionService.getCollections();
+    const collectionIds = await CollectionService.getCollections()
     collections.value = await Promise.all(
       collectionIds.map((id) => CollectionService.getCollection(id)),
-    );
-    await loadImportedSongs();
+    )
+    await loadImportedSongs()
   } catch {
-    error.value = 'Failed to load collections. Please try again later.';
+    error.value = 'Failed to load collections. Please try again later.'
   } finally {
-    loading.value = false;
+    loading.value = false
   }
-};
+}
 
 const importSong = async (collectionId: string, song: CollectionSong) => {
   try {
-    const xmlContent = await CollectionService.loadCollectionSong(
-      collectionId,
-      song.id,
-    );
+    const xmlContent = await CollectionService.loadCollectionSong(collectionId, song.id)
     await SongService.saveSong({
       name: song.name,
       xmlContent,
-    });
-    importedSongIds.value.add(song.id);
+    })
+    importedSongIds.value.add(song.id)
   } catch (error) {
-    console.error('Error importing song:', error);
-    alert('Failed to import song. Please try again.');
+    console.error('Error importing song:', error)
+    alert('Failed to import song. Please try again.')
   }
-};
+}
 
-onMounted(loadCollections);
+onMounted(loadCollections)
 </script>
 
 <style scoped>

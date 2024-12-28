@@ -1,8 +1,8 @@
-export type NoteName = 'C' | 'D' | 'E' | 'F' | 'G' | 'A' | 'H';
+export type NoteName = 'C' | 'D' | 'E' | 'F' | 'G' | 'A' | 'H'
 
 export interface Note {
-  name: NoteName;
-  color: string;
+  name: NoteName
+  color: string
 }
 
 // Initial color scheme for white keys only
@@ -14,4 +14,4 @@ export const defaultNoteColors: Note[] = [
   { name: 'G', color: '#0000FF' }, // Blue
   { name: 'A', color: '#4B0082' }, // Indigo
   { name: 'H', color: '#9400D3' }, // Violet
-];
+]

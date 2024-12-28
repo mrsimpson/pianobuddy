@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import PianoKey from './PianoKey.vue';
-import { pianoKeys } from '../types/piano';
+import { pianoKeys } from '../../types/piano.ts';
 
 const whiteKeys = computed(() => pianoKeys.filter((key) => !key.isBlack));
 const blackKeys = computed(() => pianoKeys.filter((key) => key.isBlack));

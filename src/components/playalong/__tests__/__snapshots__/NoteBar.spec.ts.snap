@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`NoteBar Component > renders note bar snapshot 1`] = `
+"<div data-v-a4d447ea="" class="note-bar" style="background-color: rgb(255, 0, 0); color: rgb(255, 255, 255); width: 60px; min-width: 40px;">
+  <div data-v-a4d447ea="" class="note-content"><span data-v-a4d447ea="" class="note-label">C4</span></div>
+</div>"
+`;
+
+exports[`NoteBar Component > renders rest note bar snapshot 1`] = `
+"<div data-v-a4d447ea="" class="is-rest note-bar" style="width: 60px; min-width: 40px;">
+  <div data-v-a4d447ea="" class="note-content">
+    <!--v-if-->
+  </div>
+</div>"
+`;

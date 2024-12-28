@@ -1,10 +1,10 @@
-import { internalToDisplayNote } from '../utils/noteMapping';
+import { internalToDisplayNote } from '../utils/noteMapping'
 
 export interface PianoKey {
-  name: string;
-  isBlack: boolean;
-  color?: string;
-  offset?: number;
+  name: string
+  isBlack: boolean
+  color?: string
+  offset?: number
 }
 
 export const pianoKeys: PianoKey[] = [
@@ -25,13 +25,13 @@ export const pianoKeys: PianoKey[] = [
   { name: 'A#', isBlack: true, color: '#3C0068', offset: 84 },
   { name: 'B', isBlack: false, color: '#9400D3' },
   { name: 'Bb', isBlack: true, color: '#7600A9', offset: 84 },
-];
+]
 
 export function getNoteColor(pitch: string): string {
-  const key = pianoKeys.find((k) => k.name === pitch);
-  return key?.color || '#999999';
+  const key = pianoKeys.find((k) => k.name === pitch)
+  return key?.color || '#999999'
 }
 
 export const getPianoKeyDisplayName = (key: PianoKey): string => {
-  return internalToDisplayNote(key.name);
-};
+  return internalToDisplayNote(key.name)
+}

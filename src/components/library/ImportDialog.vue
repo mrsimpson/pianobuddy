@@ -51,11 +51,7 @@
         <button class="cancel-button" @click="close">
           {{ t('import.buttons.cancel') }}
         </button>
-        <button
-          class="import-button"
-          :disabled="!canImport"
-          @click="importFile"
-        >
+        <button :disabled="!canImport" class="import-button" @click="importFile">
           {{ t('import.buttons.import') }}
         </button>
       </div>
@@ -64,119 +60,115 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { MusicXmlService } from '../../services/musicXmlService';
-import { SongService } from '../../services/songService';
+import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { MusicXmlService } from '../../services/musicXmlService'
+import { SongService } from '../../services/songService'
 
-const { t } = useI18n();
+const { t } = useI18n()
 
 defineProps<{
-  isOpen: boolean;
-}>();
+  isOpen: boolean
+}>()
 
 const emit = defineEmits<{
-  (e: 'close'): void;
-  (e: 'imported'): void;
-}>();
+  (e: 'close'): void
+  (e: 'imported'): void
+}>()
 
-const isDragging = ref(false);
-const selectedFile = ref<File | null>(null);
-const songName = ref('');
-const error = ref('');
+const isDragging = ref(false)
+const selectedFile = ref<File | null>(null)
+const songName = ref('')
+const error = ref('')
 
-const musicXmlService = new MusicXmlService();
+const musicXmlService = new MusicXmlService()
 
-const canImport = computed(
-  () => selectedFile.value && songName.value.trim() && !error.value,
-);
+const canImport = computed(() => selectedFile.value && songName.value.trim() && !error.value)
 
 const close = () => {
-  selectedFile.value = null;
-  songName.value = '';
-  error.value = '';
-  emit('close');
-};
+  selectedFile.value = null
+  songName.value = ''
+  error.value = ''
+  emit('close')
+}
 
 const validateFile = async (file: File) => {
-  const fileExtension = file.name.split('.').pop()?.toLowerCase();
+  const fileExtension = file.name.split('.').pop()?.toLowerCase()
 
   if (!['xml', 'musicxml', 'mxl'].includes(fileExtension || '')) {
-    throw new Error(
-      'Please select a valid MusicXML file (.xml, .mxl or .musicxml)',
-    );
+    throw new Error('Please select a valid MusicXML file (.xml, .mxl or .musicxml)')
   }
 
-  let xmlContent: string;
+  let xmlContent: string
   if (fileExtension === 'mxl') {
-    xmlContent = await musicXmlService.unzipMxlFile(file);
+    xmlContent = await musicXmlService.unzipMxlFile(file)
   } else {
-    xmlContent = await file.text();
+    xmlContent = await file.text()
   }
 
-  const validation = musicXmlService.validateXml(xmlContent);
+  const validation = musicXmlService.validateXml(xmlContent)
 
   if (!validation.isValid) {
-    throw new Error(validation.error || 'Invalid MusicXML file');
+    throw new Error(validation.error || 'Invalid MusicXML file')
   }
 
-  return xmlContent;
-};
+  return xmlContent
+}
 
 const handleFileSelect = async (event: Event) => {
-  const input = event.target as HTMLInputElement;
-  if (!input?.files?.length) return;
+  const input = event.target as HTMLInputElement
+  if (!input?.files?.length) return
 
   try {
-    const file = input.files[0];
-    await validateFile(file);
-    selectedFile.value = file;
-    songName.value = file.name.replace(/\.(xml|musicxml|mxl)$/, '');
-    error.value = '';
-  } catch (err: any) {
-    error.value = err.message;
-    selectedFile.value = null;
-    songName.value = '';
+    const file = input.files[0]
+    await validateFile(file)
+    selectedFile.value = file
+    songName.value = file.name.replace(/\.(xml|musicxml|mxl)$/, '')
+    error.value = ''
+  } catch (err: Error) {
+    error.value = err.message
+    selectedFile.value = null
+    songName.value = ''
   }
-};
+}
 
 const handleDrop = async (event: DragEvent) => {
-  isDragging.value = false;
-  const file = event.dataTransfer?.files[0];
-  if (!file) return;
+  isDragging.value = false
+  const file = event.dataTransfer?.files[0]
+  if (!file) return
 
   try {
-    await validateFile(file);
-    selectedFile.value = file;
-    songName.value = file.name.replace(/\.(xml|musicxml|mxl)$/, '');
-    error.value = '';
-  } catch (err: any) {
-    error.value = err.message;
-    selectedFile.value = null;
-    songName.value = '';
+    await validateFile(file)
+    selectedFile.value = file
+    songName.value = file.name.replace(/\.(xml|musicxml|mxl)$/, '')
+    error.value = ''
+  } catch (err: Error) {
+    error.value = err.message
+    selectedFile.value = null
+    songName.value = ''
   }
-};
+}
 
 const importFile = async () => {
-  if (!selectedFile.value || !songName.value.trim()) return;
+  if (!selectedFile.value || !songName.value.trim()) return
 
   try {
-    const formattedXml = await validateFile(selectedFile.value);
+    const formattedXml = await validateFile(selectedFile.value)
 
     const song = {
       name: songName.value.trim(),
       xmlContent: formattedXml,
       createdAt: Date.now(),
       updatedAt: Date.now(),
-    };
+    }
 
-    await SongService.saveSong(song);
-    emit('imported');
-    close();
+    await SongService.saveSong(song)
+    emit('imported')
+    close()
   } catch {
-    error.value = 'Failed to import file. Please try again.';
+    error.value = 'Failed to import file. Please try again.'
   }
-};
+}
 </script>
 
 <style scoped>

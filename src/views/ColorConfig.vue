@@ -8,11 +8,11 @@
 </template>
 
 <script setup lang="ts">
-import PageHeader from '../components/layout/PageHeader.vue';
-import PianoKeyboard from '../components/PianoKeyboard.vue';
-import { useI18n } from 'vue-i18n';
+import PageHeader from '../components/layout/PageHeader.vue'
+import PianoKeyboard from '../components/piano/PianoKeyboard.vue'
+import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n();
+const { t } = useI18n()
 </script>
 
 <style scoped>

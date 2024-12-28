@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import { usePianoKey } from '../usePianoKey';
+import { describe, expect, it } from 'vitest'
+import { usePianoKey } from '../usePianoKey'
 
 describe('usePianoKey', () => {
   const testCases = [
@@ -13,17 +13,14 @@ describe('usePianoKey', () => {
       props: { name: 'C#', isBlack: true },
       expectedStyle: {},
     },
-  ];
+  ]
 
-  it.each(testCases)(
-    'should generate correct key style',
-    ({ props, expectedStyle }) => {
-      const { getKeyStyle } = usePianoKey(props);
+  it.each(testCases)('should generate correct key style', ({ props, expectedStyle }) => {
+    const { getKeyStyle } = usePianoKey(props)
 
-      // Resolve computed value
-      const style = getKeyStyle.value;
+    // Resolve computed value
+    const style = getKeyStyle.value
 
-      expect(style).toEqual(expectedStyle);
-    },
-  );
-});
+    expect(style).toEqual(expectedStyle)
+  })
+})

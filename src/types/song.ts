@@ -1,9 +1,9 @@
 export interface Song {
-  id: string;
-  name: string;
-  xmlContent: string;
-  createdAt: number;
-  updatedAt: number;
+  id: string
+  name: string
+  xmlContent: string
+  createdAt: number
+  updatedAt: number
 }
 
 export const songSchema = {
@@ -29,4 +29,4 @@ export const songSchema = {
     },
   },
   required: ['id', 'name', 'xmlContent', 'createdAt', 'updatedAt'],
-};
+}

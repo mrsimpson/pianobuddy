@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { provide } from 'vue';
-import Navigation from './components/layout/Navigation.vue';
-import { AudioService } from './services/audio';
+import { provide } from 'vue'
+import Navigation from './components/layout/TheNavigation.vue'
+import { AudioService } from './services/audio'
 
 // Create and provide the audio service
-const audioService = new AudioService();
-provide('audioService', audioService);
+const audioService = new AudioService()
+provide('audioService', audioService)
 </script>
 
 <template>

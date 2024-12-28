@@ -16,8 +16,7 @@ export default {
   collections: {
     title: 'Notensammlungen',
     loading: 'Sammlungen werden geladen...',
-    error:
-      'Fehler beim Laden der Sammlungen. Bitte versuchen Sie es später erneut.',
+    error: 'Fehler beim Laden der Sammlungen. Bitte versuchen Sie es später erneut.',
     addToLibrary: 'Zur Bibliothek hinzufügen',
     added: 'Hinzugefügt',
   },
@@ -53,4 +52,4 @@ export default {
     loading: 'Wird geladen...',
     print: 'Drucken',
   },
-};
+}

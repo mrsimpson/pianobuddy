@@ -1,4 +1,7 @@
-import { vi } from 'vitest';
+import { vi } from 'vitest'
+import { config } from '@vue/test-utils'
+
+config.global.mocks = { $t: (tKey: string) => tKey }
 
 // Mock browser APIs and global objects
 Object.defineProperty(window, 'AudioContext', {
@@ -6,7 +9,7 @@ Object.defineProperty(window, 'AudioContext', {
     createGain = vi.fn().mockReturnValue({
       connect: vi.fn(),
       gain: { value: 0, setValueAtTime: vi.fn() },
-    });
+    })
     createOscillator = vi.fn().mockReturnValue({
       type: 'sine',
       frequency: { setValueAtTime: vi.fn() },
@@ -15,29 +18,29 @@ Object.defineProperty(window, 'AudioContext', {
       start: vi.fn(),
       stop: vi.fn(),
       onended: null,
-    });
-    currentTime = 0;
-    destination = {};
-    resume = vi.fn();
-    suspend = vi.fn();
+    })
+    currentTime = 0
+    destination = {}
+    resume = vi.fn()
+    suspend = vi.fn()
   },
   writable: true,
-});
+})
 
 // Mock localStorage
 const localStorageMock = (() => {
-  let store: Record<string, string> = {};
+  let store: Record<string, string> = {}
   return {
     getItem: vi.fn((key) => store[key] || null),
     setItem: vi.fn((key, value) => {
-      store[key] = value.toString();
+      store[key] = value.toString()
     }),
     clear: vi.fn(() => {
-      store = {};
+      store = {}
     }),
-  };
-})();
+  }
+})()
 
 Object.defineProperty(window, 'localStorage', {
   value: localStorageMock,
-});
+})

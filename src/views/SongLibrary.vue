@@ -21,9 +21,7 @@
           @click="navigateToSong(song.id)"
         >
           <h3>{{ song.name }}</h3>
-          <p class="song-meta">
-            {{ t('library.created') }}: {{ formatDate(song.createdAt) }}
-          </p>
+          <p class="song-meta">{{ t('library.created') }}: {{ formatDate(song.createdAt) }}</p>
           <div class="song-actions">
             <button class="btn btn-danger" @click.stop="deleteSong(song.id)">
               {{ t('library.delete') }}
@@ -46,56 +44,56 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { useI18n } from 'vue-i18n';
-import { SongService } from '../services/songService';
-import { formatDate } from '../utils/dateFormatter';
-import PageHeader from '../components/layout/PageHeader.vue';
-import ImportDialog from '../components/library/ImportDialog.vue';
-import type { Song } from '../types/song';
+import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import { SongService } from '../services/songService'
+import { formatDate } from '../utils/dateFormatter'
+import PageHeader from '../components/layout/PageHeader.vue'
+import ImportDialog from '../components/library/ImportDialog.vue'
+import type { Song } from '../types/song'
 
-const { t } = useI18n();
-const router = useRouter();
-const songs = ref<Song[]>([]);
-const loading = ref(true);
-const isImportDialogOpen = ref(false);
+const { t } = useI18n()
+const router = useRouter()
+const songs = ref<Song[]>([])
+const loading = ref(true)
+const isImportDialogOpen = ref(false)
 
 const loadSongs = async () => {
   try {
-    songs.value = await SongService.getAllSongs();
+    songs.value = await SongService.getAllSongs()
   } catch (error) {
-    console.error('Error loading songs:', error);
+    console.error('Error loading songs:', error)
   } finally {
-    loading.value = false;
+    loading.value = false
   }
-};
+}
 
 const navigateToSong = (songId: string) => {
-  router.push(`/song/${songId}`);
-};
+  router.push(`/song/${songId}`)
+}
 
 const deleteSong = async (songId: string) => {
-  if (!confirm(t('library.deleteConfirm'))) return;
+  if (!confirm(t('library.deleteConfirm'))) return
 
   try {
-    await SongService.deleteSong(songId);
-    await loadSongs();
+    await SongService.deleteSong(songId)
+    await loadSongs()
   } catch (error) {
-    console.error('Error deleting song:', error);
+    console.error('Error deleting song:', error)
   }
-};
+}
 
 const showImportDialog = () => {
-  isImportDialogOpen.value = true;
-};
+  isImportDialogOpen.value = true
+}
 
 const handleImported = async () => {
-  isImportDialogOpen.value = false;
-  await loadSongs();
-};
+  isImportDialogOpen.value = false
+  await loadSongs()
+}
 
-onMounted(loadSongs);
+onMounted(loadSongs)
 </script>
 
 <style scoped>

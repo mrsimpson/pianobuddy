@@ -1,0 +1,25 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ImportDialog Component > renders closed dialog snapshot 1`] = `"<!--v-if-->"`;
+
+exports[`ImportDialog Component > renders open dialog snapshot 1`] = `
+"<div data-v-777af5cb="" class="import-dialog">
+  <div data-v-777af5cb="" class="dialog-overlay"></div>
+  <div data-v-777af5cb="" class="dialog-content">
+    <div data-v-777af5cb="" class="dialog-header">
+      <h2 data-v-777af5cb="">Import MusicXML File</h2><button data-v-777af5cb="" class="close-button">×</button>
+    </div>
+    <div data-v-777af5cb="" class="dialog-body">
+      <div data-v-777af5cb="" class="file-drop-zone">
+        <div data-v-777af5cb="" class="drop-zone-content"><span data-v-777af5cb="" class="icon">📄</span>
+          <p data-v-777af5cb="">Drag and drop your MusicXML file here</p>
+          <p data-v-777af5cb="">or</p><label data-v-777af5cb="" class="file-input-label">Choose File <input data-v-777af5cb="" accept=".xml,.musicxml,.mxl" type="file" class="file-input"></label>
+        </div>
+      </div>
+      <!--v-if-->
+      <!--v-if-->
+    </div>
+    <div data-v-777af5cb="" class="dialog-footer"><button data-v-777af5cb="" class="cancel-button">import.buttons.cancel</button><button data-v-777af5cb="" disabled="" class="import-button">import.buttons.import</button></div>
+  </div>
+</div>"
+`;

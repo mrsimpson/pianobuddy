@@ -7,6 +7,6 @@ export const SUPPORTED_LOCALES = {
     name: 'Deutsch',
     flag: '🇩🇪',
   },
-} as const;
+} as const
 
-export type LocaleCode = keyof typeof SUPPORTED_LOCALES;
+export type LocaleCode = keyof typeof SUPPORTED_LOCALES
