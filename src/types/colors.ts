@@ -3,9 +3,3 @@ export interface RGB {
   g: number
   b: number
 }
-
-export interface HSL {
-  h: number
-  s: number
-  l: number
-}

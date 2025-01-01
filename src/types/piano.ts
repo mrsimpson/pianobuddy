@@ -1,6 +1,6 @@
 import { internalToDisplayNote } from '../utils/noteMapping'
 
-export interface PianoKey {
+interface PianoKey {
   name: string
   isBlack: boolean
   color?: string

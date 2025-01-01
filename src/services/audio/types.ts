@@ -4,8 +4,3 @@ export interface AudioConfig {
   releaseTime: number
   sustainLevel: number
 }
-
-export interface NoteFrequency {
-  frequency: number
-  duration: number
-}
