@@ -1,6 +1,6 @@
 # Piano Buddy 🎹
 
-A modern web application for learning piano through interactive music sheet visualization and playback. Built with Vue 3, TypeScript, and RxDB.
+A modern web application for learning piano through interactive music sheet visualization and playback. Built with Vue 3, TypeScript, and modern web technologies.
 
 ![Piano Buddy](./public/screenshot-playalong.png)
 
@@ -11,34 +11,43 @@ Use it online, for free, with no tracking or whatsoever: [🔗Piano Buddy](https
 - **Interactive Music Sheet Display**: Visualize sheet music using OpenSheetMusicDisplay
 - **Colored Note Visualization**: Each note is color-coded for easier learning
 - **Part Selection**: Support for multiple instrument parts in a single sheet
-- **Pre-configured songs and upload feature**: Save and manage your music by either uploading a MusicXML file (there are
-  many free "community sheets" at [MuseScore](https://musescore.com/sheetmusic/free-download) ). or selecting a
-  pre-configured song from a library 📚
+- **Music Library Management**: Upload and manage your own MusicXML files or use pre-configured songs
+- **Offline Support**: Works without internet connection after initial load
+- **Internationalization**: Supports multiple languages (English, German)
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
+- **Zero Tracking**: Complete privacy, no analytics or tracking
 
 ## Technology Stack 💻
 
 - **Frontend Framework**: Vue 3 with TypeScript
 - **Router**: Vue Router
-- **Database**: RxDB with IndexedDB storage
+- **Database**: Dexie.js (IndexedDB wrapper)
 - **Music Sheet Rendering**: OpenSheetMusicDisplay
 - **Build Tool**: Vite
 - **Package Manager**: npm
+- **Testing**: 
+  - Unit Tests: Vitest
+  - E2E Tests: Playwright
+- **Code Quality**:
+  - ESLint
+  - Prettier
+  - TypeScript
+  - Husky for Git hooks
 
 ## Getting Started 🚀
 
 ### Prerequisites
 
-- Node.js (v16 or higher)
-- npm (v7 or higher)
+- Node.js (v18 or higher recommended)
+- npm (v9 or higher)
 
 ### Installation
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/piano-learning-app.git
-   cd piano-learning-app
+   git clone https://github.com/yourusername/piano-buddy.git
+   cd piano-buddy
    ```
 
 2. Install dependencies:
@@ -58,22 +67,29 @@ Use it online, for free, with no tracking or whatsoever: [🔗Piano Buddy](https
 ## Project Structure 📁
 
 ```
-piano-learning-app/
+piano-buddy/
 ├── src/
-│   ├── components/         # Vue components
-│   │   ├── layout/        # Layout components
-│   │   ├── playalong/     # Playalong visualization
-│   │   └── sheet/         # Music sheet components
-│   ├── composables/       # Vue composables
-│   ├── services/          # Business logic services
-│   │   ├── parsers/       # MusicXML parsing
-│   │   └── validators/    # Data validation
-│   ├── types/            # TypeScript type definitions
-│   ├── utils/            # Utility functions
-│   └── views/            # Page components
-├── public/               # Static assets
-└── tests/               # Test files
+│   ├── components/       # Vue components
+│   │   ├── collections/ # Collection related components
+│   │   ├── layout/      # Layout components
+│   │   └── sheet/       # Music sheet components
+│   ├── composables/     # Vue composables
+│   ├── i18n/           # Internationalization
+│   ├── services/       # Business logic services
+│   ├── types/          # TypeScript type definitions
+│   └── views/          # Page components
+├── public/             # Static assets
+└── tests/             # Test files
 ```
+
+## Development 🛠
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run test` - Run unit tests
+- `npm run test:e2e` - Run end-to-end tests
+- `npm run lint` - Lint code
+- `npm run format` - Format code
 
 ## Features in Detail 🎯
 
