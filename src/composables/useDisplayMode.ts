@@ -2,7 +2,7 @@ import { onMounted, ref } from 'vue'
 import { SettingsService } from '@/services/settingsService'
 
 export function useDisplayMode() {
-  const displayMode = ref('all')
+  const displayMode = ref<string | undefined>(undefined)
 
   const setDisplayMode = async (mode: string) => {
     displayMode.value = mode
