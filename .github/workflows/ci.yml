@@ -35,3 +35,9 @@ jobs:
 
       - name: Execute unit tests
         run: npm t
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Execute e2e tests
+        run: npm run test:e2e
