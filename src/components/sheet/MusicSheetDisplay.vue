@@ -1,7 +1,7 @@
 <template>
-  <div class="music-sheet-display">
-    <div v-if="error" class="error-message">{{ error }}</div>
-    <div ref="containerRef" class="sheet-container"></div>
+  <div class="music-sheet-display" data-testid="music-sheet">
+    <div v-if="error" class="error-message" data-testid="music-sheet-error">{{ error }}</div>
+    <div ref="containerRef" class="sheet-container" data-testid="music-sheet-container"></div>
   </div>
 </template>
 

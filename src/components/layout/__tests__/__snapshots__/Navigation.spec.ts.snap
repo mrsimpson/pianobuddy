@@ -1,11 +1,11 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Navigation Component > renders desktop navigation snapshot 1`] = `
-"<nav data-v-a5dde78c="" class="navigation">
+"<nav data-v-a5dde78c="" class="navigation" data-testid="main-nav">
   <div data-v-a5dde78c="" class="nav-content">
-    <div data-v-a5dde78c="" class="nav-brand">🎹 Piano Buddy</div>
+    <div data-v-a5dde78c="" class="nav-brand" data-testid="nav-brand">🎹 Piano Buddy</div>
     <!--v-if-->
-    <div data-v-a5dde78c="" class="nav-links"><a data-v-a5dde78c="" href="/library" class="">Library</a><a data-v-a5dde78c="" href="/collections" class="">Collections</a><a data-v-a5dde78c="" href="/config" class="">Configuration</a>
+    <div data-v-a5dde78c="" class="nav-links" data-testid="nav-links"><a data-v-a5dde78c="" href="/library" class="" data-testid="nav-link-library">Library</a><a data-v-a5dde78c="" href="/collections" class="" data-testid="nav-link-collections">Collections</a><a data-v-a5dde78c="" href="/config" class="" data-testid="nav-link-config">Configuration</a>
       <div data-v-5c78f2f1="" data-v-a5dde78c="" class="language-selector"><button data-v-5c78f2f1="" class="selected-language" title="English"><span data-v-5c78f2f1="" class="flag">🇬🇧</span><span data-v-5c78f2f1="" class="chevron">▼</span></button>
         <!--v-if-->
       </div>
@@ -15,11 +15,11 @@ exports[`Navigation Component > renders desktop navigation snapshot 1`] = `
 `;
 
 exports[`Navigation Component > renders mobile navigation snapshot 1`] = `
-"<nav data-v-a5dde78c="" class="navigation">
+"<nav data-v-a5dde78c="" class="navigation" data-testid="main-nav">
   <div data-v-a5dde78c="" class="nav-content">
-    <div data-v-a5dde78c="" class="nav-brand">🎹 Piano Buddy</div>
+    <div data-v-a5dde78c="" class="nav-brand" data-testid="nav-brand">🎹 Piano Buddy</div>
     <!--v-if-->
-    <div data-v-a5dde78c="" class="nav-links"><a data-v-a5dde78c="" href="/library" class="">Library</a><a data-v-a5dde78c="" href="/collections" class="">Collections</a><a data-v-a5dde78c="" href="/config" class="">Configuration</a>
+    <div data-v-a5dde78c="" class="nav-links" data-testid="nav-links"><a data-v-a5dde78c="" href="/library" class="" data-testid="nav-link-library">Library</a><a data-v-a5dde78c="" href="/collections" class="" data-testid="nav-link-collections">Collections</a><a data-v-a5dde78c="" href="/config" class="" data-testid="nav-link-config">Configuration</a>
       <div data-v-5c78f2f1="" data-v-a5dde78c="" class="language-selector"><button data-v-5c78f2f1="" class="selected-language" title="English"><span data-v-5c78f2f1="" class="flag">🇬🇧</span><span data-v-5c78f2f1="" class="chevron">▼</span></button>
         <!--v-if-->
       </div>

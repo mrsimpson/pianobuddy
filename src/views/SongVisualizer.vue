@@ -12,6 +12,7 @@
                 'btn-secondary': displayMode !== mode,
               }"
               class="btn"
+              :data-testid="`display-mode-${mode}`"
               @click="setDisplayMode(mode)"
             >
               {{ t(`displayMode.${mode}`) }}
@@ -33,6 +34,7 @@
       <MusicSheetDisplay
         v-if="showSheet"
         ref="sheetDisplayRef"
+        data-testid="music-sheet"
         :xml-content="currentSong.xmlContent"
         @rendered="handleSheetRendered"
       />

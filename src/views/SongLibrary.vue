@@ -13,17 +13,18 @@
         <p>{{ t('library.noSongs') }}</p>
       </div>
 
-      <div v-else class="song-grid">
+      <div v-else class="song-grid" data-testid="song-list">
         <div
           v-for="song in songs"
           :key="song.id"
           class="song-card"
+          :data-testid="`song-${song.id}`"
           @click="navigateToSong(song.id)"
         >
           <h3>{{ song.name }}</h3>
           <p class="song-meta">{{ t('library.created') }}: {{ formatDate(song.createdAt) }}</p>
           <div class="song-actions">
-            <button class="btn btn-danger" @click.stop="deleteSong(song.id)">
+            <button class="btn btn-danger" @click.stop="deleteSong(song.id)" data-testid="delete-song">
               {{ t('library.delete') }}
             </button>
           </div>

@@ -1,8 +1,8 @@
 <template>
-  <div class="collection-card">
+  <div class="collection-card" data-testid="collection-card">
     <div class="card-header">
-      <h2>{{ collection.metadata.name }}</h2>
-      <p class="description">{{ collection.metadata.description }}</p>
+      <h2 data-testid="collection-name">{{ collection.metadata.name }}</h2>
+      <p class="description" data-testid="collection-description">{{ collection.metadata.description }}</p>
     </div>
 
     <div class="song-list">
@@ -11,18 +11,20 @@
         :key="song.id"
         class="song-item"
         :class="{ imported: isImported(song.id) }"
+        data-testid="song-item"
       >
         <div class="song-info">
-          <span class="song-name">{{ song.name }}</span>
+          <span class="song-name" data-testid="song-name">{{ song.name }}</span>
           <div v-if="song.composer || song.arranger" class="song-details">
-            <span v-if="song.composer" class="composer">{{ song.composer }}</span>
-            <span v-if="song.arranger" class="arranger">arr. {{ song.arranger }}</span>
+            <span v-if="song.composer" class="composer" data-testid="song-composer">{{ song.composer }}</span>
+            <span v-if="song.arranger" class="arranger" data-testid="song-arranger">arr. {{ song.arranger }}</span>
           </div>
         </div>
         <button
           class="btn btn-primary btn-sm"
           :disabled="isImported(song.id)"
           @click="$emit('import', collection.metadata.id, song)"
+          :data-testid="`song-import-button-${song.id}`"
         >
           {{ isImported(song.id) ? t('collections.added') : t('collections.addToLibrary') }}
         </button>

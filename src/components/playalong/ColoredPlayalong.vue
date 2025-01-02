@@ -1,5 +1,5 @@
 <template>
-  <div class="colored-playalong">
+  <div class="playalong" data-testid="notes-visualization">
     <div class="screen-only">
       <PlaybackControls v-model="selectedPart" :playback-service="playbackService" :parts="parts" />
     </div>

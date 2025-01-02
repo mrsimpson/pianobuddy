@@ -1,42 +1,42 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`CollectionCard Component > renders collection card snapshot 1`] = `
-"<div data-v-a67a9f3f="" class="collection-card">
+"<div data-v-a67a9f3f="" class="collection-card" data-testid="collection-card">
   <div data-v-a67a9f3f="" class="card-header">
-    <h2 data-v-a67a9f3f="">Test Collection</h2>
-    <p data-v-a67a9f3f="" class="description">A test collection description</p>
+    <h2 data-v-a67a9f3f="" data-testid="collection-name">Test Collection</h2>
+    <p data-v-a67a9f3f="" class="description" data-testid="collection-description">A test collection description</p>
   </div>
   <div data-v-a67a9f3f="" class="song-list">
-    <div data-v-a67a9f3f="" class="song-item">
-      <div data-v-a67a9f3f="" class="song-info"><span data-v-a67a9f3f="" class="song-name">Song 1</span>
-        <div data-v-a67a9f3f="" class="song-details"><span data-v-a67a9f3f="" class="composer">Composer 1</span><span data-v-a67a9f3f="" class="arranger">arr. Arranger 1</span></div>
-      </div><button data-v-a67a9f3f="" class="btn btn-primary btn-sm">Add to Library</button>
+    <div data-v-a67a9f3f="" class="song-item" data-testid="song-item">
+      <div data-v-a67a9f3f="" class="song-info"><span data-v-a67a9f3f="" class="song-name" data-testid="song-name">Song 1</span>
+        <div data-v-a67a9f3f="" class="song-details"><span data-v-a67a9f3f="" class="composer" data-testid="song-composer">Composer 1</span><span data-v-a67a9f3f="" class="arranger" data-testid="song-arranger">arr. Arranger 1</span></div>
+      </div><button data-v-a67a9f3f="" class="btn btn-primary btn-sm" data-testid="song-import-button-song1">Add to Library</button>
     </div>
-    <div data-v-a67a9f3f="" class="song-item">
-      <div data-v-a67a9f3f="" class="song-info"><span data-v-a67a9f3f="" class="song-name">Song 2</span>
+    <div data-v-a67a9f3f="" class="song-item" data-testid="song-item">
+      <div data-v-a67a9f3f="" class="song-info"><span data-v-a67a9f3f="" class="song-name" data-testid="song-name">Song 2</span>
         <!--v-if-->
-      </div><button data-v-a67a9f3f="" class="btn btn-primary btn-sm">Add to Library</button>
+      </div><button data-v-a67a9f3f="" class="btn btn-primary btn-sm" data-testid="song-import-button-song2">Add to Library</button>
     </div>
   </div>
 </div>"
 `;
 
 exports[`CollectionCard Component > renders collection card with imported songs snapshot 1`] = `
-"<div data-v-a67a9f3f="" class="collection-card">
+"<div data-v-a67a9f3f="" class="collection-card" data-testid="collection-card">
   <div data-v-a67a9f3f="" class="card-header">
-    <h2 data-v-a67a9f3f="">Test Collection</h2>
-    <p data-v-a67a9f3f="" class="description">A test collection description</p>
+    <h2 data-v-a67a9f3f="" data-testid="collection-name">Test Collection</h2>
+    <p data-v-a67a9f3f="" class="description" data-testid="collection-description">A test collection description</p>
   </div>
   <div data-v-a67a9f3f="" class="song-list">
-    <div data-v-a67a9f3f="" class="song-item imported">
-      <div data-v-a67a9f3f="" class="song-info"><span data-v-a67a9f3f="" class="song-name">Song 1</span>
-        <div data-v-a67a9f3f="" class="song-details"><span data-v-a67a9f3f="" class="composer">Composer 1</span><span data-v-a67a9f3f="" class="arranger">arr. Arranger 1</span></div>
-      </div><button data-v-a67a9f3f="" class="btn btn-primary btn-sm" disabled="">Added</button>
+    <div data-v-a67a9f3f="" class="song-item imported" data-testid="song-item">
+      <div data-v-a67a9f3f="" class="song-info"><span data-v-a67a9f3f="" class="song-name" data-testid="song-name">Song 1</span>
+        <div data-v-a67a9f3f="" class="song-details"><span data-v-a67a9f3f="" class="composer" data-testid="song-composer">Composer 1</span><span data-v-a67a9f3f="" class="arranger" data-testid="song-arranger">arr. Arranger 1</span></div>
+      </div><button data-v-a67a9f3f="" class="btn btn-primary btn-sm" disabled="" data-testid="song-import-button-song1">Added</button>
     </div>
-    <div data-v-a67a9f3f="" class="song-item">
-      <div data-v-a67a9f3f="" class="song-info"><span data-v-a67a9f3f="" class="song-name">Song 2</span>
+    <div data-v-a67a9f3f="" class="song-item" data-testid="song-item">
+      <div data-v-a67a9f3f="" class="song-info"><span data-v-a67a9f3f="" class="song-name" data-testid="song-name">Song 2</span>
         <!--v-if-->
-      </div><button data-v-a67a9f3f="" class="btn btn-primary btn-sm">Add to Library</button>
+      </div><button data-v-a67a9f3f="" class="btn btn-primary btn-sm" data-testid="song-import-button-song2">Add to Library</button>
     </div>
   </div>
 </div>"

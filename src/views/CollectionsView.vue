@@ -1,22 +1,23 @@
 <template>
   <div class="collections-view">
-    <PageHeader :title="t('collections.title')"></PageHeader>
+    <PageHeader :title="t('collections.title')" data-testid="collections-title"></PageHeader>
 
-    <div v-if="loading" class="loading">
+    <div v-if="loading" class="loading" data-testid="collections-loading">
       {{ t('collections.loading') }}
     </div>
 
-    <div v-else-if="error" class="error">
+    <div v-else-if="error" class="error" data-testid="collections-error">
       {{ t('collections.error') }}
     </div>
 
-    <div v-else class="collections-grid">
+    <div v-else class="collections-grid" data-testid="collections-list">
       <CollectionCard
         v-for="collection in collections"
         :key="collection.metadata.id"
         :collection="collection"
         :imported-song-ids="importedSongIds"
         @import="importSong"
+        data-testid="collection-card"
       />
     </div>
   </div>

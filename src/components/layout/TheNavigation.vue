@@ -1,7 +1,7 @@
 <template>
-  <nav class="navigation" :class="{ 'menu-open': isMenuOpen }">
+  <nav class="navigation" :class="{ 'menu-open': isMenuOpen }" data-testid="main-nav">
     <div class="nav-content">
-      <div class="nav-brand">🎹 Piano Buddy</div>
+      <div class="nav-brand" data-testid="nav-brand">🎹 Piano Buddy</div>
 
       <button
         v-if="isMobile"
@@ -9,20 +9,17 @@
         :aria-expanded="isMenuOpen"
         aria-label="Toggle navigation menu"
         @click="toggleMenu"
+        data-testid="nav-burger"
       >
         <span></span>
         <span></span>
         <span></span>
       </button>
 
-      <div v-show="!isMobile || isMenuOpen" :class="{ show: isMenuOpen }" class="nav-links">
-        <router-link to="/library" @click="closeMenu">{{ t('navigation.library') }}</router-link>
-        <router-link to="/collections" @click="closeMenu"
-          >{{ t('navigation.collections') }}
-        </router-link>
-        <router-link to="/config" @click="closeMenu"
-          >{{ t('navigation.configuration') }}
-        </router-link>
+      <div v-show="!isMobile || isMenuOpen" :class="{ show: isMenuOpen }" class="nav-links" data-testid="nav-links">
+        <router-link to="/library" @click="closeMenu" data-testid="nav-link-library">{{ t('navigation.library') }}</router-link>
+        <router-link to="/collections" @click="closeMenu" data-testid="nav-link-collections">{{ t('navigation.collections') }}</router-link>
+        <router-link to="/config" @click="closeMenu" data-testid="nav-link-config">{{ t('navigation.configuration') }}</router-link>
         <LanguageSelector />
       </div>
     </div>
