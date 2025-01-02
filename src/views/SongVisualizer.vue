@@ -3,6 +3,20 @@
     <div class="screen-only">
       <PageHeader :title="currentSong?.name || t('common.loading')">
         <template #actions>
+          <div class="display-mode-group">
+            <button
+              v-for="mode in displayModes"
+              :key="mode"
+              :class="{
+                'btn-primary': displayMode === mode,
+                'btn-secondary': displayMode !== mode,
+              }"
+              class="btn"
+              @click="setDisplayMode(mode)"
+            >
+              {{ t(`displayMode.${mode}`) }}
+            </button>
+          </div>
           <button :disabled="!isSheetRendered" class="btn btn-primary" @click="handlePrintScore">
             {{ t('common.print') }}
           </button>
@@ -15,12 +29,15 @@
 
     <div v-if="currentSong" class="visualizer-content">
       <h1 class="print-only song-title">{{ currentSong.name }}</h1>
+
       <MusicSheetDisplay
+        v-if="showSheet"
         ref="sheetDisplayRef"
         :xml-content="currentSong.xmlContent"
         @rendered="handleSheetRendered"
       />
-      <ColoredPlayalong :xml-content="currentSong.xmlContent" />
+
+      <ColoredPlayalong v-if="showPlayalong" :xml-content="currentSong.xmlContent" />
     </div>
 
     <div v-else class="loading screen-only">
@@ -30,16 +47,18 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { useResponsive } from '../composables/useResponsive'
 import { SongService } from '../services/songService'
 import { PrintService } from '../services/printService'
+import { DisplayMode } from '../types/displayMode'
 import PageHeader from '../components/layout/PageHeader.vue'
 import MusicSheetDisplay from '../components/sheet/MusicSheetDisplay.vue'
 import ColoredPlayalong from '../components/playalong/ColoredPlayalong.vue'
 import type { Song } from '../types/song'
+import { useDisplayMode } from '../composables/useDisplayMode'
 
 const route = useRoute()
 const { t } = useI18n()
@@ -49,13 +68,24 @@ const sheetDisplayRef = ref<InstanceType<typeof MusicSheetDisplay> | null>(null)
 const songId = route.params.songId as string
 const printService = new PrintService()
 const isSheetRendered = ref(false)
+const { displayMode, setDisplayMode } = useDisplayMode()
+
+const displayModes = [DisplayMode.ALL, DisplayMode.SHEET, DisplayMode.PLAYALONG]
+
+const showSheet = computed(
+  () => displayMode.value === DisplayMode.ALL || displayMode.value === DisplayMode.SHEET,
+)
+
+const showPlayalong = computed(
+  () => displayMode.value === DisplayMode.ALL || displayMode.value === DisplayMode.PLAYALONG,
+)
 
 const handleSheetRendered = () => {
   isSheetRendered.value = true
 }
 
 const handlePrintScore = async () => {
-  if (!sheetDisplayRef.value?.isInitialized || !isSheetRendered.value) {
+  if (showSheet.value && !(sheetDisplayRef.value?.isInitialized && isSheetRendered.value)) {
     console.warn('Sheet music not ready for printing')
     return
   }
@@ -77,6 +107,16 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+.song-visualizer {
+  padding: var(--spacing-lg);
+}
+
+.display-mode-group {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-right: var(--spacing-md);
+}
+
 .visualizer-content {
   display: flex;
   flex-direction: column;

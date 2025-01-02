@@ -39,6 +39,9 @@ describe('Database Service', () => {
       songs: {
         schema: expect.any(Object),
       },
+      settings: {
+        schema: expect.any(Object),
+      },
     })
   })
 

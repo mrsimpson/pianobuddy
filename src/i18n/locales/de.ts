@@ -52,4 +52,9 @@ export default {
     loading: 'Wird geladen...',
     print: 'Drucken',
   },
+  displayMode: {
+    all: 'Beides',
+    sheet: 'Noten',
+    playalong: 'Balken',
+  },
 }

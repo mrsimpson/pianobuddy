@@ -52,4 +52,16 @@ export default {
     loading: 'Loading...',
     print: 'Print',
   },
+  displayMode: {
+    all: 'Both',
+    sheet: 'Sheet',
+    playalong: 'Colored bars',
+  },
+  settings: {
+    title: 'Settings',
+    displayMode: {
+      label: 'Default Display Mode',
+      description: 'Choose how sheet music is displayed by default',
+    },
+  },
 }
