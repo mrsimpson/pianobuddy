@@ -1,34 +1,32 @@
 <script lang="ts" setup>
-import { computed } from 'vue';
-import PianoKey from './PianoKey.vue';
-import { pianoKeys } from '../../types/piano.ts';
+import { computed } from 'vue'
+import PianoKey from './PianoKey.vue'
+import { pianoKeys } from '../../types/piano.ts'
 
-const whiteKeys = computed(() => pianoKeys.filter((key) => !key.isBlack));
-const blackKeys = computed(() => pianoKeys.filter((key) => key.isBlack));
+const whiteKeys = computed(() => pianoKeys.filter((key) => !key.isBlack))
+const blackKeys = computed(() => pianoKeys.filter((key) => key.isBlack))
 
 // Calculate the total width of the white keys plus spacing
-const whiteKeyWidth = 60;
-const whiteKeySpacing = 2;
+const whiteKeyWidth = 60
+const whiteKeySpacing = 2
 const totalWidth = computed(
-  () =>
-    whiteKeys.value.length * (whiteKeyWidth + whiteKeySpacing) -
-    whiteKeySpacing,
-);
+  () => whiteKeys.value.length * (whiteKeyWidth + whiteKeySpacing) - whiteKeySpacing,
+)
 
 // Group black keys by offset and concatenate their names
 const groupedBlackKeys = computed(() => {
-  const groups: { [key: number]: { name: string; offset: number } } = {};
+  const groups: { [key: number]: { name: string; offset: number } } = {}
   blackKeys.value.forEach((key) => {
     if (key.offset !== undefined) {
       if (!groups[key.offset]) {
-        groups[key.offset] = { name: key.name, offset: key.offset };
+        groups[key.offset] = { name: key.name, offset: key.offset }
       } else {
-        groups[key.offset].name += `/${key.name}`;
+        groups[key.offset].name += `/${key.name}`
       }
     }
-  });
-  return Object.values(groups);
-});
+  })
+  return Object.values(groups)
+})
 </script>
 
 <template>

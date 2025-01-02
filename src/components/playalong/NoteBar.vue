@@ -1,10 +1,5 @@
 <template>
-  <div
-    :class="{ 'is-rest': note.isRest }"
-    :style="style"
-    class="note-bar"
-    @click="playNote"
-  >
+  <div :class="{ 'is-rest': note.isRest }" :style="style" class="note-bar" @click="playNote">
     <div class="note-content">
       <span v-if="!note.isRest" class="note-label">
         {{ formatNoteDisplay }}
@@ -14,41 +9,34 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from 'vue';
-import type { ParsedNote } from '../../types/musicxml';
-import { useNoteVisualizer } from '../../composables/useNoteVisualizer';
-import { formatNoteForDisplay } from '../../utils/noteMapping';
-import type { AudioService } from '../../services/audio';
-import { getNoteDurationInSeconds } from '../../utils/durationUtils';
+import { computed, inject } from 'vue'
+import type { ParsedNote } from '../../types/musicxml'
+import { useNoteVisualizer } from '../../composables/useNoteVisualizer'
+import { formatNoteForDisplay } from '../../utils/noteMapping'
+import type { AudioService } from '../../services/audio'
+import { getNoteDurationInSeconds } from '../../utils/durationUtils'
 
 const props = defineProps<{
-  note: ParsedNote;
-}>();
+  note: ParsedNote
+}>()
 
-const { getNoteStyle } = useNoteVisualizer();
-const style = getNoteStyle(props.note);
+const { getNoteStyle } = useNoteVisualizer()
+const style = getNoteStyle(props.note)
 
 const formatNoteDisplay = computed(() => {
-  if (props.note.isRest) return '';
-  return formatNoteForDisplay(props.note.pitch, props.note.octave);
-});
+  if (props.note.isRest) return ''
+  return formatNoteForDisplay(props.note.pitch, props.note.octave)
+})
 
-const audioService = inject<AudioService>('audioService');
-const tempo = inject<number>('tempo', 60); // if not provided
+const audioService = inject<AudioService>('audioService')
+const tempo = inject<number>('tempo', 60) // if not provided
 
 const playNote = () => {
   if (!props.note.isRest) {
-    const durationInSeconds = getNoteDurationInSeconds(
-      props.note.duration.divisions,
-      tempo,
-    );
-    audioService?.playNote(
-      props.note.pitch,
-      props.note.octave,
-      durationInSeconds,
-    );
+    const durationInSeconds = getNoteDurationInSeconds(props.note.duration.divisions, tempo)
+    audioService?.playNote(props.note.pitch, props.note.octave, durationInSeconds)
   }
-};
+}
 </script>
 
 <style scoped>

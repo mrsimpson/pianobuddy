@@ -5,9 +5,7 @@
       id="part-select"
       :value="modelValue"
       class="part-select"
-      @change="
-        $emit('update:modelValue', ($event.target as HTMLSelectElement).value)
-      "
+      @change="$emit('update:modelValue', ($event.target as HTMLSelectElement).value)"
     >
       <option v-for="part in parts" :key="part.id" :value="part.id">
         {{ part.name }}
@@ -17,16 +15,16 @@
 </template>
 
 <script setup lang="ts">
-import type { PartInfo } from '../../types/musicxml';
+import type { PartInfo } from '../../types/musicxml'
 
 defineProps<{
-  modelValue: string;
-  parts: PartInfo[];
-}>();
+  modelValue: string
+  parts: PartInfo[]
+}>()
 
 defineEmits<{
-  (e: 'update:modelValue', value: string): void;
-}>();
+  (e: 'update:modelValue', value: string): void
+}>()
 </script>
 
 <style scoped>

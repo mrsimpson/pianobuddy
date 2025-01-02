@@ -6,48 +6,47 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, watch } from 'vue';
-import { OpenSheetMusicDisplay } from 'opensheetmusicdisplay';
-import { NoteParser } from '../../services/parsers/noteParser';
+import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { OpenSheetMusicDisplay } from 'opensheetmusicdisplay'
+import { NoteParser } from '../../services/parsers/noteParser'
 
 const props = defineProps<{
-  xmlContent: string;
-}>();
+  xmlContent: string
+}>()
 
 const emit = defineEmits<{
-  (e: 'rendered'): void;
-}>();
+  (e: 'rendered'): void
+}>()
 
-const containerRef = ref<HTMLElement | null>(null);
-const error = ref<string>('');
-const osmd = ref<OpenSheetMusicDisplay | null>(null);
-const isInitialized = ref(false);
+const containerRef = ref<HTMLElement | null>(null)
+const error = ref<string>('')
+const osmd = ref<OpenSheetMusicDisplay | null>(null)
+const isInitialized = ref(false)
 
 const renderScore = async () => {
-  if (!osmd.value || !props.xmlContent || !isInitialized.value) return;
+  if (!osmd.value || !props.xmlContent || !isInitialized.value) return
 
-  error.value = '';
+  error.value = ''
 
   try {
     // Add note head colors before loading
-    const coloredXmlContent = NoteParser.addNoteHeadColor(props.xmlContent);
+    const coloredXmlContent = NoteParser.addNoteHeadColor(props.xmlContent)
 
-    await osmd.value.load(coloredXmlContent);
-    await osmd.value.render();
-    emit('rendered');
+    await osmd.value.load(coloredXmlContent)
+    await osmd.value.render()
+    emit('rendered')
   } catch (err) {
-    console.error('Error rendering score:', err);
-    error.value =
-      'Error rendering the music sheet. Please check if the MusicXML is valid.';
+    console.error('Error rendering score:', err)
+    error.value = 'Error rendering the music sheet. Please check if the MusicXML is valid.'
   }
-};
+}
 
 const initializeOSMD = async () => {
-  if (!containerRef.value) return;
+  if (!containerRef.value) return
 
   try {
     if (osmd.value) {
-      osmd.value.clear();
+      osmd.value.clear()
     }
 
     osmd.value = new OpenSheetMusicDisplay(containerRef.value, {
@@ -58,42 +57,42 @@ const initializeOSMD = async () => {
       drawLyricist: false,
       drawCredits: false,
       drawPartNames: false,
-    });
+    })
 
-    isInitialized.value = true;
+    isInitialized.value = true
 
     if (props.xmlContent) {
-      await renderScore();
+      await renderScore()
     }
   } catch (err) {
-    console.error('Error initializing OSMD:', err);
-    error.value = 'Failed to initialize music sheet display';
+    console.error('Error initializing OSMD:', err)
+    error.value = 'Failed to initialize music sheet display'
   }
-};
+}
 
 watch(
   () => props.xmlContent,
   async () => {
     if (isInitialized.value) {
-      await renderScore();
+      await renderScore()
     }
   },
-);
+)
 
-onMounted(initializeOSMD);
+onMounted(initializeOSMD)
 
 onUnmounted(() => {
   if (osmd.value) {
-    osmd.value.clear();
+    osmd.value.clear()
   }
-  isInitialized.value = false;
-});
+  isInitialized.value = false
+})
 
 defineExpose({
   osmd,
   isInitialized,
   renderScore,
-});
+})
 </script>
 
 <style scoped>

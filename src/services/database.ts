@@ -1,53 +1,21 @@
-import { addRxPlugin, createRxDatabase } from 'rxdb'
-import { getRxStorageDexie } from 'rxdb/plugins/storage-dexie'
-import { RxDBDevModePlugin } from 'rxdb/plugins/dev-mode'
-import { type Song, songSchema } from '../types/song'
+import Dexie, { type Table } from 'dexie'
+import type { Song } from '../types/song'
 import type { Setting } from '../types/settings'
-import { settingsSchema } from '../types/settings'
 
-// Add dev-mode plugin in development
-if (import.meta.env.DEV) {
-  addRxPlugin(RxDBDevModePlugin)
-}
+export class PianoBuddyDB extends Dexie {
+  songs!: Table<Song>
+  settings!: Table<Setting>
 
-let dbPromise: Promise<unknown> | null = null
+  constructor() {
+    super('pianobuddydb')
 
-export interface Collections {
-  songs: RxCollection<Song>
-  settings: RxCollection<Setting>
-}
-
-export const collections = {
-  songs: {
-    schema: songSchema,
-  },
-  settings: {
-    schema: settingsSchema,
-  },
-}
-
-const createDatabase = async () => {
-  const db = await createRxDatabase({
-    name: 'pianolearningdb',
-    storage: getRxStorageDexie(),
-    ignoreDuplicate: true,
-  })
-
-  await db.addCollections({
-    songs: {
-      schema: songSchema,
-    },
-    settings: {
-      schema: settingsSchema,
-    },
-  })
-
-  return db
-}
-
-export const getDatabase = async () => {
-  if (!dbPromise) {
-    dbPromise = createDatabase()
+    this.version(1).stores({
+      songs: '&id, name',
+      settings: '&key, value',
+    })
   }
-  return dbPromise
 }
+
+const db = new PianoBuddyDB()
+
+export const getDatabase = () => db

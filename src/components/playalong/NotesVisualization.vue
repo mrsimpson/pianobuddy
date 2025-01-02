@@ -15,53 +15,53 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue';
-import type { ParsedNote } from '../../types/musicxml';
-import NoteWithLyric from './NoteWithLyric.vue';
-import { useMusicSheetSize } from '../../composables/useMusicSheetSize';
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import type { ParsedNote } from '../../types/musicxml'
+import NoteWithLyric from './NoteWithLyric.vue'
+import { useMusicSheetSize } from '../../composables/useMusicSheetSize'
 
 const props = defineProps<{
-  notes: ParsedNote[];
-  currentNoteIndex: number;
-}>();
+  notes: ParsedNote[]
+  currentNoteIndex: number
+}>()
 
-const { containerRef, updateWidth } = useMusicSheetSize();
-const containerWidth = ref(0);
+const { containerRef, updateWidth } = useMusicSheetSize()
+const containerWidth = ref(0)
 
 const updateContainerWidth = () => {
   if (containerRef.value) {
-    const width = containerRef.value.offsetWidth;
-    containerWidth.value = width - 48; // Account for padding
+    const width = containerRef.value.offsetWidth
+    containerWidth.value = width - 48 // Account for padding
   }
-};
+}
 
 const breakIndices = computed(() => {
-  return []; // we don't need manual breaks for now. Keeping the method for future reference
-});
+  return [] // we don't need manual breaks for now. Keeping the method for future reference
+})
 
 const isCurrentNote = (index: number): boolean => {
-  return index === props.currentNoteIndex;
-};
+  return index === props.currentNoteIndex
+}
 
 const debouncedResize = () => {
-  let timeout: number;
+  let timeout: number
   return () => {
-    clearTimeout(timeout);
+    clearTimeout(timeout)
     timeout = window.setTimeout(() => {
-      updateContainerWidth();
-      updateWidth();
-    }, 150);
-  };
-};
+      updateContainerWidth()
+      updateWidth()
+    }, 150)
+  }
+}
 
 onMounted(() => {
-  updateContainerWidth();
-  window.addEventListener('resize', debouncedResize());
-});
+  updateContainerWidth()
+  window.addEventListener('resize', debouncedResize())
+})
 
 onUnmounted(() => {
-  window.removeEventListener('resize', debouncedResize());
-});
+  window.removeEventListener('resize', debouncedResize())
+})
 </script>
 
 <style scoped>

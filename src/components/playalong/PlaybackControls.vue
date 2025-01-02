@@ -5,9 +5,7 @@
         <TempoControl :on-tempo-change="updateTempo" :tempo="tempo" />
 
         <div class="transport-controls">
-          <button class="control-button" title="Rewind" @click="rewind">
-            ⏮
-          </button>
+          <button class="control-button" title="Rewind" @click="rewind">⏮</button>
           <button
             class="control-button"
             :title="isPlaying ? 'Pause' : 'Play'"
@@ -20,11 +18,7 @@
       </div>
 
       <div v-if="parts.length > 1" class="part-select">
-        <select
-          :value="modelValue"
-          class="part-select-input"
-          @change="handlePartChange"
-        >
+        <select :value="modelValue" class="part-select-input" @change="handlePartChange">
           <option v-for="part in parts" :key="part.id" :value="part.id">
             {{ part.name }}
           </option>
@@ -35,63 +29,63 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, provide, ref } from 'vue';
-import { PlaybackService } from '../../services/playbackService';
-import type { PartInfo } from '../../types/musicxml';
-import TempoControl from './TempoControl.vue';
+import { onMounted, provide, ref } from 'vue'
+import { PlaybackService } from '../../services/playbackService'
+import type { PartInfo } from '../../types/musicxml'
+import TempoControl from './TempoControl.vue'
 
 const props = defineProps<{
-  playbackService: PlaybackService;
-  modelValue: string;
-  parts: PartInfo[];
-}>();
+  playbackService: PlaybackService
+  modelValue: string
+  parts: PartInfo[]
+}>()
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void;
-}>();
+  (e: 'update:modelValue', value: string): void
+}>()
 
-const tempo = ref(60);
-const isPlaying = ref(false);
+const tempo = ref(60)
+const isPlaying = ref(false)
 
-provide('tempo', tempo);
+provide('tempo', tempo)
 
 onMounted(() => {
   props.playbackService.onNote((index) => {
     if (index === -1) {
-      isPlaying.value = false;
+      isPlaying.value = false
     }
-  });
-});
+  })
+})
 
 const updateTempo = (newTempo: number) => {
-  tempo.value = newTempo;
-  props.playbackService.setTempo(newTempo);
-};
+  tempo.value = newTempo
+  props.playbackService.setTempo(newTempo)
+}
 
 const handlePartChange = (event: Event) => {
-  const select = event.target as HTMLSelectElement;
-  emit('update:modelValue', select.value);
-};
+  const select = event.target as HTMLSelectElement
+  emit('update:modelValue', select.value)
+}
 
 const togglePlayback = () => {
   if (isPlaying.value) {
-    props.playbackService.pause();
+    props.playbackService.pause()
   } else {
-    props.playbackService.setTempo(tempo.value);
-    props.playbackService.play();
+    props.playbackService.setTempo(tempo.value)
+    props.playbackService.play()
   }
-  isPlaying.value = !isPlaying.value;
-};
+  isPlaying.value = !isPlaying.value
+}
 
 const stop = () => {
-  props.playbackService.stop();
-  isPlaying.value = false;
-};
+  props.playbackService.stop()
+  isPlaying.value = false
+}
 
 const rewind = () => {
-  props.playbackService.stop();
-  isPlaying.value = false;
-};
+  props.playbackService.stop()
+  isPlaying.value = false
+}
 </script>
 
 <style scoped>

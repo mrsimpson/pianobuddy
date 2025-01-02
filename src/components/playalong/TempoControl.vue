@@ -24,37 +24,37 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-const { t } = useI18n();
+const { t } = useI18n()
 
 const props = defineProps<{
-  tempo: number;
-  onTempoChange: (tempo: number) => void;
-}>();
+  tempo: number
+  onTempoChange: (tempo: number) => void
+}>()
 
-const localTempo = ref(props.tempo);
+const localTempo = ref(props.tempo)
 
 watch(
   () => props.tempo,
   (newTempo) => {
-    localTempo.value = newTempo;
+    localTempo.value = newTempo
   },
-);
+)
 
 const updateTempo = () => {
-  const tempo = Math.max(30, Math.min(240, localTempo.value));
-  props.onTempoChange(tempo);
-};
+  const tempo = Math.max(30, Math.min(240, localTempo.value))
+  props.onTempoChange(tempo)
+}
 
 const handlePresetChange = (event: Event) => {
-  const value = (event.target as HTMLSelectElement).value;
+  const value = (event.target as HTMLSelectElement).value
   if (value) {
-    localTempo.value = parseInt(value, 10);
-    updateTempo();
+    localTempo.value = parseInt(value, 10)
+    updateTempo()
   }
-};
+}
 </script>
 
 <style scoped>

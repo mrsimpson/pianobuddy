@@ -1,93 +1,47 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { SongService } from '../songService'
-import { getDatabase } from '../database' // Mock database and its methods
+import { getDatabase } from '../database'
+import { v4 as uuidv4 } from 'uuid'
 
-// Mock database and its methods
+vi.mock('uuid', () => ({
+  v4: vi.fn(() => 'test-uuid'),
+}))
+
 vi.mock('../database', () => ({
   getDatabase: vi.fn(),
 }))
 
 describe('SongService', () => {
-  const mockSong = {
-    id: 'test-id',
-    name: 'Test Song',
-    xmlContent: '<xml>test</xml>',
-    createdAt: Date.now(),
-    updatedAt: Date.now(),
+  const mockDb = {
+    songs: {
+      toArray: vi.fn(),
+      get: vi.fn(),
+      add: vi.fn(),
+      update: vi.fn(),
+      delete: vi.fn(),
+    },
   }
 
-  let mockDb: never
-  let mockSongCollection: never
-  let removeMock: vi.MockInstance<never, never>
-
   beforeEach(() => {
-    // Reset mocks
-
-    removeMock = vi.fn().mockResolvedValue(null)
-
-    mockSongCollection = {
-      find: vi.fn().mockReturnThis(),
-      exec: vi.fn().mockResolvedValue([
-        {
-          ...mockSong,
-          toJSON: () => mockSong,
-        },
-      ]),
-      findOne: vi.fn().mockReturnValue({
-        exec: vi.fn().mockResolvedValue({
-          ...mockSong,
-          toJSON: () => mockSong,
-        }),
-        remove: removeMock,
-      }),
-      insert: vi.fn().mockResolvedValue({
-        ...mockSong,
-        toJSON: () => mockSong,
-      }),
-      atomicUpdate: vi.fn().mockResolvedValue({
-        ...mockSong,
-        toJSON: () => mockSong,
-      }),
-      remove: removeMock,
-    }
-
-    mockDb = {
-      songs: mockSongCollection,
-    }
-
-    vi.mocked(getDatabase).mockResolvedValue(mockDb)
-  })
-
-  describe('getAllSongs', () => {
-    it('should retrieve all songs', async () => {
-      const songs = await SongService.getAllSongs()
-
-      expect(mockSongCollection.find).toHaveBeenCalled()
-      expect(songs).toEqual([mockSong])
-    })
-
-    it('should handle empty song list', async () => {
-      mockSongCollection.exec.mockResolvedValue([])
-
-      const songs = await SongService.getAllSongs()
-      expect(songs).toEqual([])
-    })
+    vi.clearAllMocks()
+      ; (getDatabase as ReturnType<typeof vi.fn>).mockReturnValue(mockDb)
+    // Mock Date.now() to return a consistent timestamp
+    vi.spyOn(Date, 'now').mockReturnValue(1000)
   })
 
   describe('getSongById', () => {
     it('should retrieve song by ID', async () => {
-      mockSongCollection.exec.mockResolvedValue(mockSong)
+      const mockSong = { id: 'test-id', name: 'Test Song' }
+      mockDb.songs.get.mockResolvedValue(mockSong)
 
       const song = await SongService.getSongById('test-id')
 
-      expect(mockSongCollection.findOne).toHaveBeenCalledWith('test-id')
+      expect(mockDb.songs.get).toHaveBeenCalledWith('test-id')
       expect(song).toEqual(mockSong)
     })
 
     it('should return null for non-existent song', async () => {
-      mockSongCollection.findOne.mockReturnValue({
-        exec: vi.fn().mockResolvedValue(null),
-      })
+      mockDb.songs.get.mockResolvedValue(null)
 
       const song = await SongService.getSongById('non-existent')
       expect(song).toBeNull()
@@ -101,13 +55,21 @@ describe('SongService', () => {
         xmlContent: '<xml>new song</xml>',
       }
 
+      const expectedSong = {
+        id: 'test-uuid',
+        name: 'New Song',
+        xmlContent: '<?xml version="1.0" encoding="UTF-8"?>\n<xml>new song</xml>',
+        createdAt: 1000,
+        updatedAt: 1000,
+      }
+
+      mockDb.songs.add.mockResolvedValue(undefined)
+
       const savedSong = await SongService.saveSong(newSong)
 
-      expect(mockSongCollection.insert).toHaveBeenCalled()
-      expect(savedSong.name).toBe(newSong.name)
-      expect(savedSong.id).toBeDefined()
-      expect(savedSong.createdAt).toBeDefined()
-      expect(savedSong.updatedAt).toBeDefined()
+      expect(mockDb.songs.add).toHaveBeenCalledWith(expectedSong)
+      expect(savedSong).toEqual(expectedSong)
+      expect(uuidv4).toHaveBeenCalled()
     })
   })
 
@@ -117,16 +79,17 @@ describe('SongService', () => {
 
       await SongService.updateSong('test-id', updates)
 
-      expect(mockSongCollection.atomicUpdate).toHaveBeenCalledWith('test-id', expect.any(Function))
+      expect(mockDb.songs.update).toHaveBeenCalledWith('test-id', {
+        ...updates,
+        updatedAt: 1000,
+      })
     })
   })
 
   describe('deleteSong', () => {
     it('should delete a song', async () => {
       await SongService.deleteSong('test-id')
-
-      expect(mockSongCollection.findOne).toHaveBeenCalledWith('test-id')
-      expect(removeMock).toHaveBeenCalled()
+      expect(mockDb.songs.delete).toHaveBeenCalledWith('test-id')
     })
   })
 })

@@ -6,14 +6,14 @@ export const SettingKeys = {
 
 export class SettingsService {
   static async getSetting(key: string): Promise<string | null> {
-    const db = await getDatabase()
-    const doc = await db.settings.findOne(key).exec()
-    return doc?.value ?? null
+    const db = getDatabase()
+    const setting = await db.settings.get(key)
+    return setting?.value ?? null
   }
 
   static async setSetting(key: string, value: string): Promise<void> {
-    const db = await getDatabase()
-    await db.settings.upsert({
+    const db = getDatabase()
+    await db.settings.put({
       key,
       value,
     })

@@ -14,36 +14,36 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, ref } from 'vue';
-import type { AudioService } from '../../services/audio';
-import { getPianoKeyDisplayName } from '../../types/piano.ts';
-import { usePianoKey } from '../../composables/usePianoKey.ts';
+import { computed, inject, ref } from 'vue'
+import type { AudioService } from '../../services/audio'
+import { getPianoKeyDisplayName } from '../../types/piano.ts'
+import { usePianoKey } from '../../composables/usePianoKey.ts'
 
 const props = defineProps<{
-  name: string;
-  isBlack: boolean;
-  color?: string;
-  pitch: string;
-  octave: number;
-}>();
+  name: string
+  isBlack: boolean
+  color?: string
+  pitch: string
+  octave: number
+}>()
 
-const audioService = inject<AudioService>('audioService');
-const isPressed = ref(false);
+const audioService = inject<AudioService>('audioService')
+const isPressed = ref(false)
 
-const { getKeyStyle } = usePianoKey(props);
+const { getKeyStyle } = usePianoKey(props)
 
 const displayName = computed(() => {
-  return getPianoKeyDisplayName({ name: props.name, isBlack: props.isBlack });
-});
+  return getPianoKeyDisplayName({ name: props.name, isBlack: props.isBlack })
+})
 
 const playNote = () => {
-  isPressed.value = true;
-  audioService?.playNote(props.pitch, props.octave, 0.5);
-};
+  isPressed.value = true
+  audioService?.playNote(props.pitch, props.octave, 0.5)
+}
 
 const stopNote = () => {
-  isPressed.value = false;
-};
+  isPressed.value = false
+}
 </script>
 
 <style scoped>

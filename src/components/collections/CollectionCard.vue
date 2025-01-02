@@ -15,12 +15,8 @@
         <div class="song-info">
           <span class="song-name">{{ song.name }}</span>
           <div v-if="song.composer || song.arranger" class="song-details">
-            <span v-if="song.composer" class="composer">{{
-              song.composer
-            }}</span>
-            <span v-if="song.arranger" class="arranger"
-              >arr. {{ song.arranger }}</span
-            >
+            <span v-if="song.composer" class="composer">{{ song.composer }}</span>
+            <span v-if="song.arranger" class="arranger">arr. {{ song.arranger }}</span>
           </div>
         </div>
         <button
@@ -28,11 +24,7 @@
           :disabled="isImported(song.id)"
           @click="$emit('import', collection.metadata.id, song)"
         >
-          {{
-            isImported(song.id)
-              ? t('collections.added')
-              : t('collections.addToLibrary')
-          }}
+          {{ isImported(song.id) ? t('collections.added') : t('collections.addToLibrary') }}
         </button>
       </div>
     </div>
@@ -40,21 +32,21 @@
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
-import type { CollectionSong, MusicCollection } from '../../types/collection';
+import { useI18n } from 'vue-i18n'
+import type { CollectionSong, MusicCollection } from '../../types/collection'
 
-const { t } = useI18n();
+const { t } = useI18n()
 
 const props = defineProps<{
-  collection: MusicCollection;
-  importedSongIds: Set<string>;
-}>();
+  collection: MusicCollection
+  importedSongIds: Set<string>
+}>()
 
 defineEmits<{
-  (e: 'import', collectionId: string, song: CollectionSong): void;
-}>();
+  (e: 'import', collectionId: string, song: CollectionSong): void
+}>()
 
-const isImported = (songId: string) => props.importedSongIds.has(songId);
+const isImported = (songId: string) => props.importedSongIds.has(songId)
 </script>
 
 <style scoped>

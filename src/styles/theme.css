@@ -36,10 +36,11 @@
 /* Global Styles */
 body {
   margin: 0;
-  font-family: Inter,
-  system-ui,
-  -apple-system,
-  sans-serif;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    sans-serif;
   background-color: var(--background);
   color: var(--text);
 }
@@ -51,8 +52,9 @@ body {
   border: none;
   font-weight: 500;
   cursor: pointer;
-  transition: transform var(--transition-normal),
-  background-color var(--transition-normal);
+  transition:
+    transform var(--transition-normal),
+    background-color var(--transition-normal);
 }
 
 .btn:hover {

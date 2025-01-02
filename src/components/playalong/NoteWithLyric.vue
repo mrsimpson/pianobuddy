@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="note-with-lyric"
-    :style="{ width: `${getDurationWidth(note.duration)}px` }"
-  >
+  <div class="note-with-lyric" :style="{ width: `${getDurationWidth(note.duration)}px` }">
     <div class="note-container">
       <NoteBar :class="{ 'current-note': isCurrentNote }" :note="note" />
     </div>
@@ -13,17 +10,17 @@
 </template>
 
 <script setup lang="ts">
-import { type ParsedNote } from '../../types/musicxml';
-import NoteBar from './NoteBar.vue';
-import { useNoteVisualizer } from '../../composables/useNoteVisualizer';
+import { type ParsedNote } from '../../types/musicxml'
+import NoteBar from './NoteBar.vue'
+import { useNoteVisualizer } from '../../composables/useNoteVisualizer'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const props = defineProps<{
-  note: ParsedNote;
-  isCurrentNote?: boolean;
-}>();
+  note: ParsedNote
+  isCurrentNote?: boolean
+}>()
 
-const { getDurationWidth } = useNoteVisualizer();
+const { getDurationWidth } = useNoteVisualizer()
 </script>
 
 <style scoped>

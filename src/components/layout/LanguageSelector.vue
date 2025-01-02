@@ -26,46 +26,46 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { type LocaleCode, SUPPORTED_LOCALES } from '../../i18n/constants';
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { type LocaleCode, SUPPORTED_LOCALES } from '../../i18n/constants'
 
-const { locale } = useI18n();
-const currentLocale = ref(locale.value as LocaleCode);
-const isOpen = ref(false);
-const dropdownRef = ref<HTMLElement | null>(null);
+const { locale } = useI18n()
+const currentLocale = ref(locale.value as LocaleCode)
+const isOpen = ref(false)
+const dropdownRef = ref<HTMLElement | null>(null)
 
 const sortedLocales = computed(() => {
   const entries = Object.entries(SUPPORTED_LOCALES).sort(([, a], [, b]) =>
     a.name.localeCompare(b.name),
-  );
-  return Object.fromEntries(entries);
-});
+  )
+  return Object.fromEntries(entries)
+})
 
 const toggleDropdown = () => {
-  isOpen.value = !isOpen.value;
-};
+  isOpen.value = !isOpen.value
+}
 
 const changeLocale = (code: LocaleCode) => {
-  locale.value = code;
-  currentLocale.value = code;
-  localStorage.setItem('userLocale', code);
-  isOpen.value = false;
-};
+  locale.value = code
+  currentLocale.value = code
+  localStorage.setItem('userLocale', code)
+  isOpen.value = false
+}
 
 const handleClickOutside = (event: MouseEvent) => {
   if (dropdownRef.value && !dropdownRef.value.contains(event.target as Node)) {
-    isOpen.value = false;
+    isOpen.value = false
   }
-};
+}
 
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside);
-});
+  document.addEventListener('click', handleClickOutside)
+})
 
 onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside);
-});
+  document.removeEventListener('click', handleClickOutside)
+})
 </script>
 
 <style scoped>

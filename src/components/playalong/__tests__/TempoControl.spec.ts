@@ -1,7 +1,7 @@
-import { mount } from '@vue/test-utils';
-import { describe, expect, it } from 'vitest';
-import { createI18n } from 'vue-i18n';
-import TempoControl from '../TempoControl.vue';
+import { mount } from '@vue/test-utils'
+import { describe, expect, it } from 'vitest'
+import { createI18n } from 'vue-i18n'
+import TempoControl from '../TempoControl.vue'
 
 describe('TempoControl Component', () => {
   const i18n = createI18n({
@@ -21,7 +21,7 @@ describe('TempoControl Component', () => {
         },
       },
     },
-  });
+  })
 
   it('renders tempo control snapshot', () => {
     const wrapper = mount(TempoControl, {
@@ -32,10 +32,10 @@ describe('TempoControl Component', () => {
       global: {
         plugins: [i18n],
       },
-    });
+    })
 
-    expect(wrapper.html()).toMatchSnapshot();
-  });
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 
   it('renders tempo control with different tempo snapshot', () => {
     const wrapper = mount(TempoControl, {
@@ -46,8 +46,8 @@ describe('TempoControl Component', () => {
       global: {
         plugins: [i18n],
       },
-    });
+    })
 
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-});
+    expect(wrapper.html()).toMatchSnapshot()
+  })
+})
