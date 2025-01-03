@@ -12,6 +12,7 @@ env:
 
 jobs:
   qa:
+    name: QA
     runs-on: ubuntu-latest
 
     steps:
