@@ -21,7 +21,7 @@
     "knip": "knip"
   },
   "dependencies": {
-    "dexie": "^3.2.7",
+    "dexie": "^4.0.0",
     "jszip": "3.10.1",
     "opensheetmusicdisplay": "^1.8.6",
     "uuid": "^9.0.1",
