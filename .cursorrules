@@ -1,0 +1,127 @@
+# Core Technologies
+technologies:
+  - Vue 3 with TypeScript
+  - Vue Router
+  - Dexie.js (IndexedDB)
+  - Vite
+  - Vitest
+  - Playwright
+
+# Component Structure
+components:
+  template:
+    - Use semantic HTML elements
+    - Keep templates focused and readable
+    - Use data-testid for testing hooks
+    - Follow mobile-first responsive design
+  script:
+    - Use <script setup lang="ts">
+    - Define props using TypeScript interfaces
+    - Use proper type annotations
+    - Follow composition API patterns
+  style:
+    - Use scoped CSS
+    - Follow CSS custom properties for theming
+    - Use defined breakpoints from breakpoints.css
+    - Implement proper print styles when needed
+
+# State Management
+state:
+  refs:
+    - Use ref() for primitive values
+    - Use computed() for derived state
+    - Avoid nested reactivity
+    - Follow Vue's reactivity transform syntax
+  dexie:
+    - Define table schemas using TypeScript interfaces
+    - Use type-safe queries
+    - Implement proper error handling
+    - Follow offline-first patterns
+    - Use transactions for related operations
+  injection:
+    - Use provide/inject for deep component state
+    - Provide services at app root level
+    - Type inject values with defaults
+    - Follow service injection pattern
+
+# Composables
+composables:
+  patterns:
+    - Extract reusable logic into composables
+    - Return refs and methods as cohesive unit
+    - Follow 'use' prefix naming convention
+    - Implement cleanup in onUnmounted
+
+# Testing
+testing:
+  unit:
+    - Write tests using Vitest
+    - Use Vue Test Utils for components
+    - Follow snapshot testing conventions
+    - Mock external dependencies
+  e2e:
+    - Use Playwright for E2E testing
+    - Test critical user flows
+    - Follow page object pattern
+    - Implement proper test isolation
+
+# Naming Conventions
+naming:
+  components:
+    - Use PascalCase for component names
+    - Use kebab-case for template refs
+    - Prefix event handlers with 'handle' or 'on'
+    - Use descriptive prop names
+  files:
+    - Use PascalCase for component files
+    - Use kebab-case for utility files
+    - Use .vue extension for components
+    - Use .ts extension for TypeScript files
+  variables:
+    - Use camelCase for variables and functions
+    - Prefix boolean variables with is/has/should
+    - Use UPPERCASE for constants
+    - Use descriptive names
+
+# Code Style
+style:
+  formatting:
+    - Follow Prettier configuration
+    - Use single quotes for strings
+    - Maximum line length of 100 characters
+    - Use proper spacing and indentation
+  typescript:
+    - Enable strict mode
+    - Use proper type annotations
+    - Avoid any type
+    - Use interfaces for object types
+  imports:
+    - Use named imports/exports
+    - Group imports by type
+    - Use absolute imports for project files
+    - Use relative imports for local files
+
+# Project Structure
+structure:
+  directories:
+    - components/: Vue components
+    - composables/: Reusable logic
+    - services/: Business logic
+    - types/: TypeScript types
+    - utils/: Helper functions
+    - views/: Route components
+  testing:
+    - __tests__/: Test files
+    - __snapshots__/: Test snapshots
+    - e2e/: E2E tests
+
+# Documentation
+documentation:
+  components:
+    - Document overall component purpose (responsibility)
+    - Document slots
+    - Add usage examples
+  functions:
+    - Document overall function purpose (responsibility)
+    - Document side effects
+    - Add usage examples
