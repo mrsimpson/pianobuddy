@@ -1,6 +1,10 @@
 [
   {
-    "id": "christmas",
+    "id": "kinderlieder",
     "order": 1
+  },
+  {
+    "id": "christmas",
+    "order": 2
   }
 ]
