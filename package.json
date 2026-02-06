@@ -34,7 +34,7 @@
     "@playwright/test": "1.57.0",
     "@tsconfig/node22": "22.0.5",
     "@types/jsdom": "21.1.7",
-    "@types/node": "22.19.7",
+    "@types/node": "22.19.9",
     "@types/uuid": "10.0.0",
     "@typescript-eslint/parser": "8.54.0",
     "@vitejs/plugin-vue": "5.2.4",
