@@ -48,7 +48,7 @@
     "eslint": "9.39.4",
     "eslint-plugin-playwright": "2.10.2",
     "eslint-plugin-prettier": "5.5.5",
-    "eslint-plugin-vue": "9.33.0",
+    "eslint-plugin-vue": "10.9.1",
     "globals": "15.15.0",
     "husky": "9.1.7",
     "jsdom": "26.1.0",
